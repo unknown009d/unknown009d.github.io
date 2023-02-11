@@ -1,0 +1,26 @@
+[
+		{
+			"id": 1,
+			"img": "dynamic/Certificates/Certificate1.webp",
+			"title": "Responsive Web Design",
+			"issued": "Issued on 2021 - freeCodeCamp"
+		},
+		{
+			"id": 2,
+			"img": "dynamic/Certificates/Certificate2.webp",
+			"title": "Object Oriented Programming",
+			"issued": "Issued on 2022 - LinkedIn"
+		},
+		{
+			"id": 3,
+			"img": "dynamic/Certificates/Certificate3.webp",
+			"title": "Develop your communication skills and interpersonal influence",
+			"issued": "Issued on 2022 - LinkedIn"
+		},
+		{
+			"id": 4,
+			"img": "dynamic/Certificates/Certificate4.webp",
+			"title": "Learning Cyber Incident Response and Digital Forensics",
+			"issued": "Issued on 2022 - LinkedIn"
+		}
+]
