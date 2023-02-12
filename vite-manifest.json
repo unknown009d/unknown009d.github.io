@@ -63,29 +63,13 @@
     "file": "dapp/immutable/assets/Contact-21ba7e0e.css",
     "src": "Contact.css"
   },
-  "src/routes/+page.css": {
-    "file": "dapp/immutable/assets/_page-09a67ccd.css",
-    "src": "src/routes/+page.css"
-  },
   "global.css": {
     "file": "dapp/immutable/assets/global-a78c4f2f.css",
     "src": "global.css"
   },
-  ".svelte-kit/generated/nodes/5.js": {
-    "file": "dapp/immutable/chunks/5-bc5960c3.js",
-    "src": ".svelte-kit/generated/nodes/5.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "src/routes/projects/+page.svelte"
-    ]
-  },
-  ".svelte-kit/generated/nodes/4.js": {
-    "file": "dapp/immutable/chunks/4-975382c1.js",
-    "src": ".svelte-kit/generated/nodes/4.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "src/routes/myresume/+page.svelte"
-    ]
+  "src/routes/+page.css": {
+    "file": "dapp/immutable/assets/_page-09a67ccd.css",
+    "src": "src/routes/+page.css"
   },
   ".svelte-kit/generated/nodes/1.js": {
     "file": "dapp/immutable/chunks/1-61fcdc54.js",
@@ -95,45 +79,38 @@
       "src/routes/+error.svelte"
     ]
   },
-  ".svelte-kit/generated/nodes/2.js": {
-    "file": "dapp/immutable/chunks/2-42eef9a6.js",
-    "src": ".svelte-kit/generated/nodes/2.js",
+  ".svelte-kit/generated/nodes/4.js": {
+    "file": "dapp/immutable/chunks/4-18002e8a.js",
+    "src": ".svelte-kit/generated/nodes/4.js",
     "isDynamicEntry": true,
     "imports": [
-      "__page-da46b06b.js",
-      "src/routes/+page.svelte"
-    ]
-  },
-  "src/routes/projects/+page.svelte": {
-    "file": "dapp/immutable/components/pages/projects/_page.svelte-67d2a637.js",
-    "src": "src/routes/projects/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_index-5b52a252.js",
-      "_HeadDoc-f9168cf3.js",
-      "_Header-67d95f59.js"
-    ]
-  },
-  "_HeadDoc-f9168cf3.js": {
-    "file": "dapp/immutable/chunks/HeadDoc-f9168cf3.js",
-    "imports": [
-      "_index-5b52a252.js"
+      "src/routes/myresume/+page.svelte"
     ]
   },
   ".svelte-kit/generated/nodes/3.js": {
-    "file": "dapp/immutable/chunks/3-01674c28.js",
+    "file": "dapp/immutable/chunks/3-078c889f.js",
     "src": ".svelte-kit/generated/nodes/3.js",
     "isDynamicEntry": true,
     "imports": [
       "src/routes/aboutme/+page.svelte"
     ]
   },
-  ".svelte-kit/generated/nodes/0.js": {
-    "file": "dapp/immutable/chunks/0-0816b5a4.js",
-    "src": ".svelte-kit/generated/nodes/0.js",
+  ".svelte-kit/generated/nodes/5.js": {
+    "file": "dapp/immutable/chunks/5-5c57663c.js",
+    "src": ".svelte-kit/generated/nodes/5.js",
     "isDynamicEntry": true,
     "imports": [
-      "src/routes/+layout.svelte"
+      "src/routes/projects/+page.svelte"
+    ]
+  },
+  "src/routes/myresume/+page.svelte": {
+    "file": "dapp/immutable/components/pages/myresume/_page.svelte-86163766.js",
+    "src": "src/routes/myresume/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-5b52a252.js",
+      "_HeadDoc-0c99bfce.js",
+      "_Header-67d95f59.js"
     ]
   },
   "src/routes/+page.js": {
@@ -144,41 +121,64 @@
       "__page-da46b06b.js"
     ]
   },
-  "src/routes/myresume/+page.svelte": {
-    "file": "dapp/immutable/components/pages/myresume/_page.svelte-62e9fd4c.js",
-    "src": "src/routes/myresume/+page.svelte",
+  "src/routes/aboutme/+page.svelte": {
+    "file": "dapp/immutable/components/pages/aboutme/_page.svelte-c1407acc.js",
+    "src": "src/routes/aboutme/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-5b52a252.js",
-      "_HeadDoc-f9168cf3.js",
+      "_HeadDoc-0c99bfce.js",
       "_Header-67d95f59.js"
+    ]
+  },
+  "_HeadDoc-0c99bfce.js": {
+    "file": "dapp/immutable/chunks/HeadDoc-0c99bfce.js",
+    "imports": [
+      "_index-5b52a252.js"
+    ]
+  },
+  ".svelte-kit/generated/nodes/0.js": {
+    "file": "dapp/immutable/chunks/0-0615fa76.js",
+    "src": ".svelte-kit/generated/nodes/0.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "src/routes/+layout.svelte"
+    ]
+  },
+  ".svelte-kit/generated/nodes/2.js": {
+    "file": "dapp/immutable/chunks/2-2cfe41a9.js",
+    "src": ".svelte-kit/generated/nodes/2.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "__page-da46b06b.js",
+      "src/routes/+page.svelte"
     ]
   },
   "__page-da46b06b.js": {
     "file": "dapp/immutable/chunks/_page-da46b06b.js"
   },
+  "src/routes/projects/+page.svelte": {
+    "file": "dapp/immutable/components/pages/projects/_page.svelte-e9cdec97.js",
+    "src": "src/routes/projects/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-5b52a252.js",
+      "_HeadDoc-0c99bfce.js",
+      "_Header-67d95f59.js"
+    ]
+  },
   "src/routes/+layout.svelte": {
-    "file": "dapp/immutable/components/pages/_layout.svelte-688330c1.js",
+    "file": "dapp/immutable/components/pages/_layout.svelte-005b5b55.js",
     "src": "src/routes/+layout.svelte",
     "isEntry": true,
     "imports": [
       "_index-5b52a252.js",
-      "_HeadDoc-f9168cf3.js",
+      "_HeadDoc-0c99bfce.js",
       "_Contact-f0db5b65.js"
     ],
     "css": [
       "dapp/immutable/assets/_layout-6bf9c6fe.css",
       "dapp/immutable/assets/global-a78c4f2f.css"
-    ]
-  },
-  "src/routes/aboutme/+page.svelte": {
-    "file": "dapp/immutable/components/pages/aboutme/_page.svelte-053f369d.js",
-    "src": "src/routes/aboutme/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_index-5b52a252.js",
-      "_HeadDoc-f9168cf3.js",
-      "_Header-67d95f59.js"
     ]
   },
   "_Contact-f0db5b65.js": {
@@ -216,7 +216,7 @@
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
-    "file": "dapp/immutable/start-a27a1843.js",
+    "file": "dapp/immutable/start-34137673.js",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -232,13 +232,13 @@
     ]
   },
   "src/routes/+page.svelte": {
-    "file": "dapp/immutable/components/pages/_page.svelte-f12b375e.js",
+    "file": "dapp/immutable/components/pages/_page.svelte-e085d74e.js",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
       "_index-5b52a252.js",
       "_Header-67d95f59.js",
-      "_HeadDoc-f9168cf3.js",
+      "_HeadDoc-0c99bfce.js",
       "_Contact-f0db5b65.js"
     ],
     "css": [
