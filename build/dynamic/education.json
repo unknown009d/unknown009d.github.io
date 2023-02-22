@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "img": "dynamic/Edu/ManavRachna.webp",
+        "name": "Manav Rachna International Institute of Research & Studies (Faridabad)",
+        "course": "Bachelor of Technology - B.Tech in Computer Science & Engineering",
+        "duration": "Aug 2022 - Expected 2025"
+    },
+    {
+        "id": 2,
+        "img": "dynamic/Edu/NIELIT.webp",
+        "name": "National Institute of Electronics & Information Technology (Agartala)",
+        "course": "Diploma in Computer Science and Technology",
+        "duration": "Aug 2019 - Aug 2022"
+    },
+    {
+        "id": 3,
+        "img": "dynamic/Edu/DonBosco.webp",
+        "name": "Don Bosco School (Agartala)",
+        "course": "Secondary Studies - class 10th of CBSE Board",
+        "duration": "Jun 2007 - Jun 2019"
+    }
+]

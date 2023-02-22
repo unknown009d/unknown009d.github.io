@@ -1,0 +1,36 @@
+[
+    {
+        "section": 1,
+        "projects": [
+            {
+                "name": "Dental Planet Website",
+                "image": "dynamic/Projects/Project1_Less.webp"
+            },
+            {
+                "name": "Medicor Dashboard",
+                "image": "dynamic/Projects/Project2_Less.webp"
+            },
+            {
+                "name": "Xcellent Computel Press",
+                "image": "dynamic/Projects/Project3_Less.webp"
+            }
+        ]
+    },
+    {
+        "section": 2,
+        "projects": [
+            {
+                "name": "Interpolation Project",
+                "image": "dynamic/Projects/Project4_Less.webp"
+            },
+            {
+                "name": "Phoniex",
+                "image": "dynamic/Projects/Project5_Less.webp"
+            },
+            {
+                "name": "Weebeio",
+                "image": "dynamic/Projects/Project6_Less.webp"
+            }
+        ]
+    }
+]

@@ -1,0 +1,110 @@
+[
+    {
+        "color": 0,
+        "category": "Core Programming",
+        "skills": [
+            {
+                "name": "C",
+                "level": "Advanced"
+            },
+            {
+                "name": "C++",
+                "level": "Intermediate"
+            },
+            {
+                "name": "Java",
+                "level": "Amature"
+            },
+            {
+                "name": "Python",
+                "level": "Intermediate"
+            },
+            {
+                "name": "Bash",
+                "level": "Intermediate"
+            },
+            {
+                "name": "MySQL",
+                "level": "Advanced"
+            }
+        ]
+    },
+    {
+        "color": 2,
+        "category": "Application Based",
+        "skills": [
+            {
+                "name": "Andoid Studio",
+                "level": "Amature"
+            },
+            {
+                "name": "VB.NET",
+                "level": "Advanced"
+            }
+        ]
+    },
+    {
+        "color": 3,
+        "category": "Web Based",
+        "skills": [
+            {
+                "name": "HTML5",
+                "level": "Advanced"
+            },
+            {
+                "name": "CSS3",
+                "level": "Advanced"
+            },
+            {
+                "name": "JavaScript",
+                "level": "Intermediate"
+            },
+            {
+                "name": "PHP",
+                "level": "Experienced"
+            },
+            {
+                "name": "AngularJS",
+                "level": "Advanced"
+            },
+            {
+                "name": "Svelte",
+                "level": "Novice"
+            }
+        ]
+    },
+    {
+        "color": 4,
+        "category": "Graphics Design",
+        "skills": [
+            {
+                "name": "GIMP",
+                "level": "Intermediate"
+            },
+            {
+                "name": "Krita",
+                "level": "Intermediate"
+            },
+            {
+                "name": "Inkscape",
+                "level": "Novice"
+            },
+            {
+                "name": "Blender",
+                "level": "Amature"
+            },
+            {
+                "name": "Figma",
+                "level": "Advanced"
+            },
+            {
+                "name": "Illustrator",
+                "level": "Advanced"
+            },
+            {
+                "name": "Photoshop",
+                "level": "Experience"
+            }
+        ]
+    }
+]
