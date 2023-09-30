@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "dir": "dynamic/Resume/",
+        "type": ".jpg",
+        "pages": [1,2]
+    },
+    {
+        "id": 2,
+        "dir": "dynamic/Resume/Resume.pdf"
+    }
+]

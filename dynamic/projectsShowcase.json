@@ -3,16 +3,22 @@
         "section": 1,
         "projects": [
             {
-                "name": "Dental Planet Website",
-                "image": "dynamic/Projects/Project1_Less.webp"
+                "name": "PharmacyApp",
+                "image": "dynamic/Projects/Project1_Less.webp",
+                "title": "Pharmacy App (Static)",
+                "link": "https://unknown009d.github.io/pharmacyapp/#!/"
             },
             {
                 "name": "Medicor Dashboard",
-                "image": "dynamic/Projects/Project2_Less.webp"
+                "image": "dynamic/Projects/Project2_Less.webp",
+                "title": "Medical Dashboard (Static)",
+                "link": "https://unknown009d.github.io/Medicor/dashboard.html#!/"
             },
             {
-                "name": "Xcellent Computel Press",
-                "image": "dynamic/Projects/Project3_Less.webp"
+                "name": "Gymmi",
+                "image": "dynamic/Projects/Project3.webp",
+                "title": "UI/UX of an gym app",
+                "link": "https://gymmi.fit"
             }
         ]
     },
@@ -21,15 +27,21 @@
         "projects": [
             {
                 "name": "Interpolation Project",
-                "image": "dynamic/Projects/Project4_Less.webp"
+                "image": "dynamic/Projects/Project4_Less.webp",
+                "title": "Just a fun experiment while doing Interpolation in Mathematics",
+                "link": "https://unknown009d.github.io/interpolation/"
             },
             {
                 "name": "Phoniex",
-                "image": "dynamic/Projects/Project5_Less.webp"
+                "image": "dynamic/Projects/Project5_Less.webp",
+                "title": "Web Hosting Inspired Webpage",
+                "link": "https://unknown009d.github.io/Phoniex/"
             },
             {
                 "name": "Weebeio",
-                "image": "dynamic/Projects/Project6_Less.webp"
+                "image": "dynamic/Projects/Project6_Less.webp",
+                "title": "Machine Learning Chatbot",
+                "link": "https://unknown009d.github.io/Weebeio/"
             }
         ]
     }

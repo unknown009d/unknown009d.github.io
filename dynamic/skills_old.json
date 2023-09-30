@@ -1,0 +1,106 @@
+[
+    {
+        "color": 0,
+        "category": "Core Programming",
+        "skills": [
+            {
+                "name": "C/C++",
+                "level": "80%"
+            },
+            {
+                "name": "Java",
+                "level": "40%"
+            },
+            {
+                "name": "Python",
+                "level": "80%"
+            },
+            {
+                "name": "Bash",
+                "level": "80%"
+            },
+            {
+                "name": "MySQL",
+                "level": "80%"
+            }
+        ]
+    },
+    {
+        "color": 2,
+        "category": "Application Based",
+        "skills": [
+            {
+                "name": "Andoid Studio",
+                "level": "40%"
+            },
+            {
+                "name": "VB.NET",
+                "level": "80%"
+            }
+        ]
+    },
+    {
+        "color": 3,
+        "category": "Web Based",
+        "skills": [
+            {
+                "name": "HTML5",
+                "level": "80%"
+            },
+            {
+                "name": "CSS3",
+                "level": "80%"
+            },
+            {
+                "name": "JavaScript",
+                "level": "80%"
+            },
+            {
+                "name": "PHP",
+                "level": "70%d"
+            },
+            {
+                "name": "AngularJS",
+                "level": "80%"
+            },
+            {
+                "name": "Svelte",
+                "level": "20%"
+            }
+        ]
+    },
+    {
+        "color": 4,
+        "category": "Graphics Design",
+        "skills": [
+            {
+                "name": "GIMP",
+                "level": "80%"
+            },
+            {
+                "name": "Krita",
+                "level": "80%"
+            },
+            {
+                "name": "Inkscape",
+                "level": "20%"
+            },
+            {
+                "name": "Blender",
+                "level": "40%"
+            },
+            {
+                "name": "Figma",
+                "level": "80%"
+            },
+            {
+                "name": "Illustrator",
+                "level": "80%"
+            },
+            {
+                "name": "Photoshop",
+                "level": "70%"
+            }
+        ]
+    }
+]
