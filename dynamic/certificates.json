@@ -7,19 +7,25 @@
 		},
 		{
 			"id": 2,
+			"img": "dynamic/Certificates/JS_Certificate.webp",
+			"title": "Javascript Algorithm & Data Structures",
+			"issued": "Issued on 2024 - freeCodeCamp"
+		},
+		{
+			"id": 3,
 			"img": "dynamic/Certificates/AndroidAppDev.webp",
 			"title": "Android App Developer",
 			"issued": "Issued on 2023 - NIELIT"
 		},
 		{
-			"id": 3,
+			"id": 4,
 			"img": "dynamic/Certificates/Certificate2.webp",
 			"title": "Object Oriented Programming",
 			"issued": "Issued on 2022 - LinkedIn"
 		},
 
 		{
-			"id": 4,
+			"id": 5,
 			"img": "dynamic/Certificates/Certificate4.webp",
 			"title": "Learning Cyber Incident Response and Digital Forensics",
 			"issued": "Issued on 2022 - LinkedIn"
