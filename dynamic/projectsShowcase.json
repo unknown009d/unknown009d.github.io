@@ -26,10 +26,10 @@
         "section": 2,
         "projects": [
             {
-                "name": "Interpolation Project",
-                "image": "dynamic/Projects/Project4_Less.webp",
-                "title": "Just a fun experiment while doing Interpolation in Mathematics",
-                "link": "https://unknown009d.github.io/interpolation/"
+                "name": "RBAC System Dashboard",
+                "image": "dynamic/Projects/Project7_Less.webp",
+                "title": "A Simple Role Based Access Control System for a Content Management System using PHP and TailwindCSS",
+                "link": "https://github.com/unknown009d/dev-simple-rbac"
             },
             {
                 "name": "Phoniex",
