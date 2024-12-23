@@ -3,10 +3,10 @@
         "id": 1,
         "dir": "dynamic/Resume/",
         "type": ".jpg",
-        "pages": ["Resume2"]
+        "pages": ["Resume3"]
     },
     {
         "id": 2,
-        "dir": "dynamic/Resume/Resume2.pdf"
+        "dir": "dynamic/Resume/DrubajyotiResume1224M.pdf"
     }
 ]
