@@ -29,11 +29,16 @@
 			"title": "Object Oriented Programming",
 			"issued": "Issued on 2022 - LinkedIn"
 		},
-
 		{
 			"id": 6,
 			"img": "dynamic/Certificates/Certificate4.webp",
 			"title": "Learning Cyber Incident Response and Digital Forensics",
 			"issued": "Issued on 2022 - LinkedIn"
+		},
+		{
+			"id": 7,
+			"img": "dynamic/Certificates/STQC.webp",
+			"title": "Windows OS, Networking, Server Management",
+			"issued": "Issued on 2021 - MietY"
 		}
 ]
