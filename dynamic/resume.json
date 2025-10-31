@@ -3,10 +3,10 @@
         "id": 1,
         "dir": "dynamic/Resume/",
         "type": ".jpg",
-        "pages": ["Resume7"]
+        "pages": ["DrubaResume2025"]
     },
     {
         "id": 2,
-        "dir": "dynamic/Resume/DrubaSDE.pdf"
+        "dir": "dynamic/Resume/DrubaResume2025.pdf"
     }
 ]
