@@ -1,0 +1,410 @@
+<style>
+  .case_study {
+    --base: #dac5f7;
+    --primary-accent: #7a25e7;
+  }
+</style>
+<section class="hero">
+  <div>
+    <h1>MeetHub</h1>
+    <h2 class="subtitle">Plan. Meet. Repeat.</h2>
+    <p>
+      Event finding app where people find their interested events curated to
+      their liking to meet people of their own types.
+    </p>
+    <div class="timebadge">
+      <span class="icon-time"></span>
+      <time>April 2025 - May 2025</time>
+    </div>
+  </div>
+  <div>
+    <div class="screenshots">
+      <img src="data/meethub/s1.png" alt="s1" />
+    </div>
+    <div class="screenshots">
+      <img src="data/meethub/s2.png" alt="s2" />
+    </div>
+    <div class="screenshots">
+      <img src="data/meethub/s3.png" alt="s3" />
+    </div>
+  </div>
+</section>
+<section class="intro">
+  <h2>Have you ever struggled to find the perfect place to be around?</h2>
+  <h3>
+    Presenting you a platform which brings you the ability to find and manage
+    events to curate your need and find people aligned with your interest.
+  </h3>
+  <img src="assets/icons/seperator.svg" class="seperator" alt="---" />
+</section>
+<section class="two-section">
+  <main>
+    <section id="introduction" class="content-section">
+      <h2>User Research</h2>
+      <p>
+        This event management platform connects people based on shared interests
+        by enabling the discovery, creation, and hosting of both in-person and
+        virtual events.
+        <br />
+        <br />
+        Users can find events that match their preferences or organize their own
+        gatherings. The platform simplifies event management with features like
+        digital ticketing and a seamless check-in experience using QR.
+      </p>
+      <br />
+      <section id="user-pain-point" class="content-section">
+        <h3>User pain points</h3>
+        <div class="wrapper upp">
+          <div class="box">
+            <h6>Event Discovery</h6>
+            <p>
+              Users struggle to find events relevant to their specific interests
+              due to basic or generic filtering options.
+            </p>
+          </div>
+          <div class="box">
+            <h6>Event Creation</h6>
+            <p>
+              New hosts are unsure how to structure an engaging event listing
+              (title, images, tags, description).
+            </p>
+          </div>
+          <div class="box">
+            <h6>Payments & Trust</h6>
+            <p>
+              Users are unsure about refund policies, additional fees, or what
+              happens in case of event cancellation.
+            </p>
+          </div>
+          <div class="box">
+            <h6>Form-factor UX flaws</h6>
+            <p>
+              Event creation on mobile feels cramped or confusing due to form
+              layout.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="user-persona" class="content-section">
+        <h3>User Persona & Journey</h3>
+        <div class="pj">
+          <div class="persona-container">
+            <figure class="persona">
+              <img
+                src="data/meethub/avatar.png"
+                loading="lazy"
+                decoding="async"
+                alt="User"
+              />
+              <figcaption>
+                <h6>Himani</h6>
+                <p>
+                  A tech-savvy user who attends and hosts community events.
+                  Wants a simple, reliable flow for discovering and creating
+                  events.
+                </p>
+              </figcaption>
+            </figure>
+            <div class="pkf">
+              <figure class="card">
+                <span class="icon-goal"></span>
+                <p class="title">Primary Goal</p>
+                <p class="details">
+                  Discover events quickly and understand their value and Host
+                  simple community/tech events without complexity.
+                </p>
+              </figure>
+              <figure class="card">
+                <span class="icon-keyframe"></span>
+                <p class="title">Key Behaviors</p>
+                <ul class="details">
+                  <li>
+                    Scrolls through events but gets overwhelmed by irrelevant
+                    ones.
+                  </li>
+                  <li>Relies on clear info and trust cues before joining.</li>
+                </ul>
+              </figure>
+              <figure class="card">
+                <span class="icon-frustration"></span>
+                <p class="title">Frustrations</p>
+                <ul class="details">
+                  <li>Hard to judge if an event is worth attending.</li>
+                  <li>Confusing booking flow.</li>
+                  <li>No central place to manage own events.</li>
+                </ul>
+              </figure>
+            </div>
+          </div>
+          <div class="journey-map">
+            <table>
+              <thead>
+                <tr class="table-title">
+                  <th colspan="4">Himani's Journey Map</th>
+                </tr>
+                <tr>
+                  <th>Stages</th>
+                  <th>What the user does</th>
+                  <th>Pain Points</th>
+                  <th>Opportunities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Discover</td>
+                  <td>Browses events</td>
+                  <td>Too many irrelevant events</td>
+                  <td>Better filtering & recommendations</td>
+                </tr>
+                <tr>
+                  <td>Evaluate</td>
+                  <td>Reads details</td>
+                  <td>Hard to judge credibility</td>
+                  <td>Clear info, trust indicators</td>
+                </tr>
+                <tr>
+                  <td>Decide</td>
+                  <td>Checks price/venue & considers attending</td>
+                  <td>Unclear CTAs, confusing flow</td>
+                  <td>Streamline decision + clearer CTA</td>
+                </tr>
+                <tr>
+                  <td>Register</td>
+                  <td>Books a ticket</td>
+                  <td>Uncertain confirmation steps</td>
+                  <td>Simple booking + instant confirmation</td>
+                </tr>
+                <tr>
+                  <td>Manage</td>
+                  <td>Views ticket or creates event</td>
+                  <td>Creating events feels complex</td>
+                  <td>Guided step-by-step creation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="background" class="content-section">
+      <h2>Starting the design</h2>
+      <section id="sitemap" class="content-section">
+        <h3>Sitemap</h3>
+        <img
+          src="data/meethub/sitemap.png"
+          loading="lazy"
+          decoding="async"
+          alt="Sitemap"
+        />
+      </section>
+      <br />
+      <section id="wireframe" class="content-section">
+        <h3>Wireframes</h3>
+        <img
+          src="data/meethub/wireframes.jpg"
+          loading="lazy"
+          decoding="async"
+          alt="Wireframe"
+        />
+      </section>
+      <section id="lowfi" class="content-section content80">
+        <h3>Low-fidelity prototype</h3>
+        <p>
+          The main home screen of the app was inspired by the UX of youtube as
+          it is one of the most efficient way for videos but instead of video
+          cards, I used image cards and description with appropriate details.
+          <br /><br />
+          That is the low-fidelity prototype where the user flow goes from
+          flow1. <br />
+          Home > Event Page > Payment Confirmation > Booking Affirmation >
+          Booked Tickets > QR Code
+          <br /><br />
+          Creating events have a different flow and from <br />
+          Create event > Success of event creation
+        </p>
+        <img
+          src="data/meethub/LowFidelity.jpg"
+          loading="lazy"
+          decoding="async"
+          alt="LowFidelityMockup"
+        />
+        <label>
+          Check it out:
+          <a
+            target="_blank"
+            href="https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem?page-id=2005%3A251&node-id=2006-255&viewport=575%2C-58%2C0.14&t=PaEW4aLcyiS352XZ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2006%3A255&show-proto-sidebar=1"
+          >
+            https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem
+          </a>
+        </label>
+      </section>
+    </section>
+
+    <section id="goals" class="content-section">
+      <h2>Usability Study</h2>
+      <p>
+        5 user tested the prototype. I tracked confusion points and average
+        completion time.
+      </p>
+      <section id="findings" class="content-section content80">
+        <h3>Findings</h3>
+        <p>
+          After usability study we found out that people were not happy with the
+          flow of creating an event. Also some other small UX changes were
+          needed discussed below :
+        </p>
+        <img
+          src="data/meethub/Findings.jpg"
+          loading="lazy"
+          decoding="async"
+          alt="Findings"
+        />
+      </section>
+    </section>
+
+    <section id="implementation" class="content-section">
+      <h2>Refining Design</h2>
+      <p>
+        After the usability test I figured out that I've overlooked in few of
+        the user experience flows which could be improved with slight
+        adjustments discussed below :
+      </p>
+      <section id="problem1" class="content-section content80 problems">
+        <h3>Problem #1</h3>
+        <div class="two-column">
+          <p>
+            If you see the high fidelity design, we can see that it is similar
+            to something we use daily like YouTube, reddit, X where we
+            subconsciously use the app like we use the others.
+            <br />
+            <br />
+            Using Gestalt principal I've decided to make events like a card
+            which enables to make the experience similar as other apps.
+          </p>
+          <img
+            src="data/meethub/Problem1.png"
+            loading="lazy"
+            decoding="async"
+            alt="Problem1"
+          />
+        </div>
+      </section>
+      <section id="problem2" class="content-section content80 problems">
+        <h3>Problem #2</h3>
+        <p>
+          With the users having issues with creating their own event, I had a
+          redesign for the lo-fi mockup creating a intuitive step-by-step
+          process of creating an event.
+        </p>
+        <img
+          src="data/meethub/Problem2.png"
+          loading="lazy"
+          decoding="async"
+          alt="Problem2"
+        />
+      </section>
+      <section id="problem3" class="content-section content80 problems">
+        <h3>Problem #3</h3>
+        <div class="two-column">
+          <p>
+            That happens many a times where FOMO hits and you book something
+            else like a wrong date or a wrong place, the process of changing
+            those require customer support through mails or calls.
+            <br /><br />
+            This can be solved with a simple button and a progress bar which can
+            be cancelled if wrong decision has been made.
+          </p>
+          <img
+            src="data/meethub/Problem3.png"
+            loading="lazy"
+            decoding="async"
+            alt="Problem3"
+          />
+        </div>
+      </section>
+      <div class="finallink">
+        <p class="labelforrevised">
+          Here's is the revised lo-fi prototype version:
+        </p>
+        <a
+          target="_blank"
+          href="https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem?page-id=2005%3A251&node-id=2060-485&viewport=575%2C-58%2C0.14&t=PaEW4aLcyiS352XZ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2060%3A485&show-proto-sidebar=1"
+        >
+          https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem?alternative
+        </a>
+      </div>
+    </section>
+
+    <section id="mockups" class="content-section">
+      <h2>Mockups</h2>
+      <div class="mock-img">
+        <img
+          src="data/meethub/meethub-mockup-1.png"
+          loading="lazy"
+          decoding="async"
+          alt="Mockup 1"
+        />
+        <img
+          src="data/meethub/meethub-mockup-2.png"
+          loading="lazy"
+          decoding="async"
+          alt="Mockup 2"
+        />
+      </div>
+      <p class="linkforvisit">
+        Check out high-fidelity prototype:
+        <a
+          target="_blank"
+          href="https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem?node-id=2005-180&p=f&t=2p0alfs5Dzxau9cS-1&scaling=min-zoom&content-scaling=fixed&page-id=2005%3A179&starting-point-node-id=2005%3A180"
+        >
+          https://www.figma.com/proto/qnF3lzMoPllhcQrGoMzs1R/EventManagementSystem
+        </a>
+      </p>
+    </section>
+
+    <section id="code" class="content-section">
+      <h2>Code Prototype</h2>
+      <p>
+        This project was my semi-final year project in college where, I
+        collaborated with my peers and built a working system using Next.js +
+        MongoDB and also integrated Clerk.js for authentication and Stripe for
+        payment.
+      </p>
+      <br /><br />
+      <p>
+        Here you can visit the website hosted on Vercel :
+        <a target="_blank" href="https://ems-beta-six.vercel.app/"
+          >https://ems-beta-six.vercel.app/</a
+        >
+        <br /><br />
+        Or just have a look into the source code (which was forked because I
+        mistakenly deleted the repo from my account) :
+        <a
+          target="_blank"
+          href="https://github.com/unknown009d/eventManagementSystem/"
+          >https://github.com/unknown009d/eventManagementSystem/</a
+        >
+      </p>
+    </section>
+
+    <section id="conclusions" class="content-section">
+      <h2>Conclusion</h2>
+      <p>
+        The main objective was to create an platform that users can find passion
+        and create their own meetups without extra hassle. I think visually and
+        functionally we have achieved this task with clear instructions.
+        <br /><br />
+        I learnt that sometimes having a different approach in terms of design
+        could have a huge impact. Then entire application was seamless but
+        creating event was very old and boring, thus created an intuitive system
+        to feel the sense of achievement.
+      </p>
+    </section>
+  </main>
+
+  <aside
+    class="hide-menu"
+    data-toc="A case study on a Event Management System"
+  ></aside>
+</section>

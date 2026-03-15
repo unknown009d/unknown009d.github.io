@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Druba</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/main.css" />
+    <link rel="stylesheet" href="assets/darkmode.css" />
+    <link rel="stylesheet" href="assets/icons/css/dicon.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+    <script src="assets/main.js"></script>
+  </head>
+  <body class="case_study">
+    <header id="cs-header">
+      <a class="backbutton" href="/" title="Go home">
+        <span class="icon-home"></span>
+      </a>
+    </header>
+
+    <section class="thank-you hide" id="thank-you">
+      <a href="/" class="avatar">
+        <img src="assets/thankyou.png" alt="Thankyou" />
+      </a>
+      <div>
+        <h4>Thank you for reading this case study.</h4>
+        <p>Want to have a chat let's connect!</p>
+      </div>
+    </section>
+
+    <script type="module">
+      import { ScrollSpy } from "./assets/scrollSpy.js";
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const slug = urlParams.get("slug");
+      if (!slug) show404();
+      document.title = slug.caps() + " | " + document.title;
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await fetch(`data/${slug}/main.html`)
+          .then((r) => (r.ok ? r.text() : null))
+          .then((page) => {
+            if (page) {
+              document
+                .getElementById("cs-header")
+                .insertAdjacentHTML("afterend", page);
+              document.getElementById("thank-you").classList.remove("hide");
+              ScrollSpy({
+                sectionSelector: ".content-section",
+                activeClass: "active",
+                threshold: 0.7,
+                generateTOC: true,
+                contentPlace: "aside",
+                fallbackMsgTOC: "A case study on " + slug,
+              });
+            } else {
+              document
+                .getElementById("cs-header")
+                .after(show404());
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

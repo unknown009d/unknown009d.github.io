@@ -1,0 +1,81 @@
+@media (prefers-color-scheme: dark) {
+}
+:root {
+  --background: #121212;
+  --background-alt: #161616;
+  --link-hover: #202020;
+  --foreground: #e2e2e2;
+  --button-active: #f2f2f2;
+  --light-bg-foreground: #242424;
+  --border-line: #f1f1f130;
+}
+.post-section {
+  .post {
+    filter: brightness(80%);
+    /*
+      filter: saturate(40%) invert(1);
+      background-color: var(--background-alt) !important;
+      h5,
+      p {
+        color: var(--foreground) !important;
+      }
+      p {
+        opacity: 0.5;
+      }
+      .num {
+        color: #ffffff60 !important;
+      }*/
+  }
+}
+.case_study {
+  .intro {
+    .seperator {
+      filter: invert(1);
+    }
+  }
+  .hero {
+    div:nth-child(1) {
+      p {
+        color: var(--light-bg-foreground);
+      }
+    }
+  }
+  .wrapper {
+    .box {
+      color: var(--light-bg-foreground);
+    }
+  }
+  & .two-section {
+    & main {
+      & #user-persona {
+        & .pj {
+          & .persona-container {
+            & .pkf {
+              .card {
+                color: var(--light-bg-foreground);
+              }
+            }
+          }
+          & .journey-map {
+            & table {
+              & thead {
+                .table-title th {
+                  color: var(--light-bg-foreground);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+footer {
+  .links {
+    a {
+      img {
+        filter: invert(1);
+      }
+    }
+  }
+}
