@@ -127,6 +127,9 @@ const show404 = () => {
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
+window.addEventListener("pageshow", () => {
+  document.body.classList.add("loaded");
+});
 
 const handlePageTransition = (e) => {
   const link = e.currentTarget;
