@@ -842,6 +842,7 @@ footer {
           object-fit: contain;
           object-position: left;
           display: block;
+          border-radius: 2rem;
         }
         a:focus {
           border-radius: 2rem;
@@ -1321,4 +1322,32 @@ footer {
       }
     }
   }
+}
+
+.coming-soon {
+  background-color: var(--base);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  min-height: 72.5vh;
+  margin: 4rem;
+  @media only screen and (max-width: 612px) {
+    margin: 2rem;
+  }
+  margin-top: 2rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  img {
+    width: 20vw;
+    max-width: 300px;
+    @media only screen and (max-width: 612px) {
+      width: 60%;
+    }
+  }
+  .cs-text {
+    font-size: 1.2rem;
+    color: var(--darker-primary-accent);
+    opacity: 0.8;
+  }
+  position: relative;
 }

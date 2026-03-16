@@ -1,0 +1,23 @@
+<style>
+  .case_study {
+    --base: #efdada;
+    --primary-accent: #68423d;
+  }
+  .coming-soon {
+    position: relative;
+    background: var(--base);
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("/data/brewbuddy/noise.png") repeat;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+  }
+</style>
+
+<section class="coming-soon">
+  <img src="/data/brewbuddy/logo.png" alt="Scrapcooks Logo" />
+  <p class="cs-text">Coming Soon...</p>
+</section>

@@ -75,7 +75,8 @@
               document
                 .getElementById("cs-header")
                 .insertAdjacentHTML("afterend", page);
-              document.getElementById("thank-you").classList.remove("hide");
+              if (!urlParams.has("cmp"))
+                document.getElementById("thank-you").classList.remove("hide");
               ScrollSpy({
                 sectionSelector: ".content-section",
                 activeClass: "active",

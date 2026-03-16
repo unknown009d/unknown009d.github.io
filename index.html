@@ -82,6 +82,8 @@
               const a = document.createElement("a");
               const key = Object.keys(post)[0];
               a.href = `case_study.html?${key}=${post[key]}`;
+              if (post.completed === false)
+                a.href += `&cmp=${post.completed}`;
               a.className = "post";
               a.style.backgroundColor = post.background_color;
 
