@@ -222,7 +222,7 @@ h2 {
         0 0 0 4px var(--foreground);
       transition: box-shadow 200ms ease-out;
     }
-    h5 {
+    h2 {
       font-size: 2rem;
     }
     .num {
