@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Druba | towebp</title>
+    <meta
+      name="description"
+      content="UX Engineer with 5+ years designing visually compelling and technically feasible product experiences."
+    />
     <style>
       #loading {
         display: none;
@@ -33,7 +37,7 @@
                 else reject("Conversion failed");
               },
               "image/webp",
-              quality
+              quality,
             );
           };
           img.onerror = reject;
@@ -54,7 +58,10 @@
         if (!file) return;
 
         // Ask user for filename
-        let outputName = prompt("Enter output filename (without extension):", file.name.replace(/\.\w+$/, ""));
+        let outputName = prompt(
+          "Enter output filename (without extension):",
+          file.name.replace(/\.\w+$/, ""),
+        );
         if (!outputName) outputName = file.name.replace(/\.\w+$/, "");
 
         loadingEl.style.display = "block";

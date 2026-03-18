@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Druba - UX Engineer</title>
+    <meta
+      name="description"
+      content="UX Engineer with 5+ years designing visually compelling and technically feasible product experiences."
+    />
     <!-- Open Graph -->
     <meta property="og:site_name" content="druba.in" />
     <meta property="og:title" content="Drubajyoti Debnath - UX Engineer" />
@@ -82,8 +86,7 @@
               const a = document.createElement("a");
               const key = Object.keys(post)[0];
               a.href = `case_study.html?${key}=${post[key]}`;
-              if (post.completed === false)
-                a.href += `&cmp=${post.completed}`;
+              if (post.completed === false) a.href += `&cmp=${post.completed}`;
               a.className = "post";
               a.style.backgroundColor = post.background_color;
 
