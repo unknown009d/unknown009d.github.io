@@ -38,42 +38,43 @@
     <script src="assets/main.js"></script>
   </head>
   <body>
-    <section class="hero-section">
-      <h1>Drubajyoti Debnath</h1>
-      <p>
-        I'm a UX Engineer trying to create better user experiences for 5+ years
-        through freelancing & collaborating part-time with product teams.
-        Because I understand how products are built, <br class="mx-screen" />I
-        bring forward design solutions which is both visually appealing &
-        technically feasible.
-      </p>
-      <a href="aboutme.html" tabindex="0" class="btnwicon">
-        Know more about me <span class="icon-arrowforward iconb"></span>
-      </a>
-    </section>
-    <section class="moving-section">
-      <div class="marquee">
+    <main>
+      <section class="hero-section">
+        <h1>Drubajyoti Debnath</h1>
         <p>
-          Wireframe
-          <span class="dots">•</span> Prototyping
-          <span class="dots">•</span> Storyboarding
-          <span class="dots">•</span> User Research
-          <span class="dots">•</span> Visual Design
-          <span class="dots">•</span> Interaction Design
-          <span class="dots">•</span> Mockups
-          <span class="dots">•</span> Low-fidelity
-          <span class="dots">•</span> High-fidelity
-          <span class="dots">•</span> Usability Testing
-          <span class="dots">•</span>
+          I'm a UX Engineer trying to create better user experiences for 5+
+          years through freelancing & collaborating part-time with product
+          teams. Because I understand how products are built,
+          <br class="mx-screen" />I bring forward design solutions which is both
+          visually appealing & technically feasible.
         </p>
-      </div>
-    </section>
-    <section class="post-section" id="casestudy"></section>
-    <script>
-      /* To animate the skills */
-      $(".marquee").innerHTML += $(".marquee").innerHTML;
-      document.addEventListener("DOMContentLoaded", () => {
-        const container = document.getElementById("casestudy");
+        <a href="aboutme.html" tabindex="0" class="btnwicon">
+          Know more about me <span class="icon-arrowforward iconb"></span>
+        </a>
+      </section>
+      <section class="moving-section">
+        <div class="marquee">
+          <p>
+            Wireframe
+            <span class="dots">•</span> Prototyping
+            <span class="dots">•</span> Storyboarding
+            <span class="dots">•</span> User Research
+            <span class="dots">•</span> Visual Design
+            <span class="dots">•</span> Interaction Design
+            <span class="dots">•</span> Mockups
+            <span class="dots">•</span> Low-fidelity
+            <span class="dots">•</span> High-fidelity
+            <span class="dots">•</span> Usability Testing
+            <span class="dots">•</span>
+          </p>
+        </div>
+      </section>
+      <section class="post-section" id="casestudy"></section>
+      <script>
+        /* To animate the skills */
+        $(".marquee").innerHTML += $(".marquee").innerHTML;
+        document.addEventListener("DOMContentLoaded", () => {
+          const container = document.getElementById("casestudy");
 
         fetch("data/post.json")
           .then((res) => res.json())
@@ -90,26 +91,27 @@
               h2.textContent = post.title;
               h2.style.color = post.title_color;
 
-              const p = document.createElement("p");
-              p.textContent = post.tagline;
-              p.style.color = post.tag_color;
+                const p = document.createElement("p");
+                p.textContent = post.tagline;
+                p.style.color = post.tag_color;
 
-              const span = document.createElement("span");
-              span.className = "num";
-              span.textContent = count + 1;
-              span.style.color = post.title_color;
+                const span = document.createElement("span");
+                span.className = "num";
+                span.textContent = count + 1;
+                span.style.color = post.title_color;
 
               a.appendChild(h2);
               a.appendChild(p);
               a.appendChild(span);
 
-              container.prepend(a);
+                container.prepend(a);
+              });
+            })
+            .catch((err) => {
+              console.error("Error loading posts:", err);
             });
-          })
-          .catch((err) => {
-            console.error("Error loading posts:", err);
-          });
-      });
-    </script>
+        });
+      </script>
+    </main>
   </body>
 </html>
