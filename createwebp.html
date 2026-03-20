@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,7 @@
                 else reject("Conversion failed");
               },
               "image/webp",
-              quality
+              quality,
             );
           };
           img.onerror = reject;
@@ -54,7 +54,10 @@
         if (!file) return;
 
         // Ask user for filename
-        let outputName = prompt("Enter output filename (without extension):", file.name.replace(/\.\w+$/, ""));
+        let outputName = prompt(
+          "Enter output filename (without extension):",
+          file.name.replace(/\.\w+$/, ""),
+        );
         if (!outputName) outputName = file.name.replace(/\.\w+$/, "");
 
         loadingEl.style.display = "block";
