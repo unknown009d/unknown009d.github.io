@@ -222,7 +222,9 @@ h2 {
         0 0 0 4px var(--foreground);
       transition: box-shadow 200ms ease-out;
     }
-    h5 {
+    h2 {
+      font-family: "DM Sans", sans-serif;
+      font-weight: bold;
       font-size: 2rem;
     }
     .num {
