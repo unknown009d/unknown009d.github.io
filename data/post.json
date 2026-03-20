@@ -3,7 +3,7 @@
     "slug": "scrapcooks",
     "title": "ScrapCooks",
     "tagline": "Create, savor, waste less.",
-    "title_color": "#cc3a3a",
+    "title_color": "#e74646",
     "tag_color": "#88392a",
     "background_color": "#fff3e2",
     "completed": false
@@ -13,7 +13,7 @@
     "title": "BrewBuddy",
     "tagline": "Find. Book. Earn every cup.",
     "title_color": "#8c3435",
-    "tag_color": "#8c3435",
+    "tag_color": "#8b4f50",
     "background_color": "#efdada",
     "completed": false
   },
