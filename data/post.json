@@ -4,7 +4,7 @@
     "title": "ScrapCooks",
     "tagline": "Create, savor, waste less.",
     "title_color": "#e74646",
-    "tag_color": "#a9695c",
+    "tag_color": "#88392a",
     "background_color": "#fff3e2",
     "completed": false
   },
@@ -22,7 +22,7 @@
     "title": "MeetHub",
     "tagline": "Plan. Meet. Repeat.",
     "title_color": "#7a25e7",
-    "tag_color": "#8566ad",
+    "tag_color": "#64369e",
     "background_color": "#f5eeff",
     "completed": true
   }

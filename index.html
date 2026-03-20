@@ -76,21 +76,20 @@
         document.addEventListener("DOMContentLoaded", () => {
           const container = document.getElementById("casestudy");
 
-          fetch("data/post.json")
-            .then((res) => res.json())
-            .then((data) => {
-              data.reverse().forEach((post, count) => {
-                const a = document.createElement("a");
-                const key = Object.keys(post)[0];
-                a.href = `case_study.html?${key}=${post[key]}`;
-                if (post.completed === false)
-                  a.href += `&cmp=${post.completed}`;
-                a.className = "post";
-                a.style.backgroundColor = post.background_color;
+        fetch("data/post.json")
+          .then((res) => res.json())
+          .then((data) => {
+            data.reverse().forEach((post, count) => {
+              const a = document.createElement("a");
+              const key = Object.keys(post)[0];
+              a.href = `case_study.html?${key}=${post[key]}`;
+              if (post.completed === false) a.href += `&cmp=${post.completed}`;
+              a.className = "post";
+              a.style.backgroundColor = post.background_color;
 
-                const h5 = document.createElement("h5");
-                h5.textContent = post.title;
-                h5.style.color = post.title_color;
+              const h2 = document.createElement("h2");
+              h2.textContent = post.title;
+              h2.style.color = post.title_color;
 
                 const p = document.createElement("p");
                 p.textContent = post.tagline;
@@ -101,9 +100,9 @@
                 span.textContent = count + 1;
                 span.style.color = post.title_color;
 
-                a.appendChild(h5);
-                a.appendChild(p);
-                a.appendChild(span);
+              a.appendChild(h2);
+              a.appendChild(p);
+              a.appendChild(span);
 
                 container.prepend(a);
               });
