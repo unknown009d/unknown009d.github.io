@@ -558,6 +558,12 @@ footer {
             font-weight 200ms ease-in-out;
           width: fit-content;
           user-select: none;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          line-clamp: 1;
+
           &:hover,
           &:focus {
             box-shadow: none;
