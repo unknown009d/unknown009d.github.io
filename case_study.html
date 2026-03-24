@@ -51,7 +51,6 @@
         <span class="icon-home"></span>
       </a>
     </header>
-    <main></main>
     <section class="thank-you hide" id="thank-you">
       <a href="/" class="avatar">
         <img src="assets/thankyou.png" alt="Thankyou" />
@@ -76,7 +75,9 @@
           .then((r) => (r.ok ? r.text() : null))
           .then((page) => {
             if (page) {
-              document.querySelector("main").innerHTML = page;
+              document
+                .getElementById("cs-header")
+                .insertAdjacentHTML("afterend", page);
               if (!urlParams.has("cmp"))
                 document.getElementById("thank-you").classList.remove("hide");
               ScrollSpy({
