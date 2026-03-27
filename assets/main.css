@@ -4,8 +4,23 @@
   --background-alt: #f2f2f2;
   --link-hover: #f6f6f6;
   --foreground: #242424;
+  --light-foreground: #242424;
   --button-active: #121212;
   --border-line: #12121230;
+  --image-filter: invert(0);
+  --post-brightness: 100%;
+}
+
+[data-theme="dark"] {
+  --background: #121212;
+  --background-alt: #161616;
+  --link-hover: #202020;
+  --foreground: #e2e2e2;
+  --light-foreground: #242424;
+  --button-active: #121212;
+  --border-line: #f1f1f130;
+  --image-filter: invert(1);
+  --post-brightness: 80%;
 }
 
 html {
@@ -216,6 +231,7 @@ h2 {
     flex-direction: column;
     border-radius: 1.2rem;
     cursor: pointer;
+    filter: brightness(var(--post-brightness));
     &:focus {
       box-shadow:
         0 0 0 2px var(--background),
@@ -281,6 +297,7 @@ footer {
         object-fit: contain;
         user-select: none;
         pointer-events: none;
+        filter: var(--image-filter);
       }
       .tooltip {
         position: absolute;
@@ -379,6 +396,7 @@ footer {
       }
       p {
         font-size: 1.2rem;
+        color: var(--light-foreground);
         @media only screen and (max-width: 612px) {
           font-size: 1rem;
         }
@@ -480,6 +498,7 @@ footer {
     .seperator {
       width: 180px;
       margin-top: 2rem;
+      filter: var(--image-filter);
     }
   }
   .two-section {
@@ -697,6 +716,7 @@ footer {
                 border-radius: 0.8rem;
                 padding: 1.5rem;
                 position: relative;
+                color: var(--light-foreground);
                 .title {
                   font-weight: 600;
                   font-size: 1.05rem;
@@ -784,6 +804,7 @@ footer {
                 .table-title th {
                   text-align: left;
                   padding: 1.2rem 1.4rem;
+                  color: var(--light-foreground);
                 }
                 tr:nth-child(2) th {
                   font-weight: 600;
@@ -984,6 +1005,7 @@ footer {
       flex-direction: column;
       gap: 1rem;
       width: 100%;
+      color: var(--light-foreground);
       p {
         font-size: 1rem;
       }
