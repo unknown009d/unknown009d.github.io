@@ -8,6 +8,7 @@
   --button-active: #f2f2f2;
   --light-bg-foreground: #242424;
   --border-line: #f1f1f130;
+  --dark-theme-filter: brightness(90%);
 }
 .post-section {
   .post {
@@ -39,8 +40,10 @@
         color: var(--light-bg-foreground);
       }
     }
+    filter: var(--dark-theme-filter);
   }
   .wrapper {
+    filter: var(--dark-theme-filter);
     .box {
       color: var(--light-bg-foreground);
     }
@@ -52,6 +55,7 @@
           & .persona-container {
             & .pkf {
               .card {
+                filter: var(--dark-theme-filter);
                 color: var(--light-bg-foreground);
               }
             }
@@ -59,6 +63,8 @@
           & .journey-map {
             & table {
               & thead {
+                filter: var(--dark-theme-filter);
+
                 .table-title th {
                   color: var(--light-bg-foreground);
                 }
@@ -78,4 +84,7 @@ footer {
       }
     }
   }
+}
+img {
+  filter: var(--dark-theme-filter);
 }

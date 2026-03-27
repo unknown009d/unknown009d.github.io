@@ -1,11 +1,11 @@
 const $ = (el) => document.querySelector(el);
 
-const isFirstVisit = (key = "firstVisit") => {
+const isFirst = (key = "firstVisit") => {
   if (!localStorage.getItem(key)) {
     localStorage.setItem(key, "true");
     return true;
   }
-  return false;
+  return localStorage.getItem(key);
 };
 
 /* Dark mode implementation are done below */
@@ -23,6 +23,7 @@ const toggleDarkMode = () => {
     ? localStorage.setItem("darkmode", "true")
     : localStorage.setItem("darkmode", "false");
   setTheme();
+  localStorage.setItem("firstVisit", "false");
 };
 const setTheme = () => {
   if (darkmode != null) {
@@ -39,7 +40,6 @@ const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const theme = async () => {
   const themeButton = document.createElement("button");
   themeButton.classList.add("theme-button");
-
   themeButton.onclick = toggleDarkMode;
   themeButton.innerHTML = `
   <svg xmlns="http://www.w3.org/2000/svg" 
@@ -54,11 +54,13 @@ const theme = async () => {
   <p>Light / Dark Mode</p>
   `;
   themeButton.title = "Light/Dark Mode";
-  if (isFirstVisit()) {
-    themeButton.classList.add("first-time");
-    setTimeout(() => {
-      themeButton.classList.remove("first-time");
-    }, 3000);
+  if (isFirst("firstVisit")) {
+    if (isFirst("firstVisit") == "true") {
+      themeButton.classList.add("first-time");
+      setTimeout(() => {
+        themeButton.classList.remove("first-time");
+      }, 3500);
+    }
   }
   if (darkmode != null) {
     document.body.appendChild(themeButton);
