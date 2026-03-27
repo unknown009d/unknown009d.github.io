@@ -9,38 +9,28 @@ const isFirstVisit = (key = "firstVisit") => {
 };
 
 /* Dark mode implementation are done below */
-const darkmode = document.querySelector('link[href="assets/darkmode.css"]');
-const disableDarkMode = () => {
-  localStorage.setItem("darkmode", "false");
-  setTheme();
-};
-const enableDarkMode = () => {
-  localStorage.setItem("darkmode", "true");
-  setTheme();
-};
-const toggleDarkMode = () => {
-  localStorage.getItem("darkmode") == "false"
-    ? localStorage.setItem("darkmode", "true")
-    : localStorage.setItem("darkmode", "false");
-  setTheme();
-};
-const setTheme = () => {
-  if (darkmode != null) {
-    darkmode.disabled = localStorage.getItem("darkmode") == "false";
-  }
-};
+// renamed variables to allow scope for more themes in the future
+// and to imrove readability
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-(() => {
-  if (localStorage.getItem("darkmode") === null)
-    localStorage.setItem("darkmode", prefersDark);
-  else setTheme();
-})();
+
+const setTheme = () => {
+  const storedTheme = localStorage.getItem("theme");
+  const theme = storedTheme ?? (prefersDark ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+};
+
+const toggleTheme = () => {
+  const storedTheme = localStorage.getItem("theme");
+  const current = storedTheme ?? (prefersDark ? "dark" : "light");
+  localStorage.setItem("theme", current === "dark" ? "light" : "dark");
+  setTheme();
+};
 
 const theme = async () => {
   const themeButton = document.createElement("button");
   themeButton.classList.add("theme-button");
 
-  themeButton.onclick = toggleDarkMode;
+  themeButton.onclick = toggleTheme;
   themeButton.innerHTML = `
   <svg xmlns="http://www.w3.org/2000/svg" 
   width="24" height="24" viewBox="0 0 24 24" 
@@ -60,9 +50,11 @@ const theme = async () => {
       themeButton.classList.remove("first-time");
     }, 3000);
   }
-  if (darkmode != null) {
-    document.body.appendChild(themeButton);
-  }
+  document.body.appendChild(themeButton);
+};
+
+window.onstorage = () => {
+  setTheme();
 };
 
 /* Footer implementation are done below */
@@ -107,6 +99,7 @@ const footer_main = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  setTheme();
   footer_main();
   theme();
 });
