@@ -53,6 +53,10 @@ const theme = async () => {
   document.body.appendChild(themeButton);
 };
 
+window.onstorage = () => {
+  setTheme();
+};
+
 /* Footer implementation are done below */
 const footer_main = async () => {
   const footer = document.createElement("footer");
