@@ -9,7 +9,6 @@ const isFirstVisit = (key = "firstVisit") => {
 };
 
 /* Dark mode implementation are done below */
-const darkmode = document.querySelector('link[href="assets/darkmode.css"]');
 const disableDarkMode = () => {
   localStorage.setItem("darkmode", "false");
   setTheme();
@@ -24,10 +23,10 @@ const toggleDarkMode = () => {
     : localStorage.setItem("darkmode", "false");
   setTheme();
 };
+
 const setTheme = () => {
-  if (darkmode != null) {
-    darkmode.disabled = localStorage.getItem("darkmode") == "false";
-  }
+  const theme = localStorage.getItem("darkmode") == "true" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", theme);
 };
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 (() => {
@@ -60,9 +59,7 @@ const theme = async () => {
       themeButton.classList.remove("first-time");
     }, 3000);
   }
-  if (darkmode != null) {
-    document.body.appendChild(themeButton);
-  }
+  document.body.appendChild(themeButton);
 };
 
 /* Footer implementation are done below */
