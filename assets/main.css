@@ -9,6 +9,7 @@
   --border-line: #12121230;
   --image-filter: invert(0);
   --post-brightness: 100%;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
