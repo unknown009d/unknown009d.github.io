@@ -41,6 +41,9 @@
       }
     }
     filter: var(--dark-theme-filter);
+    img {
+      filter: none;
+    }
   }
   .wrapper {
     filter: var(--dark-theme-filter);
