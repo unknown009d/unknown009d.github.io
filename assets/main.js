@@ -70,34 +70,35 @@ const footer_main = async () => {
   const footer = document.createElement("footer");
   const socialLinks = document.createElement("div");
 
-  await fetch("data/links.json")
+  await fetch("data/db.json")
     .then((res) => res.json())
     .then((data) => {
-      data.forEach((social) => {
+      data.links.forEach((social) => {
         const link = document.createElement("a");
         link.href = social.href;
         link.target = "_blank";
+
         const tooltip = document.createElement("span");
         tooltip.classList.add("tooltip");
         tooltip.innerText = social.title;
+
         const icon = document.createElement("img");
         icon.src = social.icon;
         icon.alt = social.title;
+
         link.appendChild(tooltip);
         link.appendChild(icon);
         socialLinks.appendChild(link);
       });
+
       socialLinks.classList.add("links");
       footer.appendChild(socialLinks);
 
       const khudkitarif = document.createElement("p");
       khudkitarif.classList.add("desdev");
-      fetch("data/misc.json")
-        .then((res) => res.json())
-        .then((data) => {
-          khudkitarif.innerText = data[0].content;
-          footer.appendChild(khudkitarif);
-        });
+
+      khudkitarif.innerText = data.misc[0].content;
+      footer.appendChild(khudkitarif);
     })
     .catch((err) => {
       console.error(err);

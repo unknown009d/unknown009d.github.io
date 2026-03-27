@@ -100,7 +100,7 @@ export function ScrollSpy({
     navSelector = "#auto-toc .nav-link";
   }
 
-  // 🔸 Keep old logic intact for backward compatibility
+  // Keep old logic intact for backward compatibility
   if (!sectionSelector || !navSelector)
     throw new Error("ScrollSpy: sectionSelector and navSelector are required.");
 
