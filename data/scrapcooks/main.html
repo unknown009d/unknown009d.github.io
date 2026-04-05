@@ -1,14 +1,495 @@
 <style>
   .case_study {
-    --base: #FFF3E2;
-    --primary-accent: #E74646;
+    --base: #fff3e2;
+    --primary-accent: #e74646;
+    --border-rounded-hero: 4rem;
   }
-  .coming-soon{
-    background: url(/data/scrapcooks/banner_background.webp) center/cover no-repeat, var(--base);
+  .coming-soon {
+    background:
+      url(/data/scrapcooks/banner_background.we) center/cover no-repeat,
+      var(--base);
   }
 </style>
 
-<section class="coming-soon">
-    <img src="/data/scrapcooks/logo.webp" alt="Scrapcooks Logo">
-    <p class="cs-text">Coming Soon...</p>
+<section class="hero seperate">
+  <div>
+    <img src="data/scrapcooks/logo_icon.webp" alt="ScrapCooks" width="72px" />
+    <h1>Scrapcooks</h1>
+    <h2 class="subtitle">Create, savor, waste less.</h2>
+    <p>
+      An AI-powered solution that transforms last night's leftovers into
+      creative, unique recipes, helping reduce food waste while offering
+      delicious new meal ideas.
+    </p>
+    <div class="timebadge">
+      <span class="icon-time"></span>
+      <time>June 2025 - July 2025</time>
+    </div>
+  </div>
+  <section class="hero-extra">
+    <img src="data/scrapcooks/Showcase.webp" alt="Showcase" />
+  </section>
+</section>
+
+<section class="intro">
+  <h2>
+    Tired of finding recipes that always require ingredients you don't have?
+  </h2>
+  <h3>
+    Transform your leftovers into delicious, unique meals with AI-powered
+    suggestions designed around what's already in your kitchen.
+  </h3>
+  <img src="assets/icons/seperator.svg" class="seperator" alt="---" />
+</section>
+
+<section class="two-section">
+  <main>
+    <section id="introduction" class="content-section">
+      <h2>User Research</h2>
+      <p>
+        Found out that everyday cooking is often hindered by time constraints,
+        mismatched ingredients, and recipe platforms demanding unavailable
+        items. This leads to decision fatigue, causing many to skip meals or
+        rely on food delivery instead.
+        <br />
+        <br />
+        The insights highlight a strong need for a solution that generates
+        simple recipes using available ingredients, reducing effort, minimizing
+        food waste, and making home cooking more accessible and stress-free.
+      </p>
+      <br />
+      <section id="user-storyboarding" class="content-section content80">
+        <h3>Storyboards</h3>
+        <img
+          src="data/scrapcooks/WithoutScrapcooks.webp"
+          loading="lazy"
+          decoding="async"
+          alt="Life without Scrapcooks"
+        />
+      </section>
+      <section id="user-pain-point" class="content-section">
+        <h3>User pain points</h3>
+        <div class="wrapper upp">
+          <div class="box">
+            <h6>Meal Decision</h6>
+            <p>
+              Users often feel mentally exhausted trying to decide what to cook
+              with limited ingredients and little time.
+            </p>
+          </div>
+          <div class="box">
+            <h6>Unhelpful Recipe</h6>
+            <p>
+              Most online recipes require extra ingredients or don't align with
+              the random leftovers users have.
+            </p>
+          </div>
+          <div class="box">
+            <h6>Time Constraints</h6>
+            <p>
+              Busy students and professionals don't have time to browse long
+              recipe lists or shop for missing ingredients.
+            </p>
+          </div>
+          <div class="box">
+            <h6>Food waste</h6>
+            <p>
+              Leftovers frequently go unused because users don't know how to
+              combine them into a proper meal.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section id="user-persona" class="content-section">
+        <h3>User Persona & Journey</h3>
+        <div class="pj">
+          <div class="persona-container">
+            <figure class="persona">
+              <img
+                src="data/scrapcooks/avatar.webp"
+                loading="lazy"
+                decoding="async"
+                alt="User"
+              />
+              <figcaption>
+                <h6>Jeanilia</h6>
+                <p>
+                  A busy B.A. student, struggles with leftovers and seeks quick,
+                  simple recipes using available ingredients without extra
+                  effort or time.
+                </p>
+              </figcaption>
+            </figure>
+            <div class="pkf">
+              <figure class="card">
+                <span class="icon-goal"></span>
+                <p class="title">Primary Goal</p>
+                <p class="details">
+                  Prepare quick meals using available ingredients, reduce food
+                  waste and unnecessary spending, maintain a healthy diet.
+                </p>
+              </figure>
+              <figure class="card">
+                <span class="icon-keyframe"></span>
+                <p class="title">Key Behaviors</p>
+                <ul class="details">
+                  <li>Browses recipe blogs but abandons due to complexity.</li>
+                  <li>Tries to decide meals based on available leftovers.</li>
+                  <li>Looks for quick, low-effort cooking solutions.</li>
+                </ul>
+              </figure>
+              <figure class="card">
+                <span class="icon-frustration"></span>
+                <p class="title">Frustrations</p>
+                <ul class="details">
+                  <li>Most recipes require ingredients she doesn't have.</li>
+                  <li>Feels overwhelmed deciding what to cook.</li>
+                  <li>Ends up skipping meals or ordering food.</li>
+                </ul>
+              </figure>
+            </div>
+          </div>
+          <div class="journey-map">
+            <table>
+              <thead>
+                <tr class="table-title">
+                  <th colspan="4">Himani's Journey Map</th>
+                </tr>
+                <tr>
+                  <th>Stages</th>
+                  <th>What the user does</th>
+                  <th>Pain Points</th>
+                  <th>Opportunities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Discover</td>
+                  <td>Opens fridge and sees scattered leftovers</td>
+                  <td>Feels unsure, lacks direction</td>
+                  <td>Reduce decision effort</td>
+                </tr>
+                <tr>
+                  <td>Evaluate</td>
+                  <td>Tries recalling past meals and ideas</td>
+                  <td>Can't think of anything, mentally tired</td>
+                  <td>Provide creative meal suggestions</td>
+                </tr>
+                <tr>
+                  <td>Decide</td>
+                  <td>Searches recipes online</td>
+                  <td>
+                    Finds irrelevant or complex recipes, feels overwhelmed
+                  </td>
+                  <td>Recommend recipes using available ingredients only</td>
+                </tr>
+                <tr>
+                  <td>Register</td>
+                  <td>Opens food delivery app and considers ordering</td>
+                  <td>Feels guilty, unsure if worth it</td>
+                  <td>Offer quick, low-effort cooking alternatives</td>
+                </tr>
+                <tr>
+                  <td>Manage</td>
+                  <td>Eats simple food or skips meal</td>
+                  <td>Feels disappointed, leftovers wasted</td>
+                  <td>Help turn leftovers into satisfying meals</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="background" class="content-section">
+      <h2>Starting the design</h2>
+      <section id="sitemap" class="content-section">
+        <h3>Sitemap</h3>
+        <img
+          src="data/scrapcooks/ScrapCooksIA.webp"
+          loading="lazy"
+          decoding="async"
+          alt="Information Architecture"
+        />
+      </section>
+      <br />
+      <section id="wireframe" class="content-section">
+        <h3>Paper Wireframes</h3>
+        <img
+          src="data/scrapcooks/wireframes.webp"
+          loading="lazy"
+          class="w-100"
+          decoding="async"
+          alt="Wireframe"
+        />
+      </section>
+      <section id="dwf" class="content-section content80">
+        <h3>Digital Wireframes</h3>
+        <div class="two-column">
+          <p>
+            This is the main home screen of the app, which was inspired by
+            Tinder. Keeping in mind “the Gestalt principles” this interface was
+            made to easily find recipe that suits your need.
+            <br /><br />
+            And the one it doesn't you can swipe left to find the right one!
+          </p>
+          <img src="data/scrapcooks/digital_wireframes.webp" alt="" />
+        </div>
+        <br /><br /><br />
+        <div class="two-column">
+          <p>
+            The AI-generated recipe details and a prominent button to show the
+            details in a overlay for cooking instructions.
+            <br /><br />
+            The design is made with simplicity in mind.
+          </p>
+          <img src="data/scrapcooks/digital_wireframes2.webp" alt="" />
+        </div>
+      </section>
+      <section id="lowfi" class="content-section content80">
+        <h3>Low-fidelity prototype</h3>
+        <p>
+          This is the low-fidelity prototype where the user flow goes from
+          Flow1. Home > Search Page > Enter Leftovers > Generated Recipe >
+          Detailed Recipe Page > Cooking Instruction
+          <br /><br />
+          In the home page, the card can be dragged either side for showcasing
+          list of recipes.
+        </p>
+        <img
+          class="my-3"
+          src="data/scrapcooks/LowFidelity.webp"
+          loading="lazy"
+          decoding="async"
+          alt="LowFidelityMockup"
+        />
+        <label>
+          Check it out:
+          <a
+            target="_blank"
+            href="https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks?page-id=311%3A681&node-id=311-682&p=f&viewport=95%2C185%2C0.51&t=Gyzke2EQSwq7VBkX-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=311%3A682"
+          >
+            https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks
+          </a>
+        </label>
+      </section>
+    </section>
+
+    <section id="goals" class="content-section">
+      <h2>Usability Study</h2>
+      <p>
+        Conducted an online unmoderate
+        <a
+          target="_blank"
+          class="link-border"
+          href="https://docs.google.com/presentation/d/e/2PACX-1vSzQNXY-bqifBnTKe9pg5inzwC_oxJFIsQNjO8QPxz-vf_YLMteqbSnCCFBmu-7lG-G0eivd07QPsS_/pub?start=false&loop=false&delayms=3000"
+          >usability study</a
+        >
+        for around 10 minutes and asked for feedback on overall ease of use,
+        confidence completing task, navigating the app.
+      </p>
+      <section id="findings" class="content-section content80">
+        <h3>Findings</h3>
+        <p>
+          After usability study we found out people were confused after
+          searching because of back button as well as no label on the icons made
+          it more confused which lead to 40% drop-off rate :
+        </p>
+        <div class="us-finding">
+          <figure>
+            <img
+              class="img-figure"
+              src="data/scrapcooks/hashproblem1.webp"
+              alt="problem1"
+            />
+            <figcaption>
+              <p>Problem #1</p>
+              <label
+                >Lack of a visible back button led to drop-off after users
+                navigated to search screens.</label
+              >
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              class="img-figure"
+              src="data/scrapcooks/hashproblem2.webp"
+              alt="problem2"
+            />
+            <figcaption>
+              <p>Problem #2</p>
+              <label
+                >Users were having trouble and felt overwhelmed in navigating
+                the app as they had to guess what's going on.</label
+              >
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </section>
+
+    <section id="implementation" class="content-section">
+      <h2>Refining Design</h2>
+      <p>
+        After the usability test there were few design changes that I took are
+        discussed below:
+      </p>
+      <section id="problem1" class="content-section content80 problems">
+        <h3>Problem #1</h3>
+        <div class="two-column">
+          <p>
+            After having the pain points from the usability test I prioritized
+            and resolved the critical usability issues identified, that were
+            back button and a consistent top bar, this is a huge concern for
+            accessibility which was fixed by adding a back button in all pages
+            and a consistent top bar.
+          </p>
+          <img
+            src="data/scrapcooks/Problem1.webp"
+            loading="lazy"
+            decoding="async"
+            alt="Problem1"
+          />
+        </div>
+      </section>
+      <section id="problem2" class="content-section content80 problems">
+        <h3>Problem #2</h3>
+        <div class="two-column">
+          <p>
+            Users also had issues with navigation thus, created a navigation bar
+            with label, this also ensures that accessibility concerns. It is
+            much more prominent and users can identify each icons distinctly.
+          </p>
+          <img
+            src="data/scrapcooks/Problem2.webp"
+            loading="lazy"
+            decoding="async"
+            alt="Problem2"
+          />
+        </div>
+      </section>
+      <div class="finallink">
+        <p class="labelforrevised">
+          Here's is the revised lo-fi prototype version:
+        </p>
+        <a
+          target="_blank"
+          href="https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks?page-id=311%3A681&node-id=403-133&p=f&viewport=-1159%2C-744%2C0.65&t=NvKarXfipsaITHJu-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=403%3A133"
+        >
+          https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks?iteration1
+        </a>
+      </div>
+    </section>
+
+    <section id="colors" class="content-section">
+      <h2>Choosing Colors</h2>
+      <div class="two-column">
+        <p>
+          The color palette evokes warmth, creativity, and comfort. <br /><br />
+          The soft beige suggests home-cooked simplicity, the deep brown hints
+          at rich, hearty flavors, and the vibrant coral adds a fresh,
+          appetizing energy perfect for turning leftovers into delightful meals.
+          <br /><br />
+          Thus the last color is used in cooking instruction to convey a sense
+          of achievement for the user.
+        </p>
+        <img
+          src="data/scrapcooks/color.webp"
+          loading="lazy"
+          decoding="async"
+          alt="Colors"
+        />
+      </div>
+    </section>
+
+    <section id="mockups" class="content-section mt-3">
+      <h2>Mockups</h2>
+      <div class="mocks">
+        <img
+          src="data/scrapcooks/mockup1.webp"
+          loading="lazy"
+          decoding="async"
+          alt="Mockup 1"
+        />
+        <img
+          src="data/scrapcooks/mockup2.webp"
+          class="img-contain"
+          loading="lazy"
+          decoding="async"
+          alt="Mockup 2"
+        />
+      </div>
+      <p class="linkforvisit">
+        Check out high-fidelity prototype:
+        <a
+          target="_blank"
+          href="https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks?page-id=311%3A102&node-id=311-103&p=f&viewport=105%2C105%2C0.45&t=CZhtkDgPqWlm9HCX-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=311%3A103"
+        >
+          https://www.figma.com/proto/bu5dPJ68dUwRUewWDtJrLV/ScrapCooks
+        </a>
+      </p>
+    </section>
+
+    <section id="accessibility" class="content-section">
+      <h2>Accessibility</h2>
+      <div class="grid-3 ab">
+        <figure class="card">
+          <p>1</p>
+          <figcaption>
+            Back buttons added in every page for better usability of the app.
+            Also all the buttons have proper tooltip.
+          </figcaption>
+          <img
+            src="data/scrapcooks/accessibility1.webp"
+            alt="Back Button Tooltip"
+          />
+        </figure>
+        <figure class="card">
+          <p>2</p>
+          <figcaption>
+            The design is not cluttered & animations are less than 5000ms
+            according to the WCAG standards.
+          </figcaption>
+          <video
+            src="data/scrapcooks/accessibility2.webm"
+            muted
+            autoplay
+            loop
+          ></video>
+        </figure>
+        <figure class="card">
+          <p>3</p>
+          <figcaption>
+            Color contrast is checked through WebAIM for better accessibility.
+          </figcaption>
+          <img
+            src="data/scrapcooks/accessibility3.webp"
+            alt="Color Contrast AAA"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section id="conclusions" class="content-section">
+      <h2>Conclusion</h2>
+      <p>
+        The main objective was to create an platform where people can make their
+        customized recipe with the leftover food that they have. It reduces food
+        waste and create unique food items.
+        <br /><br />
+        This project taught me that as much as I want to make the user-flow
+        simple it requires a lot of iteration to make it perfect for normal
+        usage. Not giving an back button was a design choice but after usability
+        test most of the users wanted to have a back button because they think
+        they have done something wrong. And the back button is a sign of relief
+        (just like undo)
+      </p>
+    </section>
+  </main>
+
+  <aside
+    class="hide-menu"
+    data-toc="A case study on a Event Management System"
+  ></aside>
 </section>

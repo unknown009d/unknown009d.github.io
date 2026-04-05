@@ -78,6 +78,12 @@
       }
     }
   }
+  .us-finding {
+    background-color: var(--background-alt);
+    img {
+      filter: none;
+    }
+  }
 }
 footer {
   .links {

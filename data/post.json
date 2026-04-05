@@ -6,7 +6,7 @@
     "title_color": "#e74646",
     "tag_color": "#88392a",
     "background_color": "#fff3e2",
-    "completed": false
+    "completed": true
   },
   {
     "slug": "brewbuddy",
