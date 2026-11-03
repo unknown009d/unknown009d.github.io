@@ -1,0 +1,990 @@
+<!-- 
+================= WARNING! =================
+============ DISTURBING VISUALS ============
+
+Everything below is AI generated
+Ya I'm just a lazy ass making my life easier
+
+================= WARNING! =================
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toWebP | Druba</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="assets/main.css" />
+  <link rel="stylesheet" href="assets/darkmode.css" />
+  <link rel="stylesheet" href="assets/icons/css/dicon.css" />
+  <script src="assets/main.js"></script>
+
+  <style>
+    body.towebp-page {
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .webp-shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: 1.5rem auto 4rem;
+      padding: 0 4rem;
+      flex: 1;
+
+      @media only screen and (max-width: 612px) {
+        padding: 0 2rem;
+        margin-top: 1.25rem;
+      }
+    }
+
+    .webp-hero {
+      margin-bottom: 1.75rem;
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.12;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 0.96rem;
+        line-height: 1.5;
+        opacity: 0.75;
+      }
+    }
+
+    /* Dropzone */
+    .dropzone {
+      position: relative;
+      background-color: var(--background-alt);
+      border: 2px dashed var(--border-line);
+      border-radius: 1.6rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition:
+        border-color 200ms ease,
+        transform 200ms ease,
+        background-color 200ms ease;
+      user-select: none;
+
+      @media only screen and (max-width: 612px) {
+        padding: 2rem 1.25rem;
+        border-radius: 1.25rem;
+      }
+
+      &:hover,
+      &.is-dragover {
+        border-color: var(--foreground);
+      }
+
+      &.is-dragover {
+        transform: scale(0.995);
+      }
+
+      input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .drop-icon {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 1rem;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        display: inline-grid;
+        place-items: center;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: clamp(1.3rem, 4.5vw, 1.6rem);
+        line-height: 1.25;
+        margin-bottom: 0.4rem;
+      }
+
+      .drop-sub {
+        font-size: 0.88rem;
+        line-height: 1.45;
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+      }
+
+      .drop-hint {
+        font-family: "DM Mono", monospace;
+        font-size: 0.74rem;
+        line-height: 1.4;
+        opacity: 0.5;
+
+        @media (hover: none) and (pointer: coarse) {
+          display: none;
+        }
+      }
+    }
+
+    /* Controls bar */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      padding: 1.1rem 1.4rem;
+      background-color: var(--background-alt);
+      border-radius: 1.2rem;
+      border: 1px solid var(--border-line);
+
+      @media only screen and (max-width: 612px) {
+        padding: 1rem;
+        gap: 1rem;
+      }
+    }
+
+    .control-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+
+      @media only screen and (max-width: 612px) {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 1rem;
+      }
+    }
+
+    .control-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+
+      label {
+        font-size: 0.88rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .mono-val {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        min-width: 3.2ch;
+        padding: 0.2rem 0.55rem;
+        border-radius: 6pt;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 612px) {
+        width: 100%;
+
+        &.width-control {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 130px;
+      height: 6px;
+      border-radius: 99px;
+      background: var(--border-line);
+      cursor: pointer;
+
+      @media only screen and (max-width: 612px) {
+        flex: 1;
+        width: auto;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--foreground);
+        border: 2px solid var(--background);
+        cursor: pointer;
+      }
+    }
+
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+
+      button.pill {
+        margin: 0;
+        padding: 0.32rem 0.65rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        border-radius: 99px;
+        background-color: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+
+        &.active {
+          background-color: var(--foreground);
+          color: var(--background);
+          border-color: var(--foreground);
+        }
+      }
+    }
+
+    .custom-width {
+      width: 5.8rem;
+      padding: 0.3rem 0.55rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.76rem;
+      border-radius: 99px;
+      border: 1px solid var(--border-line);
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+
+    .bulk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6rem;
+
+      @media only screen and (max-width: 612px) {
+        width: 100%;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border-line);
+      }
+
+      .btnwicon {
+        box-sizing: border-box;
+        white-space: nowrap;
+        margin: 0;
+        font-size: 0.85rem;
+        padding: 0.55rem 1.15rem;
+
+        .iconb {
+          right: 0.85rem;
+          transform: translateY(-6px);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+          padding-right: 2.35rem;
+
+          .iconb {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+
+      .btn-ghost {
+        box-sizing: border-box;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0.55rem 1rem;
+        font-size: 0.85rem;
+        background: transparent;
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+        border-radius: 20pt;
+
+        &:hover {
+          border-color: var(--foreground);
+        }
+      }
+    }
+
+    /* Summary banner */
+    .queue-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.75rem 0 1rem;
+
+      &.is-visible {
+        display: flex;
+      }
+
+      .queue-stats {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        opacity: 0.8;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .saved-badge {
+        font-family: "DM Mono", monospace;
+        font-size: 0.78rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 99px;
+        background-color: var(--foreground);
+        color: var(--background);
+      }
+    }
+
+    /* Cards grid */
+    .webp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 1.25rem;
+    }
+
+    .webp-card {
+      background-color: var(--background-alt);
+      border: 1px solid var(--border-line);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .thumb-wrap {
+        position: relative;
+        height: 190px;
+        background-color: var(--background);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border-line);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          padding: 0.5rem;
+          filter: none;
+        }
+      }
+
+      .remove-btn {
+        position: absolute;
+        top: 0.65rem;
+        right: 0.65rem;
+        margin: 0;
+        padding: 0;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: var(--background-alt);
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+        line-height: 1;
+
+        &:hover {
+          background-color: var(--foreground);
+          color: var(--background);
+        }
+      }
+
+      .ratio-pill {
+        position: absolute;
+        bottom: 0.65rem;
+        right: 0.65rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.74rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 99px;
+        background-color: var(--foreground);
+        color: var(--background);
+      }
+
+      .card-body {
+        padding: 1rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+      }
+
+      .name-row {
+        display: flex;
+        align-items: center;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        border-radius: 0.65rem;
+        padding: 0.4rem 0.65rem;
+
+        &:focus-within {
+          border-color: var(--foreground);
+        }
+
+        input {
+          all: unset;
+          flex: 1;
+          font-size: 0.9rem;
+          font-weight: 600;
+          min-width: 0;
+        }
+
+        span {
+          font-family: "DM Mono", monospace;
+          font-size: 0.78rem;
+          opacity: 0.55;
+          user-select: none;
+        }
+      }
+
+      .meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "DM Mono", monospace;
+        font-size: 0.76rem;
+        opacity: 0.75;
+        gap: 0.5rem;
+      }
+
+      .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: auto;
+
+        .btnwicon {
+          box-sizing: border-box;
+          white-space: nowrap;
+          margin: 0;
+          width: 100%;
+          text-align: center;
+          padding: 0.55rem 1.1rem;
+          font-size: 0.86rem;
+          border-radius: 0.75rem;
+
+          .iconb {
+            right: 0.9rem;
+            transform: translateY(-6px);
+          }
+
+          &:hover,
+          &:focus,
+          &:active {
+            padding-right: 2.2rem;
+
+            .iconb {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        }
+      }
+    }
+
+    .lie {
+      font-size: 0.6rem;
+    }
+
+    @media only screen and (max-width: 250px) {
+      body {
+        display: none !important;
+      }
+
+      html {
+        &::after {
+          content: "Seriously?";
+          display: grid;
+          place-items: center;
+          min-height: 90vh;
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body class="towebp-page">
+  <header id="cs-header">
+    <a class="backbutton" href="/" title="Go home">
+      <span class="icon-home"></span>
+    </a>
+  </header>
+
+  <main class="webp-shell">
+    <section class="webp-hero">
+      <h1>How did you end up here?</h1>
+      <p>
+        Drop one image or a whole folder. Everything converts locally in your
+        browser; nothing is uploaded <small class="lie">*Promise🤞</small>
+      </p>
+    </section>
+
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" accept="image/*" multiple aria-label="Choose images to convert" />
+      <div class="drop-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" x2="12" y1="3" y2="15" />
+        </svg>
+      </div>
+      <h2>Drop images here or click to browse</h2>
+      <p class="drop-sub">Supports PNG, JPG, WebP, AVIF, GIF, SVG — single or bulk</p>
+      <p class="drop-hint">Tip: You can also press Ctrl + V anywhere to paste from clipboard</p>
+    </div>
+
+    <section class="controls-bar" aria-label="Conversion settings">
+      <div class="control-group">
+        <div class="control-item">
+          <label for="quality-range">Quality</label>
+          <input type="range" id="quality-range" min="10" max="100" step="5" value="75" />
+          <span class="mono-val" id="quality-val">75%</span>
+        </div>
+
+        <div class="control-item width-control">
+          <label>Max Width</label>
+          <div class="preset-pills" id="width-presets">
+            <button type="button" class="pill active" data-w="0">Original</button>
+            <button type="button" class="pill" data-w="1920">1920px</button>
+            <button type="button" class="pill" data-w="1200">1200px</button>
+            <button type="button" class="pill" data-w="800">800px</button>
+            <input type="number" id="custom-width" class="custom-width" placeholder="Custom px" min="16" max="8000" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bulk-actions" id="bulk-actions" style="display: none">
+        <button type="button" class="btn-ghost" id="clear-btn">Clear All</button>
+        <button type="button" class="btnwicon btn-outline" id="download-each-btn">
+          Download Each <span class="icon-arrowbelow iconb"></span>
+        </button>
+        <button type="button" class="btnwicon" id="download-zip-btn">
+          Download ZIP <span class="icon-arrowbelow iconb"></span>
+        </button>
+      </div>
+    </section>
+
+    <div class="queue-header" id="queue-header">
+      <div class="queue-stats">
+        <span id="stats-count">0 images</span>
+        <span>•</span>
+        <span id="stats-size">0 KB → 0 KB</span>
+        <span class="saved-badge" id="stats-saved">0% saved</span>
+      </div>
+    </div>
+
+    <section class="webp-grid" id="webp-grid"></section>
+  </main>
+
+  <script>
+    (() => {
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("file-input");
+      const qualityRange = document.getElementById("quality-range");
+      const qualityVal = document.getElementById("quality-val");
+      const widthPresets = document.getElementById("width-presets");
+      const customWidthInput = document.getElementById("custom-width");
+      const bulkActions = document.getElementById("bulk-actions");
+      const queueHeader = document.getElementById("queue-header");
+      const statsCount = document.getElementById("stats-count");
+      const statsSize = document.getElementById("stats-size");
+      const statsSaved = document.getElementById("stats-saved");
+      const grid = document.getElementById("webp-grid");
+      const clearBtn = document.getElementById("clear-btn");
+      const downloadEachBtn = document.getElementById("download-each-btn");
+      const downloadZipBtn = document.getElementById("download-zip-btn");
+
+      let items = [];
+      let maxWidth = 0;
+      let nextId = 1;
+
+      const formatBytes = (bytes) => {
+        if (bytes < 1024) return `${bytes} B`;
+        const kb = bytes / 1024;
+        if (kb < 1024) return `${kb.toFixed(1)} KB`;
+        return `${(kb / 1024).toFixed(2)} MB`;
+      };
+
+      const stripExt = (name) => name.replace(/\.[^.]+$/, "") || "image";
+
+      const loadImage = (file) =>
+        new Promise((resolve, reject) => {
+          const url = URL.createObjectURL(file);
+          const img = new Image();
+          img.onload = () => {
+            URL.revokeObjectURL(url);
+            resolve(img);
+          };
+          img.onerror = (err) => {
+            URL.revokeObjectURL(url);
+            reject(err);
+          };
+          img.src = url;
+        });
+
+      const renderWebP = (img, quality, targetMaxW) =>
+        new Promise((resolve, reject) => {
+          let w = img.naturalWidth || img.width;
+          let h = img.naturalHeight || img.height;
+          if (targetMaxW > 0 && w > targetMaxW) {
+            h = Math.round((h * targetMaxW) / w);
+            w = targetMaxW;
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+          canvas.toBlob(
+            (blob) => {
+              if (blob) resolve({ blob, width: w, height: h });
+              else reject(new Error("WebP encoding failed"));
+            },
+            "image/webp",
+            quality
+          );
+        });
+
+      const updateSummary = () => {
+        const hasItems = items.length > 0;
+        bulkActions.style.display = hasItems ? "flex" : "none";
+        queueHeader.classList.toggle("is-visible", hasItems);
+        if (!hasItems) return;
+
+        const totalOrig = items.reduce((s, it) => s + it.file.size, 0);
+        const totalOut = items.reduce((s, it) => s + (it.blob ? it.blob.size : 0), 0);
+        const pct = totalOrig > 0 ? Math.round((1 - totalOut / totalOrig) * 100) : 0;
+
+        statsCount.textContent = `${items.length} ${items.length === 1 ? "image" : "images"}`;
+        statsSize.textContent = `${formatBytes(totalOrig)} → ${formatBytes(totalOut)}`;
+        statsSaved.textContent =
+          pct >= 0 ? `-${pct}% saved` : `+${Math.abs(pct)}% larger`;
+      };
+
+      const updateCardView = (item) => {
+        if (!item.el || !item.blob) return;
+        const pct = Math.round((1 - item.blob.size / item.file.size) * 100);
+        item.el.querySelector(".thumb-img").src = item.previewUrl;
+        item.el.querySelector(".ratio-pill").textContent =
+          pct >= 0 ? `-${pct}%` : `+${Math.abs(pct)}%`;
+        item.el.querySelector(".dims-text").textContent =
+          `${item.outW} × ${item.outH}`;
+        item.el.querySelector(".size-text").textContent =
+          `${formatBytes(item.file.size)} → ${formatBytes(item.blob.size)}`;
+      };
+
+      const processItem = async (item) => {
+        const quality = Number(qualityRange.value) / 100;
+        if (!item.img) {
+          item.img = await loadImage(item.file);
+        }
+        const { blob, width, height } = await renderWebP(
+          item.img,
+          quality,
+          maxWidth
+        );
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+        item.blob = blob;
+        item.outW = width;
+        item.outH = height;
+        item.previewUrl = URL.createObjectURL(blob);
+        updateCardView(item);
+      };
+
+      const downloadSingle = (item) => {
+        if (!item.blob) return;
+        const a = document.createElement("a");
+        a.href = item.previewUrl;
+        a.download = `${(item.outputName || "image").trim()}.webp`;
+        a.click();
+      };
+
+      const createCard = (item) => {
+        const card = document.createElement("article");
+        card.className = "webp-card";
+        card.innerHTML = `
+            <div class="thumb-wrap">
+              <img class="thumb-img" alt="" />
+              <button type="button" class="remove-btn" title="Remove image" aria-label="Remove image">×</button>
+              <span class="ratio-pill">...</span>
+            </div>
+            <div class="card-body">
+              <div class="name-row">
+                <input type="text" class="name-input" value="" aria-label="Output filename" />
+                <span>.webp</span>
+              </div>
+              <div class="meta-row">
+                <span class="dims-text">...</span>
+                <span class="size-text">${formatBytes(item.file.size)}</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btnwicon dl-btn">
+                  Download <span class="icon-arrowbelow iconb"></span>
+                </button>
+              </div>
+            </div>
+          `;
+
+        const nameInput = card.querySelector(".name-input");
+        nameInput.value = item.outputName;
+        nameInput.addEventListener("input", () => {
+          item.outputName = nameInput.value;
+        });
+
+        card.querySelector(".dl-btn").addEventListener("click", () => {
+          downloadSingle(item);
+        });
+
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+          if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+          items = items.filter((x) => x.id !== item.id);
+          card.remove();
+          updateSummary();
+        });
+
+        item.el = card;
+        grid.appendChild(card);
+      };
+
+      const addFiles = async (fileList) => {
+        const valid = [...fileList].filter((f) => f.type.startsWith("image/"));
+        if (!valid.length) return;
+
+        const added = valid.map((file) => {
+          const item = {
+            id: nextId++,
+            file,
+            outputName: stripExt(file.name),
+            img: null,
+            blob: null,
+            previewUrl: null,
+            outW: 0,
+            outH: 0,
+            el: null,
+          };
+          items.push(item);
+          createCard(item);
+          return item;
+        });
+
+        for (const item of added) {
+          try {
+            await processItem(item);
+          } catch (err) {
+            console.error("Failed to convert", item.file.name, err);
+          }
+        }
+        updateSummary();
+      };
+
+      const reprocessAll = async () => {
+        for (const item of items) {
+          try {
+            await processItem(item);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        updateSummary();
+      };
+
+      // Minimal store-mode ZIP builder so bulk downloads work in a single click
+      const crcTable = (() => {
+        const table = new Uint32Array(256);
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+          for (let k = 0; k < 8; k++) {
+            c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+          }
+          table[n] = c >>> 0;
+        }
+        return table;
+      })();
+
+      const crc32 = (bytes) => {
+        let c = 0xffffffff;
+        for (let i = 0; i < bytes.length; i++) {
+          c = crcTable[(c ^ bytes[i]) & 0xff] ^ (c >>> 8);
+        }
+        return (c ^ 0xffffffff) >>> 0;
+      };
+
+      const buildZip = async (entries) => {
+        const encoder = new TextEncoder();
+        const localParts = [];
+        const centralParts = [];
+        let offset = 0;
+
+        for (const { name, blob } of entries) {
+          const nameBytes = encoder.encode(name);
+          const data = new Uint8Array(await blob.arrayBuffer());
+          const crc = crc32(data);
+          const size = data.byteLength;
+
+          const local = new DataView(new ArrayBuffer(30 + nameBytes.length));
+          local.setUint32(0, 0x04034b50, true);
+          local.setUint16(4, 20, true);
+          local.setUint16(6, 0x0800, true);
+          local.setUint16(8, 0, true);
+          local.setUint16(10, 0, true);
+          local.setUint16(12, 0, true);
+          local.setUint32(14, crc, true);
+          local.setUint32(18, size, true);
+          local.setUint32(22, size, true);
+          local.setUint16(26, nameBytes.length, true);
+          local.setUint16(28, 0, true);
+          new Uint8Array(local.buffer, 30).set(nameBytes);
+
+          const central = new DataView(new ArrayBuffer(46 + nameBytes.length));
+          central.setUint32(0, 0x02014b50, true);
+          central.setUint16(4, 20, true);
+          central.setUint16(6, 20, true);
+          central.setUint16(8, 0x0800, true);
+          central.setUint16(10, 0, true);
+          central.setUint16(12, 0, true);
+          central.setUint16(14, 0, true);
+          central.setUint32(16, crc, true);
+          central.setUint32(20, size, true);
+          central.setUint32(24, size, true);
+          central.setUint16(28, nameBytes.length, true);
+          central.setUint16(30, 0, true);
+          central.setUint16(32, 0, true);
+          central.setUint16(34, 0, true);
+          central.setUint16(36, 0, true);
+          central.setUint32(38, 0, true);
+          central.setUint32(42, offset, true);
+          new Uint8Array(central.buffer, 46).set(nameBytes);
+
+          localParts.push(local.buffer, data);
+          centralParts.push(central.buffer);
+          offset += local.buffer.byteLength + size;
+        }
+
+        const centralSize = centralParts.reduce((s, b) => s + b.byteLength, 0);
+        const eocd = new DataView(new ArrayBuffer(22));
+        eocd.setUint32(0, 0x06054b50, true);
+        eocd.setUint16(8, entries.length, true);
+        eocd.setUint16(10, entries.length, true);
+        eocd.setUint32(12, centralSize, true);
+        eocd.setUint32(16, offset, true);
+
+        return new Blob([...localParts, ...centralParts, eocd.buffer], {
+          type: "application/zip",
+        });
+      };
+
+      // Events
+      fileInput.addEventListener("change", (e) => {
+        addFiles(e.target.files);
+        fileInput.value = "";
+      });
+
+      ["dragenter", "dragover"].forEach((evt) =>
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.add("is-dragover");
+        })
+      );
+      ["dragleave", "drop"].forEach((evt) =>
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove("is-dragover");
+        })
+      );
+      dropzone.addEventListener("drop", (e) => {
+        if (e.dataTransfer?.files?.length) {
+          addFiles(e.dataTransfer.files);
+        }
+      });
+
+      window.addEventListener("paste", (e) => {
+        const files = [...(e.clipboardData?.files || [])];
+        if (files.length) addFiles(files);
+      });
+
+      qualityRange.addEventListener("input", () => {
+        qualityVal.textContent = `${qualityRange.value}%`;
+      });
+      qualityRange.addEventListener("change", reprocessAll);
+
+      widthPresets.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-w]");
+        if (!btn) return;
+        widthPresets
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        customWidthInput.value = "";
+        maxWidth = Number(btn.dataset.w) || 0;
+        reprocessAll();
+      });
+
+      customWidthInput.addEventListener("change", () => {
+        const v = Number(customWidthInput.value);
+        widthPresets
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        maxWidth = v > 0 ? v : 0;
+        if (!maxWidth) {
+          widthPresets.querySelector('[data-w="0"]').classList.add("active");
+        }
+        reprocessAll();
+      });
+
+      clearBtn.addEventListener("click", () => {
+        items.forEach((it) => {
+          if (it.previewUrl) URL.revokeObjectURL(it.previewUrl);
+        });
+        items = [];
+        grid.innerHTML = "";
+        updateSummary();
+      });
+
+      downloadEachBtn.addEventListener("click", () => {
+        items.forEach((it, idx) => {
+          setTimeout(() => downloadSingle(it), idx * 140);
+        });
+      });
+
+      downloadZipBtn.addEventListener("click", async () => {
+        const ready = items.filter((it) => it.blob);
+        if (!ready.length) return;
+        const used = new Map();
+        const entries = ready.map((it) => {
+          const base = (it.outputName || "image").trim();
+          const count = used.get(base) || 0;
+          used.set(base, count + 1);
+          const finalName = count === 0 ? `${base}.webp` : `${base}-${count}.webp`;
+          return { name: finalName, blob: it.blob };
+        });
+        const zipBlob = await buildZip(entries);
+        const url = URL.createObjectURL(zipBlob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `webp-images-${entries.length}.zip`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      });
+    })();
+  </script>
+</body>
+
+</html>
