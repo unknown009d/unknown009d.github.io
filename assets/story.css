@@ -514,6 +514,10 @@ html.lenis {
 
 /* 03 · The Mess */
 .chapter-mess {
+  .canvas.cover {
+    width: 100vw;
+    height: 100svh;
+  }
   @media only screen and (max-width: 768px) {
     .canvas.cover {
       width: 190vw;
@@ -527,13 +531,15 @@ html.lenis {
     inset: 0;
   }
   .tile {
+    --gx: 0.22%;
+    --gy: 0.38%;
     position: absolute;
-    left: calc(var(--l) * 1%);
-    top: calc(var(--t) * 1%);
-    width: calc(var(--w) * 1%);
-    height: calc(var(--h) * 1%);
-    border-radius: 1.1cqw;
-    border: 0.22cqw solid var(--frame);
+    left: calc(var(--l) * 1% - var(--gx));
+    top: calc(var(--t) * 1% - var(--gy));
+    width: calc(var(--w) * 1% + var(--gx) * 2);
+    height: calc(var(--h) * 1% + var(--gy) * 2);
+    border-radius: 1cqw;
+    border: 0.18cqw solid var(--frame);
     background: var(--ph, var(--placeholder));
     overflow: hidden;
     --is: 0.9;
@@ -698,6 +704,11 @@ html.lenis {
       margin-top: 0.65cqw;
     }
   }
+  .card-app{
+    background: transparent !important;
+    border: none;
+    transform: translate(-4rem, 4rem) scale(1.4);
+  }
   @media only screen and (max-width: 768px) {
     .canvas.contain {
       width: 100vw;
@@ -803,6 +814,9 @@ html.lenis {
         font-size: clamp(0.95rem, 3.8vw, 1.15rem);
         margin-top: 0.35rem;
       }
+    }
+    .card-app{
+      transform: translate(-0.8rem, 4rem) scale(0.9);
     }
   }
 }
@@ -961,6 +975,9 @@ html.lenis {
       border: 2pt solid var(--border-profile);
       border-radius: 50%;
       background-color: transparent;
+      &:focus{
+       box-shadow: none;
+      }
     }
     @media only screen and (max-width: 768px) {
       bottom: 5svh;
