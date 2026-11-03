@@ -20,6 +20,46 @@ Ya I'm just a lazy ass making my life easier
   <link rel="stylesheet" href="assets/main.css" />
   <link rel="stylesheet" href="assets/darkmode.css" />
   <link rel="stylesheet" href="assets/icons/css/dicon.css" />
+  <script>
+    // Prevent dev servers (e.g. VS Code Live Server) from reloading the page
+    // when downloaded files are saved into the project workspace folder
+    (() => {
+      const NativeWS = window.WebSocket;
+      if (!NativeWS) return;
+      window.WebSocket = function (...args) {
+        const ws = new NativeWS(...args);
+        const origAdd = ws.addEventListener.bind(ws);
+        ws.addEventListener = function (type, listener, opts) {
+          if (type === "message" && typeof listener === "function") {
+            return origAdd(
+              type,
+              (e) => {
+                if (window.__towebpHasItems && e?.data === "reload") return;
+                return listener.call(ws, e);
+              },
+              opts
+            );
+          }
+          return origAdd(type, listener, opts);
+        };
+        let userOnMsg = null;
+        Object.defineProperty(ws, "onmessage", {
+          configurable: true,
+          get: () => userOnMsg,
+          set: (fn) => {
+            userOnMsg = fn;
+            origAdd("message", (e) => {
+              if (window.__towebpHasItems && e?.data === "reload") return;
+              if (typeof userOnMsg === "function") userOnMsg.call(ws, e);
+            });
+          },
+        });
+        return ws;
+      };
+      window.WebSocket.prototype = NativeWS.prototype;
+      Object.assign(window.WebSocket, NativeWS);
+    })();
+  </script>
   <script src="assets/main.js"></script>
 
   <style>
@@ -1172,6 +1212,7 @@ Ya I'm just a lazy ass making my life easier
 
       const updateSummary = () => {
         const hasItems = items.length > 0;
+        window.__towebpHasItems = hasItems;
         setDropzoneHidden(hasItems);
         bulkActions.style.display = hasItems ? "flex" : "none";
         queueHeader.classList.toggle("is-visible", hasItems);
@@ -1265,14 +1306,24 @@ Ya I'm just a lazy ass making my life easier
         updateCardView(item);
       };
 
+      const triggerDownload = (url, filename) => {
+        const a = document.createElement("a");
+        a.href = url;
+        a.setAttribute("download", filename);
+        a.rel = "noopener";
+        a.style.display = "none";
+        a.addEventListener("click", (e) => e.stopPropagation());
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => a.remove(), 100);
+      };
+
       const downloadSingle = (item) => {
         if (!item.blob || !item.downloadUrl) return;
-        const a = document.createElement("a");
-        a.href = item.downloadUrl;
         const base = (item.outputName || "image").trim();
-        a.download =
+        const filename =
           mode === "pwa" ? `${base}-pwa-pack.zip` : `${base}.${item.ext}`;
-        a.click();
+        triggerDownload(item.downloadUrl, filename);
       };
 
       const revokeItemUrls = (item) => {
@@ -1334,6 +1385,7 @@ Ya I'm just a lazy ass making my life easier
         const valid = [...fileList].filter((f) => f.type.startsWith("image/"));
         if (!valid.length) return;
 
+        window.__towebpHasItems = true;
         setDropzoneHidden(true);
 
         uploadCount += 1;
@@ -1536,13 +1588,17 @@ Ya I'm just a lazy ass making my life easier
         updateSummary();
       });
 
-      downloadEachBtn.addEventListener("click", () => {
+      downloadEachBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         items.forEach((it, idx) => {
-          setTimeout(() => downloadSingle(it), idx * 140);
+          setTimeout(() => downloadSingle(it), idx * 240);
         });
       });
 
-      downloadZipBtn.addEventListener("click", async () => {
+      downloadZipBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const ready = items.filter((it) => it.blob);
         if (!ready.length) return;
         const used = new Map();
@@ -1563,11 +1619,8 @@ Ya I'm just a lazy ass making my life easier
         });
         const zipBlob = await buildZip(entries);
         const url = URL.createObjectURL(zipBlob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${mode}-export-${ready.length}.zip`;
-        a.click();
-        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        triggerDownload(url, `${mode}-export-${ready.length}.zip`);
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
       });
     })();
   </script>
