@@ -551,36 +551,71 @@ Ya I'm just a lazy ass making my life easier
       <p class="drop-hint">Tip: You can also press Ctrl + V anywhere to paste from clipboard</p>
     </div>
 
-    <section class="controls-bar" aria-label="Conversion settings">
-      <div class="control-group">
-        <div class="control-item">
-          <label for="quality-range">Quality</label>
-          <input type="range" id="quality-range" min="10" max="100" step="5" value="75" />
-          <span class="mono-val" id="quality-val">75%</span>
-        </div>
+      <section class="controls-bar" aria-label="Conversion settings">
+        <div class="control-group">
+          <div class="control-item width-control">
+            <label>Format</label>
+            <div class="preset-pills" id="mode-switch">
+              <button type="button" class="pill active" data-mode="webp">WebP</button>
+              <button type="button" class="pill" data-mode="ico">ICO</button>
+              <button type="button" class="pill" data-mode="pwa">PWA Preset</button>
+            </div>
+          </div>
 
-        <div class="control-item width-control">
-          <label>Max Width</label>
-          <div class="preset-pills" id="width-presets">
-            <button type="button" class="pill active" data-w="0">Original</button>
-            <button type="button" class="pill" data-w="1920">1920px</button>
-            <button type="button" class="pill" data-w="1200">1200px</button>
-            <button type="button" class="pill" data-w="800">800px</button>
-            <input type="number" id="custom-width" class="custom-width" placeholder="Custom px" min="16" max="8000" />
+          <div class="control-item" id="webp-quality-group">
+            <label for="quality-range">Quality</label>
+            <input type="range" id="quality-range" min="10" max="100" step="5" value="75" />
+            <span class="mono-val" id="quality-val">75%</span>
+          </div>
+
+          <div class="control-item width-control" id="webp-width-group">
+            <label>Max Width</label>
+            <div class="preset-pills" id="width-presets">
+              <button type="button" class="pill active" data-w="0">Original</button>
+              <button type="button" class="pill" data-w="1920">1920px</button>
+              <button type="button" class="pill" data-w="1200">1200px</button>
+              <button type="button" class="pill" data-w="800">800px</button>
+              <input type="number" id="custom-width" class="custom-width" placeholder="Custom px" min="16" max="8000" />
+            </div>
+          </div>
+
+          <div class="control-item width-control" id="ico-sizes-group" style="display: none">
+            <label>ICO Sizes</label>
+            <div class="preset-pills" id="ico-sizes">
+              <button type="button" class="pill active" data-size="16">16px</button>
+              <button type="button" class="pill active" data-size="32">32px</button>
+              <button type="button" class="pill active" data-size="48">48px</button>
+              <button type="button" class="pill" data-size="64">64px</button>
+              <button type="button" class="pill" data-size="128">128px</button>
+              <button type="button" class="pill" data-size="256">256px</button>
+            </div>
+          </div>
+
+          <div class="control-item width-control" id="pwa-sizes-group" style="display: none">
+            <label>PWA Pack</label>
+            <div class="preset-pills" id="pwa-sizes">
+              <button type="button" class="pill active" data-pwa="ico">favicon.ico (16·32·48)</button>
+              <button type="button" class="pill active" data-pwa="180">180px Apple</button>
+              <button type="button" class="pill active" data-pwa="192">192px</button>
+              <button type="button" class="pill active" data-pwa="512">512px</button>
+            </div>
+            <div class="preset-pills" id="pwa-ext-switch">
+              <button type="button" class="pill active" data-ext="png">PNG</button>
+              <button type="button" class="pill" data-ext="webp">WebP</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="bulk-actions" id="bulk-actions" style="display: none">
-        <button type="button" class="btn-ghost" id="clear-btn">Clear All</button>
-        <button type="button" class="btnwicon btn-outline" id="download-each-btn">
-          Download Each <span class="icon-arrowbelow iconb"></span>
-        </button>
-        <button type="button" class="btnwicon" id="download-zip-btn">
-          Download ZIP <span class="icon-arrowbelow iconb"></span>
-        </button>
-      </div>
-    </section>
+        <div class="bulk-actions" id="bulk-actions" style="display: none">
+          <button type="button" class="btn-ghost" id="clear-btn">Clear All</button>
+          <button type="button" class="btnwicon btn-outline" id="download-each-btn">
+            Download Each <span class="icon-arrowbelow iconb"></span>
+          </button>
+          <button type="button" class="btnwicon" id="download-zip-btn">
+            Download ZIP <span class="icon-arrowbelow iconb"></span>
+          </button>
+        </div>
+      </section>
 
     <div class="queue-header" id="queue-header">
       <div class="queue-stats">
@@ -598,6 +633,14 @@ Ya I'm just a lazy ass making my life easier
     (() => {
       const dropzone = document.getElementById("dropzone");
       const fileInput = document.getElementById("file-input");
+      const modeSwitch = document.getElementById("mode-switch");
+      const webpQualityGroup = document.getElementById("webp-quality-group");
+      const webpWidthGroup = document.getElementById("webp-width-group");
+      const icoSizesGroup = document.getElementById("ico-sizes-group");
+      const icoSizesEl = document.getElementById("ico-sizes");
+      const pwaSizesGroup = document.getElementById("pwa-sizes-group");
+      const pwaSizesEl = document.getElementById("pwa-sizes");
+      const pwaExtSwitch = document.getElementById("pwa-ext-switch");
       const qualityRange = document.getElementById("quality-range");
       const qualityVal = document.getElementById("quality-val");
       const widthPresets = document.getElementById("width-presets");
@@ -613,7 +656,9 @@ Ya I'm just a lazy ass making my life easier
       const downloadZipBtn = document.getElementById("download-zip-btn");
 
       let items = [];
+      let mode = "webp"; // "webp" | "ico" | "pwa"
       let maxWidth = 0;
+      let pwaExt = "png";
       let nextId = 1;
 
       const formatBytes = (bytes) => {
@@ -624,6 +669,20 @@ Ya I'm just a lazy ass making my life easier
       };
 
       const stripExt = (name) => name.replace(/\.[^.]+$/, "") || "image";
+
+      const getSelectedIcoSizes = () => {
+        const selected = [...icoSizesEl.querySelectorAll(".pill.active")]
+          .map((b) => Number(b.dataset.size))
+          .filter(Boolean);
+        return selected.length ? selected : [32];
+      };
+
+      const getSelectedPwaTargets = () => {
+        const selected = [...pwaSizesEl.querySelectorAll(".pill.active")].map(
+          (b) => b.dataset.pwa
+        );
+        return selected.length ? selected : ["ico", "180", "192", "512"];
+      };
 
       const loadImage = (file) =>
         new Promise((resolve, reject) => {
@@ -652,6 +711,8 @@ Ya I'm just a lazy ass making my life easier
           canvas.width = w;
           canvas.height = h;
           const ctx = canvas.getContext("2d");
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
           ctx.drawImage(img, 0, 0, w, h);
           canvas.toBlob(
             (blob) => {
@@ -663,150 +724,72 @@ Ya I'm just a lazy ass making my life easier
           );
         });
 
-      const updateSummary = () => {
-        const hasItems = items.length > 0;
-        bulkActions.style.display = hasItems ? "flex" : "none";
-        queueHeader.classList.toggle("is-visible", hasItems);
-        if (!hasItems) return;
+      // Renders a square icon (centered contain-fit so non-square logos aren't stretched)
+      const renderSquareIcon = (img, size, mime = "image/png", quality = 0.92) =>
+        new Promise((resolve, reject) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext("2d");
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          const sw = img.naturalWidth || img.width;
+          const sh = img.naturalHeight || img.height;
+          const scale = Math.min(size / sw, size / sh);
+          const dw = Math.round(sw * scale);
+          const dh = Math.round(sh * scale);
+          const dx = Math.round((size - dw) / 2);
+          const dy = Math.round((size - dh) / 2);
+          ctx.drawImage(img, dx, dy, dw, dh);
+          canvas.toBlob(
+            (blob) => {
+              if (blob) resolve(blob);
+              else reject(new Error("Square icon encoding failed"));
+            },
+            mime,
+            quality
+          );
+        });
 
-        const totalOrig = items.reduce((s, it) => s + it.file.size, 0);
-        const totalOut = items.reduce((s, it) => s + (it.blob ? it.blob.size : 0), 0);
-        const pct = totalOrig > 0 ? Math.round((1 - totalOut / totalOrig) * 100) : 0;
-
-        statsCount.textContent = `${items.length} ${items.length === 1 ? "image" : "images"}`;
-        statsSize.textContent = `${formatBytes(totalOrig)} → ${formatBytes(totalOut)}`;
-        statsSaved.textContent =
-          pct >= 0 ? `-${pct}% saved` : `+${Math.abs(pct)}% larger`;
-      };
-
-      const updateCardView = (item) => {
-        if (!item.el || !item.blob) return;
-        const pct = Math.round((1 - item.blob.size / item.file.size) * 100);
-        item.el.querySelector(".thumb-img").src = item.previewUrl;
-        item.el.querySelector(".ratio-pill").textContent =
-          pct >= 0 ? `-${pct}%` : `+${Math.abs(pct)}%`;
-        item.el.querySelector(".dims-text").textContent =
-          `${item.outW} × ${item.outH}`;
-        item.el.querySelector(".size-text").textContent =
-          `${formatBytes(item.file.size)} → ${formatBytes(item.blob.size)}`;
-      };
-
-      const processItem = async (item) => {
-        const quality = Number(qualityRange.value) / 100;
-        if (!item.img) {
-          item.img = await loadImage(item.file);
+      // Packs one or more square PNG blobs into a standard Windows .ico binary
+      const buildIco = async (sizes, img) => {
+        const pngEntries = [];
+        for (const size of sizes) {
+          const pngBlob = await renderSquareIcon(img, size, "image/png");
+          const bytes = new Uint8Array(await pngBlob.arrayBuffer());
+          pngEntries.push({ size, bytes, pngBlob });
         }
-        const { blob, width, height } = await renderWebP(
-          item.img,
-          quality,
-          maxWidth
+
+        const count = pngEntries.length;
+        const headerSize = 6 + count * 16;
+        const header = new DataView(new ArrayBuffer(headerSize));
+        header.setUint16(0, 0, true); // Reserved
+        header.setUint16(2, 1, true); // Type: 1 = ICO
+        header.setUint16(4, count, true); // Image count
+
+        let offset = headerSize;
+        pngEntries.forEach(({ size, bytes }, i) => {
+          const pos = 6 + i * 16;
+          header.setUint8(pos, size >= 256 ? 0 : size); // Width (0 = 256)
+          header.setUint8(pos + 1, size >= 256 ? 0 : size); // Height (0 = 256)
+          header.setUint8(pos + 2, 0); // Palette colors
+          header.setUint8(pos + 3, 0); // Reserved
+          header.setUint16(pos + 4, 1, true); // Color planes
+          header.setUint16(pos + 6, 32, true); // Bits per pixel
+          header.setUint32(pos + 8, bytes.byteLength, true); // PNG byte length
+          header.setUint32(pos + 12, offset, true); // Offset from file start
+          offset += bytes.byteLength;
+        });
+
+        const icoBlob = new Blob(
+          [header.buffer, ...pngEntries.map((e) => e.bytes)],
+          { type: "image/x-icon" }
         );
-        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
-        item.blob = blob;
-        item.outW = width;
-        item.outH = height;
-        item.previewUrl = URL.createObjectURL(blob);
-        updateCardView(item);
+        const previewBlob = pngEntries.at(-1).pngBlob;
+        return { icoBlob, previewBlob };
       };
 
-      const downloadSingle = (item) => {
-        if (!item.blob) return;
-        const a = document.createElement("a");
-        a.href = item.previewUrl;
-        a.download = `${(item.outputName || "image").trim()}.webp`;
-        a.click();
-      };
-
-      const createCard = (item) => {
-        const card = document.createElement("article");
-        card.className = "webp-card";
-        card.innerHTML = `
-            <div class="thumb-wrap">
-              <img class="thumb-img" alt="" />
-              <button type="button" class="remove-btn" title="Remove image" aria-label="Remove image">×</button>
-              <span class="ratio-pill">...</span>
-            </div>
-            <div class="card-body">
-              <div class="name-row">
-                <input type="text" class="name-input" value="" aria-label="Output filename" />
-                <span>.webp</span>
-              </div>
-              <div class="meta-row">
-                <span class="dims-text">...</span>
-                <span class="size-text">${formatBytes(item.file.size)}</span>
-              </div>
-              <div class="card-actions">
-                <button type="button" class="btnwicon dl-btn">
-                  Download <span class="icon-arrowbelow iconb"></span>
-                </button>
-              </div>
-            </div>
-          `;
-
-        const nameInput = card.querySelector(".name-input");
-        nameInput.value = item.outputName;
-        nameInput.addEventListener("input", () => {
-          item.outputName = nameInput.value;
-        });
-
-        card.querySelector(".dl-btn").addEventListener("click", () => {
-          downloadSingle(item);
-        });
-
-        card.querySelector(".remove-btn").addEventListener("click", () => {
-          if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
-          items = items.filter((x) => x.id !== item.id);
-          card.remove();
-          updateSummary();
-        });
-
-        item.el = card;
-        grid.appendChild(card);
-      };
-
-      const addFiles = async (fileList) => {
-        const valid = [...fileList].filter((f) => f.type.startsWith("image/"));
-        if (!valid.length) return;
-
-        const added = valid.map((file) => {
-          const item = {
-            id: nextId++,
-            file,
-            outputName: stripExt(file.name),
-            img: null,
-            blob: null,
-            previewUrl: null,
-            outW: 0,
-            outH: 0,
-            el: null,
-          };
-          items.push(item);
-          createCard(item);
-          return item;
-        });
-
-        for (const item of added) {
-          try {
-            await processItem(item);
-          } catch (err) {
-            console.error("Failed to convert", item.file.name, err);
-          }
-        }
-        updateSummary();
-      };
-
-      const reprocessAll = async () => {
-        for (const item of items) {
-          try {
-            await processItem(item);
-          } catch (err) {
-            console.error(err);
-          }
-        }
-        updateSummary();
-      };
-
-      // Minimal store-mode ZIP builder so bulk downloads work in a single click
+      // Minimal store-mode ZIP builder so bulk & PWA downloads work in a single click
       const crcTable = (() => {
         const table = new Uint32Array(256);
         for (let n = 0; n < 256; n++) {
@@ -891,7 +874,315 @@ Ya I'm just a lazy ass making my life easier
         });
       };
 
+      const buildPwaPack = async (img, baseName) => {
+        const targets = getSelectedPwaTargets();
+        const mime = pwaExt === "webp" ? "image/webp" : "image/png";
+        const quality = Number(qualityRange.value) / 100;
+        const files = [];
+        let previewBlob = null;
+
+        if (targets.includes("ico")) {
+          const { icoBlob, previewBlob: p } = await buildIco([16, 32, 48], img);
+          files.push({ name: "favicon.ico", blob: icoBlob });
+          previewBlob = p;
+        }
+        if (targets.includes("180")) {
+          const b = await renderSquareIcon(img, 180, mime, quality);
+          files.push({ name: `apple-touch-icon.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+        if (targets.includes("192")) {
+          const b = await renderSquareIcon(img, 192, mime, quality);
+          files.push({ name: `icon-192.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+        if (targets.includes("512")) {
+          const b = await renderSquareIcon(img, 512, mime, quality);
+          files.push({ name: `icon-512.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+
+        const manifestIcons = [];
+        if (targets.includes("192")) {
+          manifestIcons.push({
+            src: `/icon-192.${pwaExt}`,
+            sizes: "192x192",
+            type: mime,
+          });
+        }
+        if (targets.includes("512")) {
+          manifestIcons.push({
+            src: `/icon-512.${pwaExt}`,
+            sizes: "512x512",
+            type: mime,
+          });
+        }
+        const manifest = {
+          name: baseName,
+          short_name: baseName,
+          icons: manifestIcons,
+          theme_color: "#ffffff",
+          background_color: "#ffffff",
+          display: "standalone",
+        };
+        files.push({
+          name: "site.webmanifest",
+          blob: new Blob([JSON.stringify(manifest, null, 2)], {
+            type: "application/manifest+json",
+          }),
+        });
+
+        const zipBlob = await buildZip(files);
+        return { zipBlob, previewBlob, files, fileCount: files.length };
+      };
+
+      const updateSummary = () => {
+        const hasItems = items.length > 0;
+        bulkActions.style.display = hasItems ? "flex" : "none";
+        queueHeader.classList.toggle("is-visible", hasItems);
+        if (!hasItems) return;
+
+        const totalOrig = items.reduce((s, it) => s + it.file.size, 0);
+        const totalOut = items.reduce((s, it) => s + (it.blob ? it.blob.size : 0), 0);
+
+        statsCount.textContent = `${items.length} ${items.length === 1 ? "image" : "images"}`;
+        statsSize.textContent = `${formatBytes(totalOrig)} → ${formatBytes(totalOut)}`;
+
+        if (mode === "webp") {
+          const pct = totalOrig > 0 ? Math.round((1 - totalOut / totalOrig) * 100) : 0;
+          statsSaved.textContent =
+            pct >= 0 ? `-${pct}% saved` : `+${Math.abs(pct)}% larger`;
+        } else if (mode === "ico") {
+          const sizes = getSelectedIcoSizes();
+          statsSaved.textContent = `ICO (${sizes.join("·")}px)`;
+        } else {
+          statsSaved.textContent = `PWA Pack (${pwaExt.toUpperCase()})`;
+        }
+      };
+
+      const updateCardView = (item) => {
+        if (!item.el || !item.blob) return;
+        item.el.querySelector(".thumb-img").src = item.previewUrl;
+        item.el.querySelector(".ext-label").textContent = `.${item.ext}`;
+        item.el.querySelector(".ratio-pill").textContent = item.badgeText;
+        item.el.querySelector(".dims-text").textContent = item.dimsText;
+        item.el.querySelector(".size-text").textContent =
+          `${formatBytes(item.file.size)} → ${formatBytes(item.blob.size)}`;
+      };
+
+      const processItem = async (item) => {
+        if (!item.img) {
+          item.img = await loadImage(item.file);
+        }
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+        if (item.downloadUrl && item.downloadUrl !== item.previewUrl) {
+          URL.revokeObjectURL(item.downloadUrl);
+        }
+
+        if (mode === "webp") {
+          const quality = Number(qualityRange.value) / 100;
+          const { blob, width, height } = await renderWebP(
+            item.img,
+            quality,
+            maxWidth
+          );
+          const pct = Math.round((1 - blob.size / item.file.size) * 100);
+          item.blob = blob;
+          item.ext = "webp";
+          item.pwaFiles = null;
+          item.badgeText = pct >= 0 ? `-${pct}%` : `+${Math.abs(pct)}%`;
+          item.dimsText = `${width} × ${height}`;
+          item.previewUrl = URL.createObjectURL(blob);
+          item.downloadUrl = item.previewUrl;
+        } else if (mode === "ico") {
+          const sizes = getSelectedIcoSizes();
+          const { icoBlob, previewBlob } = await buildIco(sizes, item.img);
+          item.blob = icoBlob;
+          item.ext = "ico";
+          item.pwaFiles = null;
+          item.badgeText = `${sizes.length} ${sizes.length === 1 ? "size" : "sizes"}`;
+          item.dimsText = `${sizes.join("·")}px`;
+          item.previewUrl = URL.createObjectURL(previewBlob);
+          item.downloadUrl = URL.createObjectURL(icoBlob);
+        } else {
+          const baseName = (item.outputName || "app").trim();
+          const { zipBlob, previewBlob, files, fileCount } = await buildPwaPack(
+            item.img,
+            baseName
+          );
+          item.blob = zipBlob;
+          item.ext = "zip";
+          item.pwaFiles = files;
+          item.badgeText = `${fileCount} files`;
+          item.dimsText = `PWA · ${pwaExt.toUpperCase()}`;
+          item.previewUrl = previewBlob ? URL.createObjectURL(previewBlob) : "";
+          item.downloadUrl = URL.createObjectURL(zipBlob);
+        }
+        updateCardView(item);
+      };
+
+      const downloadSingle = (item) => {
+        if (!item.blob || !item.downloadUrl) return;
+        const a = document.createElement("a");
+        a.href = item.downloadUrl;
+        const base = (item.outputName || "image").trim();
+        a.download =
+          mode === "pwa" ? `${base}-pwa-pack.zip` : `${base}.${item.ext}`;
+        a.click();
+      };
+
+      const revokeItemUrls = (item) => {
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+        if (item.downloadUrl && item.downloadUrl !== item.previewUrl) {
+          URL.revokeObjectURL(item.downloadUrl);
+        }
+      };
+
+      const createCard = (item) => {
+        const card = document.createElement("article");
+        card.className = "webp-card";
+        card.innerHTML = `
+            <div class="thumb-wrap">
+              <img class="thumb-img" alt="" />
+              <button type="button" class="remove-btn" title="Remove image" aria-label="Remove image">×</button>
+              <span class="ratio-pill">...</span>
+            </div>
+            <div class="card-body">
+              <div class="name-row">
+                <input type="text" class="name-input" value="" aria-label="Output filename" />
+                <span class="ext-label">.webp</span>
+              </div>
+              <div class="meta-row">
+                <span class="dims-text">...</span>
+                <span class="size-text">${formatBytes(item.file.size)}</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btnwicon dl-btn">
+                  Download <span class="icon-arrowbelow iconb"></span>
+                </button>
+              </div>
+            </div>
+          `;
+
+        const nameInput = card.querySelector(".name-input");
+        nameInput.value = item.outputName;
+        nameInput.addEventListener("input", () => {
+          item.outputName = nameInput.value;
+        });
+
+        card.querySelector(".dl-btn").addEventListener("click", () => {
+          downloadSingle(item);
+        });
+
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+          revokeItemUrls(item);
+          items = items.filter((x) => x.id !== item.id);
+          card.remove();
+          updateSummary();
+        });
+
+        item.el = card;
+        grid.appendChild(card);
+      };
+
+      const addFiles = async (fileList) => {
+        const valid = [...fileList].filter((f) => f.type.startsWith("image/"));
+        if (!valid.length) return;
+
+        const added = valid.map((file) => {
+          const item = {
+            id: nextId++,
+            file,
+            outputName: stripExt(file.name),
+            img: null,
+            blob: null,
+            ext: "webp",
+            badgeText: "...",
+            dimsText: "...",
+            previewUrl: null,
+            downloadUrl: null,
+            pwaFiles: null,
+            el: null,
+          };
+          items.push(item);
+          createCard(item);
+          return item;
+        });
+
+        for (const item of added) {
+          try {
+            await processItem(item);
+          } catch (err) {
+            console.error("Failed to convert", item.file.name, err);
+          }
+        }
+        updateSummary();
+      };
+
+      const reprocessAll = async () => {
+        for (const item of items) {
+          try {
+            await processItem(item);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        updateSummary();
+      };
+
+      const syncModeUI = () => {
+        webpQualityGroup.style.display =
+          mode === "webp" || (mode === "pwa" && pwaExt === "webp")
+            ? "flex"
+            : "none";
+        webpWidthGroup.style.display = mode === "webp" ? "flex" : "none";
+        icoSizesGroup.style.display = mode === "ico" ? "flex" : "none";
+        pwaSizesGroup.style.display = mode === "pwa" ? "flex" : "none";
+      };
+
       // Events
+      modeSwitch.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-mode]");
+        if (!btn) return;
+        modeSwitch
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        mode = btn.dataset.mode;
+        syncModeUI();
+        reprocessAll();
+      });
+
+      icoSizesEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-size]");
+        if (!btn) return;
+        const activeCount = icoSizesEl.querySelectorAll(".pill.active").length;
+        if (btn.classList.contains("active") && activeCount <= 1) return;
+        btn.classList.toggle("active");
+        reprocessAll();
+      });
+
+      pwaSizesEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-pwa]");
+        if (!btn) return;
+        const activeCount = pwaSizesEl.querySelectorAll(".pill.active").length;
+        if (btn.classList.contains("active") && activeCount <= 1) return;
+        btn.classList.toggle("active");
+        reprocessAll();
+      });
+
+      pwaExtSwitch.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-ext]");
+        if (!btn) return;
+        pwaExtSwitch
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        pwaExt = btn.dataset.ext;
+        syncModeUI();
+        reprocessAll();
+      });
+
       fileInput.addEventListener("change", (e) => {
         addFiles(e.target.files);
         fileInput.value = "";
@@ -950,9 +1241,7 @@ Ya I'm just a lazy ass making my life easier
       });
 
       clearBtn.addEventListener("click", () => {
-        items.forEach((it) => {
-          if (it.previewUrl) URL.revokeObjectURL(it.previewUrl);
-        });
+        items.forEach(revokeItemUrls);
         items = [];
         grid.innerHTML = "";
         updateSummary();
@@ -968,18 +1257,26 @@ Ya I'm just a lazy ass making my life easier
         const ready = items.filter((it) => it.blob);
         if (!ready.length) return;
         const used = new Map();
-        const entries = ready.map((it) => {
+        const entries = [];
+        ready.forEach((it) => {
           const base = (it.outputName || "image").trim();
           const count = used.get(base) || 0;
           used.set(base, count + 1);
-          const finalName = count === 0 ? `${base}.webp` : `${base}-${count}.webp`;
-          return { name: finalName, blob: it.blob };
+          const prefix = count === 0 ? base : `${base}-${count}`;
+          if (mode === "pwa" && it.pwaFiles) {
+            const folder = ready.length > 1 ? `${prefix}/` : "";
+            it.pwaFiles.forEach((f) => {
+              entries.push({ name: `${folder}${f.name}`, blob: f.blob });
+            });
+          } else {
+            entries.push({ name: `${prefix}.${it.ext}`, blob: it.blob });
+          }
         });
         const zipBlob = await buildZip(entries);
         const url = URL.createObjectURL(zipBlob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `webp-images-${entries.length}.zip`;
+        a.download = `${mode}-export-${ready.length}.zip`;
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 2000);
       });
