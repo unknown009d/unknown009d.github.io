@@ -28,12 +28,19 @@ html.lenis {
   /* noise.webp has a see-through last row, on a page this long it shows
      up as a light line every 2341px, this copy is cropped by 1px */
   background: var(--background);
+  opacity: 1;
+  #cs-header,
+  .story-stage,
+  footer,
+  &::after {
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
   &::after {
     inset: -50svh 0;
     background-image: url(noise-seamless.webp);
-    opacity: 1;
     z-index: -1;
-    will-change: transform;
+    will-change: transform, opacity;
     transform: translate3d(0, var(--grain-y, 0px), 0);
   }
   #cs-header {
@@ -41,6 +48,14 @@ html.lenis {
     top: 0;
     left: 0;
     z-index: 5;
+  }
+  &.loaded {
+    #cs-header,
+    .story-stage,
+    footer,
+    &::after {
+      opacity: 1;
+    }
   }
 }
 
@@ -253,15 +268,15 @@ html.lenis {
   }
 }
 /* the Hi chapter is the loading moment, it fades in once the page is ready */
-.loaded .chapter-hi {
+.chapter-hi {
   .hi-load {
-    animation: story-hi-in 1.6s ease 0.2s both;
+    animation: story-hi-in 1.2s ease both;
   }
   .hi-outline span {
-    animation: story-fade-in 2.4s ease both;
+    animation: story-fade-in 1.6s ease both;
   }
   .scroll-hint > * {
-    animation: story-fade-in 1.2s ease 1.6s both;
+    animation: story-fade-in 1s ease 0.8s both;
   }
 }
 @keyframes story-hi-in {
