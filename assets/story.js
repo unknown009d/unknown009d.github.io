@@ -126,6 +126,7 @@ const setupDIY = (chapter) => {
   let panDist = 0;
   let lineEnd = 1;
   let boxHeight = 1;
+  let lastProgress = 0;
   const layout = () => {
     isMobile = window.innerWidth <= 768;
     const box = stage.getBoundingClientRect();
@@ -135,10 +136,23 @@ const setupDIY = (chapter) => {
       lineEnd = lastEl
         ? lastEl.offsetTop + lastEl.offsetHeight * 0.5
         : canvas.scrollHeight;
-      panDist = Math.max(0, canvas.scrollHeight - box.height);
-      anchors.forEach((item) => {
-        const mAt = item.el.offsetTop / Math.max(1, lineEnd);
-        item.mobileRange = [mAt - 0.005, Math.min(mAt + 0.065, 1)];
+      const targetCenter = boxHeight * 0.54;
+      panDist = Math.max(
+        0,
+        lastEl
+          ? lastEl.offsetTop + lastEl.offsetHeight * 0.5 - targetCenter
+          : canvas.scrollHeight - box.height
+      );
+      anchors.forEach((item, idx) => {
+        const anchorY =
+          idx === anchors.length - 1
+            ? item.el.offsetTop + item.el.offsetHeight * 0.2
+            : item.el.offsetTop;
+        const mAt = anchorY / Math.max(1, lineEnd);
+        item.mobileRange = [
+          Math.max(0, mAt - 0.04),
+          Math.min(mAt + 0.05, 0.98),
+        ];
       });
       return;
     }
@@ -149,8 +163,9 @@ const setupDIY = (chapter) => {
   };
 
   const frame = (p) => {
+    lastProgress = p;
     if (isMobile) {
-      const t = clamp((p - 0.04) / 0.82);
+      const t = clamp((p - 0.03) / 0.68);
       const yDot = t * lineEnd;
       const holdY = boxHeight * 0.42;
       const panProgress = clamp((yDot - holdY) / Math.max(1, lineEnd - holdY));
@@ -182,6 +197,20 @@ const setupDIY = (chapter) => {
       set(el, "--in", progress(drawn / length, range))
     );
   };
+
+  // Re-measure whenever any DIY image finishes decoding so mobile pan distance is always exact
+  chapter.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) {
+      img.addEventListener(
+        "load",
+        () => {
+          layout();
+          frame(lastProgress);
+        },
+        { once: true }
+      );
+    }
+  });
 
   return { layout, frame };
 };
@@ -232,10 +261,13 @@ const setupTuition = (chapter) => {
 
 const setupMediaLoaders = (root) => {
   root.querySelectorAll("img").forEach((img) => {
-    if (!img.hasAttribute("loading")) img.loading = "lazy";
+    const inDiy = Boolean(img.closest(".chapter-diy"));
+    if (!img.hasAttribute("loading")) {
+      img.loading = inDiy ? "eager" : "lazy";
+    }
     if (!img.hasAttribute("decoding")) img.decoding = "async";
-    const host = img.closest(
-      ".intro-photo, .tile, .ph, .avatar, figure, div, section"
+    const host = img.parentElement?.closest(
+      ".intro-photo, .tile, .avatar, figure.card"
     );
     if (!host || img.complete) return;
     host.classList.add("is-img-loading");
