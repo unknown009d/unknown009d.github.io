@@ -1579,3 +1579,20 @@ footer {
     width: 50%;
   }
 }
+
+@media only screen and (max-width: 250px) {
+    body{
+        display: none;
+    }
+    html{
+        &::after{
+            content: "Seriously?";
+            display: grid;
+            place-items: center;
+            min-height: 90vh;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    }
+}
