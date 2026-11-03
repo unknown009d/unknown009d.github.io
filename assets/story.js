@@ -230,11 +230,28 @@ const setupTuition = (chapter) => {
   return { frame };
 };
 
+const setupMediaLoaders = (root) => {
+  root.querySelectorAll("img").forEach((img) => {
+    if (!img.hasAttribute("loading")) img.loading = "lazy";
+    if (!img.hasAttribute("decoding")) img.decoding = "async";
+    const host = img.closest(
+      ".intro-photo, .tile, .ph, .avatar, figure, div, section"
+    );
+    if (!host || img.complete) return;
+    host.classList.add("is-img-loading");
+    const done = () => host.classList.remove("is-img-loading");
+    img.addEventListener("load", done, { once: true });
+    img.addEventListener("error", done, { once: true });
+  });
+};
+
 const hooks = { mess: setupMess, diy: setupDIY, tuition: setupTuition };
 
 const story = () => {
   const track = document.querySelector(".story");
-  if (!track || typeof Lenis === "undefined") return;
+  if (!track) return;
+  setupMediaLoaders(track);
+  if (typeof Lenis === "undefined") return;
   // reduced motion keeps the plain stacked layout and native scroll
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

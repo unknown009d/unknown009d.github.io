@@ -59,6 +59,59 @@ html.lenis {
   }
 }
 
+/* Fixed bottom message shown only if First Contentful Paint / content takes > 5s */
+.slow-load-msg {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+  margin: 0;
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 300ms ease;
+  &.is-visible {
+    opacity: 0.65;
+  }
+}
+
+/* Centered spinner shown inside any div / section / figure while its image is loading */
+.is-img-loading {
+  position: relative;
+  img {
+    opacity: 0;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: -0.7rem;
+    margin-top: -0.7rem;
+    border-radius: 50%;
+    border: 2px solid color-mix(in oklch, var(--foreground) 20%, transparent);
+    border-top-color: var(--foreground);
+    animation: story-spin 0.75s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+}
+
+@keyframes story-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Without JS (or with reduced motion) chapters simply stack */
 .story {
   position: relative;
@@ -368,16 +421,26 @@ html.lenis {
     }
   }
   .intro-photo {
+    box-sizing: border-box;
+    margin: 0;
     position: absolute;
     right: 6.5vw;
     top: 9.5svh;
     width: min(32.7vw, 58.8svh);
+    min-height: 24svh;
     padding: 0.35rem;
     border: 2px solid var(--border-profile);
     border-radius: min(5.2vw, 9.4svh);
-    object-fit: cover;
     user-select: none;
     z-index: 1;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: calc(min(5.2vw, 9.4svh) - 0.35rem);
+      object-fit: cover;
+      transition: opacity 250ms ease;
+    }
   }
   @media only screen and (max-width: 768px) {
     .ux-word {
@@ -399,7 +462,6 @@ html.lenis {
       top: 14svh;
       width: 80vw;
       max-height: 44svh;
-      object-position: center 18%;
       border-radius: min(9.5vw, 5svh);
       --fx: translate3d(
           calc(-50% + (1 - var(--in)) * var(--ix) + var(--out) * var(--ox)),
@@ -407,6 +469,13 @@ html.lenis {
           0
         )
         scale(calc(1 + (1 - var(--in)) * (var(--is) - 1) + var(--out) * (var(--os) - 1)));
+      img {
+        width: 100%;
+        max-height: calc(44svh - 0.7rem);
+        border-radius: calc(min(9.5vw, 5svh) - 0.35rem);
+        object-fit: cover;
+        object-position: center 18%;
+      }
     }
     .intro-copy {
       left: 6.7vw;
