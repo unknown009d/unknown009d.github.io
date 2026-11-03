@@ -1,4 +1,13 @@
-<!doctype html>
+<!-- 
+================= WARNING! =================
+============ DISTURBING VISUALS ============
+
+Everything below is AI generated
+Ya I'm just a lazy ass making my life easier
+
+================= WARNING! =================
+-->
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -38,55 +47,465 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="assets/main.css" />
     <link rel="stylesheet" href="assets/icons/css/dicon.css" />
+    <link rel="stylesheet" href="assets/vendor/lenis/lenis.css" />
+    <link rel="stylesheet" href="assets/story.css?v=28" />
     <script src="assets/main.js"></script>
   </head>
-  <body class="aboutme" data-title="UX Engineer">
+  <body class="aboutme story-page">
+    <p class="slow-load-msg" id="slow-load-msg" aria-live="polite">
+      Good things take time (is not an excuse that my server is taking so long to load). Anyways sorry for the interruption
+    </p>
+    <script>
+      (() => {
+        const msg = document.getElementById("slow-load-msg");
+        let painted = false;
+        const timer = setTimeout(() => {
+          if (!painted && msg) msg.classList.add("is-visible");
+        }, 5000);
+        const markPainted = () => {
+          if (painted) return;
+          painted = true;
+          clearTimeout(timer);
+          if (msg) msg.classList.remove("is-visible");
+          document.body.classList.add("loaded");
+        };
+        if ("PerformanceObserver" in window) {
+          try {
+            const po = new PerformanceObserver((list) => {
+              if (list.getEntriesByName("first-contentful-paint").length) {
+                po.disconnect();
+                if (document.readyState !== "loading") markPainted();
+                else document.addEventListener("DOMContentLoaded", markPainted, { once: true });
+              }
+            });
+            po.observe({ type: "paint", buffered: true });
+          } catch {}
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+          requestAnimationFrame(() => requestAnimationFrame(markPainted));
+        }, { once: true });
+        window.addEventListener("load", markPainted, { once: true });
+      })();
+    </script>
     <header id="cs-header">
       <a class="backbutton" href="/" title="Go home">
         <span class="icon-home"></span>
       </a>
     </header>
-    <main>
-      <section class="hero-section">
-        <img src="data/profile.webp" alt="Profile Picture" />
-        <p class="skills">
-          Wireframe
-          <span class="dots">•</span> Prototyping
-          <span class="dots">•</span> Storyboarding
-          <span class="dots">•</span> User Research
-          <span class="dots">•</span> Visual Design
-          <span class="dots">•</span> Interaction Design
-          <span class="dots">•</span> Mockups
-          <span class="dots">•</span> Low-fidelity
-          <span class="dots">•</span> High-fidelity
-          <span class="dots">•</span> Usability Testing
-        </p>
-        <h1>Drubajyoti Debnath</h1>
-        <p>
-          I've been learning by building for almost a decade now. I never really
-          stuck to a single technology, whenever something needed to be fixed,
-          improved or understood I picked up whatever technologies made sense
-          and figured it out on the way.
-        </p>
-        <a
-          href="data/resume/UXEDruba.pdf"
-          download="Drubajyoti_Resume"
-          tabindex="0"
-          class="btnwicon btn-outline downloadbtn"
-        >
-          Download Resume <span class="icon-arrowbelow iconb"></span>
-        </a>
-      </section>
-      <section class="timeline">
-        <h2>Here's how it all started.</h2>
-        <img
-          src="data/upcomingtimeline.webp"
-          class="upcoming-timeline"
-          alt="upcoming-timeline"
-          loading="lazy"
-          decoding="async"
-        />
-      </section>
+
+    <main class="story">
+      <div class="story-stage">
+        <!-- 01 · Hi -->
+        <section class="chapter chapter-hi" data-span="3">
+          <div class="hi-outline" data-reveal data-out="0.55 0.9">
+            <span aria-hidden="true">Hi.</span>
+          </div>
+
+          <p class="doubt tl fx-blur" data-reveal data-in="0.08 0.24" data-out="0.6 0.8">
+            I don't really know how to present myself.<br />Self doubt maybe?
+          </p>
+          <p class="doubt tr fx-blur" data-reveal data-in="0.18 0.34" data-out="0.62 0.82">
+            If I cramp I feel like I'm losing out on<br />something that could be
+            a potential?
+          </p>
+          <p class="doubt bl fx-blur" data-reveal data-in="0.28 0.44" data-out="0.64 0.84">
+            If I present everything at once<br />I myself won't read it again.
+          </p>
+          <p class="doubt br fx-blur" data-reveal data-in="0.38 0.54" data-out="0.66 0.86">
+            Am I overthinking it?<br />Anyways here's an attempt.
+          </p>
+
+          <div class="hi-word" data-reveal data-out="0.62 0.94">
+            <p class="hi-load">Hi.</p>
+          </div>
+
+          <div class="scroll-hint" data-reveal data-out="0 0.06">
+            <p>keep scrolling</p>
+            <i></i>
+          </div>
+        </section>
+
+        <!-- 02 · Intro -->
+        <section class="chapter chapter-intro" data-span="3">
+          <div class="ux-word fx-blur" data-reveal data-in="-0.04 0.2" data-out="0.78 0.96" aria-hidden="true">
+            UX Engineer
+          </div>
+
+          <p class="intro-skills" data-reveal data-in="0.06 0.28" data-out="0.76 0.96">
+            Wireframe
+            <span class="dots">•</span> Prototyping
+            <span class="dots">•</span> Storyboarding
+            <span class="dots">•</span> User Research
+            <span class="dots">•</span> Visual Design
+            <span class="dots">•</span> Interaction Design
+            <span class="dots">•</span> Mockups
+            <span class="dots">•</span> Low-fidelity
+            <span class="dots">•</span> High-fidelity
+            <span class="dots">•</span> Usability Testing
+          </p>
+
+          <div class="intro-copy">
+            <h1 class="fx-blur" data-reveal data-in="0.1 0.3" data-out="0.74 0.9">
+              I'm Drubajyoti Debnath
+            </h1>
+            <p class="fx-blur" data-reveal data-in="0.14 0.3" data-out="0.73 0.89">
+              I've been learning by building for almost a decade now.
+            </p>
+            <p>
+              <span class="fx-blur" data-reveal data-in="0.18 0.34" data-out="0.72 0.88">I don't start with tools.</span>
+              <span class="fx-blur" data-reveal data-in="0.22 0.38" data-out="0.71 0.87">I start with friction.</span>
+              <span class="fx-blur" data-reveal data-in="0.26 0.42" data-out="0.7 0.86">Tools follow.</span>
+            </p>
+            <div class="fx-blur" data-reveal data-in="0.3 0.46" data-out="0.68 0.84">
+              <a
+                href="data/resume/UXEDruba.pdf"
+                download="Drubajyoti_Resume"
+                tabindex="0"
+                class="btnwicon btn-outline downloadbtn"
+              >
+                Download Resume <span class="icon-arrowbelow iconb"></span>
+              </a>
+            </div>
+          </div>
+
+          <figure
+            class="intro-photo fx-depth"
+            data-reveal
+            data-in="0 0.22"
+            data-out="0.76 0.95"
+          >
+            <img
+              src="data/profile.webp"
+              alt="Profile Picture"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </section>
+
+        <!-- 03 · The Mess. Every .tile is a placeholder, drop an <img> in it later -->
+        <section class="chapter chapter-mess" data-span="4.5" data-chapter="mess">
+          <div class="canvas cover">
+            <div class="tiles">
+              <div class="tile" data-reveal style="--l: 0; --t: -0.5; --w: 5.8; --h: 12.5">
+                <img src="data/mine/mess/1.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 6.5; --t: -0.5; --w: 8.8; --h: 12.5">
+                <img src="data/mine/mess/2.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 16; --t: -0.5; --w: 10.8; --h: 12.5">
+                <img src="data/mine/mess/3.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 27.5; --t: -0.5; --w: 14.5; --h: 12.5">
+                <img src="data/mine/mess/4.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 42.7; --t: -0.5; --w: 7.8; --h: 12.5">
+                <img src="data/mine/mess/5.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 51.2; --t: -0.5; --w: 15.5; --h: 12.5">
+                <img src="data/mine/mess/6.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 67.4; --t: -0.5; --w: 17.6; --h: 12.5">
+                <img src="data/mine/mess/7.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 85.7; --t: -0.5; --w: 14.3; --h: 12.5">
+                <img src="data/mine/mess/8.webp" alt="some">
+              </div>
+
+              <div class="tile" data-reveal style="--l: 0; --t: 13; --w: 12.2; --h: 13.2">
+                <img src="data/mine/mess/9.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 12.9; --t: 13; --w: 13.9; --h: 29">
+                <img src="data/mine/mess/10.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 27.5; --t: 13; --w: 15.1; --h: 15.2">
+                <img src="data/mine/mess/11.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 43.3; --t: 13; --w: 8.6; --h: 9.8">
+                <img src="data/mine/mess/12.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 52.6; --t: 13; --w: 8; --h: 9.8">
+                <img src="data/mine/mess/13.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 61.3; --t: 13; --w: 15.3; --h: 15.2">
+                <img src="data/mine/mess/14.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 77.3; --t: 13; --w: 13.4; --h: 24.2">
+                <img src="data/mine/mess/15.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 91.4; --t: 13; --w: 8.6; --h: 24.2">
+                <img src="data/mine/mess/16.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 43.3; --t: 23.8; --w: 9.6; --h: 9.8">
+                <img src="data/mine/mess/20.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 53.6; --t: 23.8; --w: 7; --h: 9.8">
+                <img src="data/mine/mess/21.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 27.5; --t: 29.2; --w: 15.1; --h: 9.4">
+                <img src="data/mine/mess/19.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: -5; --t: 27.2; --w: 8.3; --h: 14.8">
+                <img src="data/mine/mess/17.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 4; --t: 27.2; --w: 8.2; --h: 14.8">
+                <img src="data/mine/mess/18.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 65.2; --t: 29.2; --w: 11.4; --h: 10.6">
+                <img src="data/mine/mess/22.webp" alt="some">
+              </div>
+
+              <div class="tile" data-reveal style="--l: 65.4; --t: 40.8; --w: 11.2; --h: 10.2">
+                <img src="data/mine/mess/25.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 77.3; --t: 38.2; --w: 12; --h: 12.8">
+                <img src="data/mine/mess/26.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 90; --t: 38.2; --w: 10; --h: 29.8">
+                <img src="data/mine/mess/27.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 71.6; --t: 52; --w: 10.2; --h: 16">
+                <img src="data/mine/mess/34.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 82.5; --t: 52; --w: 6.8; --h: 16">
+                <img src="data/mine/mess/35.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 65.6; --t: 57.6; --w: 5.3; --h: 10.4">
+                <img src="data/mine/mess/33.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 0; --t: 43; --w: 13.4; --h: 21">
+                <img src="data/mine/mess/23.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 14.1; --t: 43; --w: 14.8; --h: 21">
+                <img src="data/mine/mess/24.webp" alt="some">
+              </div>
+
+              <div class="tile" data-reveal style="--l: 0; --t: 65.2; --w: 16.4; --h: 19.2">
+                <img src="data/mine/mess/28.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 17.1; --t: 65.2; --w: 19.6; --h: 19.2">
+                <img src="data/mine/mess/29.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 37.4; --t: 65.2; --w: 5.2; --h: 19.2">
+                <img src="data/mine/mess/30.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 43.3; --t: 66; --w: 11.8; --h: 18.4">
+                <img src="data/mine/mess/31.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 55.8; --t: 69; --w: 11.8; --h: 15.4">
+                <img src="data/mine/mess/32.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 68.3; --t: 69; --w: 18; --h: 15.4">
+                <img src="data/mine/mess/36.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 87; --t: 69; --w: 13; --h: 31">
+                <img src="data/mine/mess/37.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 0; --t: 85.6; --w: 12.6; --h: 14.8">
+                <img src="data/mine/mess/38.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 13.3; --t: 85.6; --w: 17.8; --h: 14.8">
+                <img src="data/mine/mess/39.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 31.8; --t: 85.6; --w: 7.2; --h: 6.8">
+                <img src="data/mine/mess/40.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 31.8; --t: 93.4; --w: 7.2; --h: 7">
+                <img src="data/mine/mess/41.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 39.7; --t: 85.6; --w: 12.2; --h: 14.8">
+                <img src="data/mine/mess/42.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 52.6; --t: 85.6; --w: 4.4; --h: 14.8">
+                <img src="data/mine/mess/43.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 57.7; --t: 85.6; --w: 7; --h: 14.8">
+                <img src="data/mine/mess/44.webp" alt="some">
+              </div>
+              <div class="tile" data-reveal style="--l: 65.4; --t: 85.6; --w: 20.9; --h: 14.8">
+                <img src="data/mine/mess/45.webp" alt="some">
+              </div>
+            </div>
+
+            <div class="mess-title">
+              <h2 class="fx-blur" data-reveal data-in="0.04 0.2" data-out="0.62 0.78">The Mess</h2>
+              <p class="fx-blur" data-reveal data-in="0.08 0.24" data-out="0.6 0.76">
+                Sometimes I wonder are they<br />even related to each other?
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 · DIYRemote. The dashed line draws with scroll, cards appear as it reaches them -->
+        <section class="chapter chapter-diy" data-span="5.5" data-chapter="diy">
+          <div class="diy-wrap" data-reveal data-out="0.9 1">
+            <div class="canvas contain">
+              <svg class="diy-path" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <mask id="diy-draw" maskUnits="userSpaceOnUse" x="-1300" y="0" width="3000" height="900">
+                    <path
+                      class="diy-mask"
+                      d="M -1200 164 H 1280 C 1390 164 1436 225 1436 310 C 1436 395 1390 454 1280 454 H 240 C 145 454 102 520 102 585 C 102 650 145 700 240 700 H 1242"
+                    />
+                    <rect x="635" y="425" width="330" height="58" fill="black" />
+                  </mask>
+                </defs>
+                <path
+                  class="diy-line"
+                  mask="url(#diy-draw)"
+                  d="M -1200 164 H 1280 C 1390 164 1436 225 1436 310 C 1436 395 1390 454 1280 454 H 240 C 145 454 102 520 102 585 C 102 650 145 700 240 700 H 1242"
+                />
+                <g class="diy-tip">
+                  <circle r="16" class="ring" />
+                  <circle r="6" />
+                </g>
+              </svg>
+
+              <figure class="card top-card" data-reveal data-anchor="251,164" style="--l: 6.6; --t: 5.8; --w: 18">
+                <img class="ph" src="data/mine/DIYRemote/1.webp" alt="F&D 5.1 Home Theater Picture">
+                <figcaption>
+                  A 5.1 home theater from 2014, and I <br />found out in our store room in 2025
+                </figcaption>
+              </figure>
+              <figure class="card top-card" data-reveal data-anchor="655,164" style="--l: 31.8; --t: 5.8; --w: 18.1">
+                <img class="ph" src="data/mine/DIYRemote/2.webp" alt="Broken Speaker">
+                <figcaption>
+                  Umm, yep broken. Good thing it <br />worked but one small issue...
+                </figcaption>
+              </figure>
+              <figure class="card top-card" data-reveal data-anchor="1079,164" style="--l: 57.3; --t: 5.8; --w: 20.2">
+                <img class="ph" src="data/mine/DIYRemote/3.webp" alt="Broken Remote with a coin">
+                <figcaption>
+                  Ya i mean someone probably just ate that <br />up, anyways I managed to turn it on by <br />shorting with a coin <b>but until when?</b>
+                </figcaption>
+              </figure>
+              <figure class="card note" data-reveal data-anchor="1436,310" style="--l: 83.8; --t: 29.4; --w: 11.8">
+                <figcaption>
+                  Existing alternatives <br />were either unreliable, <br />over-featured, or not <br />worth adapting
+                </figcaption>
+              </figure>
+
+              <div class="diy-title" data-reveal data-anchor="800,454">
+                <p class="eyebrow">Here comes</p>
+                <h2>DIYRemote</h2>
+                <p>A small project from 2025. <br />Not to scale, but to intent.</p>
+              </div>
+
+              <figure class="card low" data-reveal data-anchor="373,700" style="--l: 14.1; --t: 66.8; --w: 18.4">
+                <img class="ph" src="data/mine/DIYRemote/4.webp" alt="Arduino Board with some desktop code">
+                <figcaption>
+                  Extracted IR Hex Codes from the <br />broken remote and stored it
+                </figcaption>
+              </figure>
+              <figure class="card low" data-reveal data-anchor="852,700" style="--l: 42.5; --t: 67.7; --w: 21.4">
+                <img class="ph" src="data/mine/DIYRemote/5.webp" alt="Android Studio with output">
+                <figcaption>
+                  Recreated the physical layout digitally, using <br />haptics to replace missing tactile feedback.
+                </figcaption>
+              </figure>
+
+              <img src="data/mine/DIYRemote/6.webp" alt="F&D 5.1 Home Theater Picture" class="card card-app" data-reveal data-anchor="1242,700" style="--l: 77.6; --t: 58.6; --w: 9.8; --h: 35.8">
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 · Tuition Info -->
+        <section class="chapter chapter-tuition" data-span="3" data-chapter="tuition">
+          <div class="tuition">
+            <div class="frame fx-depth" data-reveal data-in="0.04 0.26" data-out="0.74 0.92">
+              <!-- Add src="path/to/tuition.webm" when the video is ready -->
+              <video
+                class="tuition-video"
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                src="data/mine/tuitioninfo/tuitioninfo.webm"
+              ></video>
+              <button
+                type="button"
+                class="tuition-pause"
+                aria-label="Pause video"
+                aria-pressed="false"
+                title="Pause video"
+              >
+                <svg
+                  class="icon-pause"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="14" y="4" width="4" height="16" rx="1" />
+                  <rect x="6" y="4" width="4" height="16" rx="1" />
+                </svg>
+                <svg
+                  class="icon-play"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polygon points="6 3 20 12 6 21 6 3" />
+                </svg>
+              </button>
+            </div>
+            <h2 class="fx-blur" data-reveal data-in="0.14 0.3" data-out="0.76 0.9">Tuition Info</h2>
+            <p class="year fx-blur" data-reveal data-in="0.18 0.34" data-out="0.77 0.91">In 2017, 8th standard</p>
+            <p class="fx-blur" data-reveal data-in="0.24 0.4" data-out="0.78 0.92">
+              I kept forgetting whether I paid the teachers.
+            </p>
+            <p class="fx-blur" data-reveal data-in="0.3 0.46" data-out="0.79 0.93">
+              So I made remembering easier.
+            </p>
+          </div>
+        </section>
+
+        <!-- 06 · HCI, the last one stays and scrolls away into the footer.
+             The thank you card is the same one as case_study.html -->
+        <section class="chapter chapter-hci" data-span="3">
+          <div class="hci">
+            <h2 class="fx-blur" data-reveal data-in="0.06 0.22">I didn't know it's called HCI.</h2>
+            <p>
+              <span class="fx-blur" data-reveal data-in="0.14 0.3">I just kept asking the same question:</span>
+              <span class="fx-blur" data-reveal data-in="0.2 0.36">”How can I make a better experience for people?”</span>
+            </p>
+            <p>
+              <span class="fx-blur" data-reveal data-in="0.28 0.44">A decade of projects later,</span>
+              <span class="fx-blur" data-reveal data-in="0.32 0.48">I've realized I was designing interactions</span>
+              <span class="fx-blur" data-reveal data-in="0.36 0.52">without knowing the language for it.</span>
+            </p>
+            <p>
+              <span class="fx-blur" data-reveal data-in="0.46 0.62">Now, I'm trying to learn that language.</span>
+            </p>
+          </div>
+
+          <section class="thank-you">
+            <a href="/" class="avatar fx-depth" data-reveal data-in="0.58 0.76">
+              <img src="assets/thankyou.webp" alt="Thankyou" loading="lazy" decoding="async" />
+            </a>
+            <div class="fx-blur" data-reveal data-in="0.64 0.8">
+              <h4>Thanks for reading my case study. lol</h4>
+              <p>Want to have a chat let's connect!</p>
+            </div>
+          </section>
+        </section>
+      </div>
     </main>
+
+    <script src="assets/vendor/lenis/lenis.min.js"></script>
+    <script type="module" src="assets/story.js?v=25"></script>
   </body>
 </html>

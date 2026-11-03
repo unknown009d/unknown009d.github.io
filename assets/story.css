@@ -1,0 +1,991 @@
+/* 
+================= WARNING! =================
+============ DISTURBING VISUALS ============
+
+Everything below is AI generated
+Ya I'm just a lazy ass making my life easier
+
+================= WARNING! =================
+*/ 
+/**
+ * story.css
+ * ----------------
+ * Scroll story for the about page (aboutme-story.html).
+ * Everything visual comes from .aboutme in main.css, this file only adds
+ * the sticky stage, the chapters and the --in / --out reveal system.
+ *
+ */
+
+/* Lenis does the smoothing, native smooth scroll would fight it */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+.story-page {
+  --frame: color-mix(in oklch, var(--background) 40%, white);
+  --card: color-mix(in oklch, var(--background) 62%, white);
+  --placeholder: color-mix(in oklch, var(--background-alt) 55%, var(--background));
+  /* noise.webp has a see-through last row, on a page this long it shows
+     up as a light line every 2341px, this copy is cropped by 1px */
+  background: var(--background);
+  opacity: 1;
+  #cs-header,
+  .story-stage,
+  footer,
+  &::after {
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+  &::after {
+    inset: -50svh 0;
+    background-image: url(noise-seamless.webp);
+    z-index: -1;
+    will-change: transform, opacity;
+    transform: translate3d(0, var(--grain-y, 0px), 0);
+  }
+  #cs-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  &.loaded {
+    #cs-header,
+    .story-stage,
+    footer,
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+/* Fixed bottom message shown only if First Contentful Paint / content takes > 5s */
+.slow-load-msg {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+  margin: 0;
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 300ms ease;
+  &.is-visible {
+    opacity: 0.65;
+  }
+}
+
+/* Centered spinner shown inside any div / section / figure while its image is loading */
+.is-img-loading {
+  position: relative;
+  img {
+    opacity: 0;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: -0.7rem;
+    margin-top: -0.7rem;
+    border-radius: 50%;
+    border: 2px solid color-mix(in oklch, var(--foreground) 20%, transparent);
+    border-top-color: var(--foreground);
+    animation: story-spin 0.75s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+}
+
+@keyframes story-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Without JS (or with reduced motion) chapters simply stack */
+.story {
+  position: relative;
+  .chapter {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+}
+
+/* With JS, one sticky stage and every chapter is a layer on top of it */
+.story-on .story {
+  .story-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .chapter {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+    pointer-events: none;
+    a,
+    button {
+      pointer-events: auto;
+    }
+    &.is-off {
+      visibility: hidden;
+    }
+  }
+}
+
+/**
+ * Reveal system
+ * --in goes 0 → 1 while an element enters, --out goes 0 → 1 while it leaves.
+ * The i* values describe where it enters from, the o* values where it leaves to.
+ */
+[data-reveal] {
+  --in: 1;
+  --out: 0;
+  --ix: 0px;
+  --iy: 0px;
+  --iz: 0px;
+  --is: 1;
+  --ib: 0px;
+  --ox: 0px;
+  --oy: 0px;
+  --oz: 0px;
+  --os: 1;
+  --ob: 0px;
+  --fx: translate3d(
+      calc((1 - var(--in)) * var(--ix) + var(--out) * var(--ox)),
+      calc((1 - var(--in)) * var(--iy) + var(--out) * var(--oy)),
+      calc((1 - var(--in)) * var(--iz) + var(--out) * var(--oz))
+    )
+    scale(calc(1 + (1 - var(--in)) * (var(--is) - 1) + var(--out) * (var(--os) - 1)));
+  opacity: calc(var(--o, 1) * var(--in) * (1 - var(--out)));
+  transform: var(--fx);
+  filter: blur(calc((1 - var(--in)) * var(--ib) + var(--out) * var(--ob)));
+}
+.fx-blur {
+  --iy: 1.4rem;
+  --ib: 10px;
+  --oy: -1.4rem;
+  --ob: 10px;
+}
+.fx-depth {
+  --is: 0.9;
+  --ib: 10px;
+  --os: 1.14;
+  --ob: 12px;
+}
+
+/* A 16:9 slide that scales like the pdf, sized with cqw / cqh inside */
+.canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  container-type: size;
+  &.cover {
+    width: max(100vw, 177.78svh);
+    height: max(56.25vw, 100svh);
+  }
+  &.contain {
+    width: min(100vw, 177.78svh);
+    height: min(56.25vw, 100svh);
+  }
+}
+
+/* 01 · Hi */
+.chapter-hi {
+  .hi-outline {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    --os: 1.25;
+    --ob: 6px;
+    span {
+      font-family: "DM Serif Display", serif;
+      font-size: 182svh;
+      line-height: 0.8;
+      color: transparent;
+      -webkit-text-stroke: 2.5px color-mix(in oklch, var(--foreground) 8%, transparent);
+      transform: translate(-8.1vw, -24.7svh);
+      user-select: none;
+      @media only screen and (max-width: 768px) {
+        font-size: 350vw;
+        transform: translate(-187vw, -14svh);
+      }
+    }
+  }
+  .hi-word {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    --os: 4.5;
+    --ob: 16px;
+    p {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(3.2rem, 9svh, 6.5rem);
+      line-height: 1;
+    }
+  }
+  .doubt {
+    position: absolute;
+    font-size: clamp(1rem, 2.4svh, 1.45rem);
+    line-height: 1.6;
+    &.tl {
+      left: 6.7vw;
+      top: 12svh;
+      --ox: -2vw;
+    }
+    &.tr {
+      right: 6.7vw;
+      top: 12svh;
+      text-align: right;
+      --ox: 2vw;
+    }
+    &.bl {
+      left: 6.7vw;
+      bottom: 13svh;
+      --ox: -2vw;
+      --oy: 1.4rem;
+    }
+    &.br {
+      right: 6.7vw;
+      bottom: 12svh;
+      text-align: right;
+      --ox: 2vw;
+      --oy: 1.4rem;
+    }
+    @media only screen and (max-width: 768px) {
+      font-size: clamp(0.88rem, 3.7vw, 1.05rem);
+      line-height: 1.45;
+      &.tl {
+        top: 12svh;
+        left: 6.7vw;
+      }
+      &.tr {
+        top: 24svh;
+        right: 6.7vw;
+      }
+      &.bl {
+        bottom: 26svh;
+        left: 6.7vw;
+      }
+      &.br {
+        bottom: 14svh;
+        right: 6.7vw;
+      }
+    }
+  }
+  .scroll-hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 5svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    --o: 0.6;
+    p {
+      font-family: "DM Mono", monospace;
+      font-size: 0.8rem;
+    }
+    i {
+      width: 1px;
+      height: 2.6rem;
+      position: relative;
+      overflow: hidden;
+      background: color-mix(in oklch, var(--foreground) 20%, transparent);
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: var(--foreground);
+        animation: story-hint 2.8s ease-in-out infinite;
+      }
+    }
+  }
+}
+/* the Hi chapter is the loading moment, it fades in once the page is ready */
+.chapter-hi {
+  .hi-load {
+    animation: story-hi-in 1.2s ease both;
+  }
+  .hi-outline span {
+    animation: story-fade-in 1.6s ease both;
+  }
+  .scroll-hint > * {
+    animation: story-fade-in 1s ease 0.8s both;
+  }
+}
+@keyframes story-hi-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(0.6rem);
+  }
+}
+@keyframes story-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes story-hint {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
+  }
+}
+
+/* 02 · Intro */
+.chapter-intro {
+  .ux-word {
+    position: absolute;
+    top: -13vw;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: "DM Serif Display", serif;
+    font-size: 18.35vw;
+    font-weight: 400;
+    user-select: none;
+    pointer-events: none;
+    --o: 0.06;
+    @media only screen and (max-width: 480px) {
+      --o: 0.08;
+      top: -18vw;
+    }
+  }
+  .intro-skills {
+    position: absolute;
+    top: 31svh;
+    left: 0;
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.08rem;
+    font-weight: 400;
+    font-family: "DM Mono", monospace;
+    overflow-x: hidden;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+    --o: 0.35;
+    --ix: 3vw;
+    --ib: 6px;
+    --ox: -3vw;
+    --ob: 6px;
+  }
+  .intro-copy {
+    position: absolute;
+    left: 6.7vw;
+    bottom: 13svh;
+    text-align: left;
+    z-index: 2;
+    h1 {
+      font-size: clamp(2.2rem, 3.65vw, 3.8rem);
+      line-height: 1.12;
+      margin-bottom: 2.2svh;
+    }
+    p {
+      font-weight: 400;
+      font-size: clamp(1rem, 1.35vw, 1.45rem);
+      line-height: 1.6;
+      margin: 0 0 5svh;
+      span {
+        display: block;
+      }
+    }
+    .downloadbtn {
+      margin: 0.4svh 0 0;
+    }
+  }
+  .intro-photo {
+    box-sizing: border-box;
+    margin: 0;
+    position: absolute;
+    right: 6.5vw;
+    top: 9.5svh;
+    width: min(32.7vw, 58.8svh);
+    min-height: 24svh;
+    padding: 0.35rem;
+    border: 2px solid var(--border-profile);
+    border-radius: min(5.2vw, 9.4svh);
+    user-select: none;
+    z-index: 1;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: calc(min(5.2vw, 9.4svh) - 0.35rem);
+      object-fit: cover;
+      transition: opacity 250ms ease;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .ux-word {
+      --o: 0.08;
+      width: max-content;
+      overflow: visible;
+      font-size: 38vw;
+      top: 3svh;
+      left: -17vw;
+    }
+    .intro-skills {
+      top: 36svh;
+      font-size: 0.8rem;
+      gap: 1rem;
+    }
+    .intro-photo {
+      right: auto;
+      left: 50%;
+      top: 14svh;
+      width: 80vw;
+      max-height: 44svh;
+      border-radius: min(9.5vw, 5svh);
+      --fx: translate3d(
+          calc(-50% + (1 - var(--in)) * var(--ix) + var(--out) * var(--ox)),
+          calc((1 - var(--in)) * var(--iy) + var(--out) * var(--oy)),
+          0
+        )
+        scale(calc(1 + (1 - var(--in)) * (var(--is) - 1) + var(--out) * (var(--os) - 1)));
+      img {
+        width: 100%;
+        max-height: calc(44svh - 0.7rem);
+        border-radius: calc(min(9.5vw, 5svh) - 0.35rem);
+        object-fit: cover;
+        object-position: center 18%;
+      }
+    }
+    .intro-copy {
+      left: 6.7vw;
+      right: 6.7vw;
+      top: auto;
+      bottom: 4svh;
+      h1 {
+        font-size: clamp(1.85rem, 7.2vw, 2.4rem);
+        margin-bottom: 1svh;
+      }
+      p {
+        font-size: clamp(0.92rem, 3.7vw, 1.08rem);
+        line-height: 1.5;
+        margin: 0 0 1.2svh;
+      }
+      .downloadbtn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.25rem;
+        margin-top: 0.4svh;
+        .iconb {
+          right: 1rem;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          padding-right: 2.5rem;
+          .iconb {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 03 · The Mess */
+.chapter-mess {
+  .canvas.cover {
+    width: 100vw;
+    height: 100svh;
+  }
+  @media only screen and (max-width: 768px) {
+    .canvas.cover {
+      width: 190vw;
+      height: 100svh;
+      left: 50%;
+      translate: -47.65% -50%;
+    }
+  }
+  .tiles {
+    position: absolute;
+    inset: 0;
+  }
+  .tile {
+    --gx: 0.22%;
+    --gy: 0.38%;
+    position: absolute;
+    left: calc(var(--l) * 1% - var(--gx));
+    top: calc(var(--t) * 1% - var(--gy));
+    width: calc(var(--w) * 1% + var(--gx) * 2);
+    height: calc(var(--h) * 1% + var(--gy) * 2);
+    border-radius: 1cqw;
+    border: 0.18cqw solid var(--frame);
+    background: var(--ph, var(--placeholder));
+    overflow: hidden;
+    --is: 0.9;
+    --os: 0.9;
+    --ib: 18px;
+    --ob: 18px;
+    will-change: transform, opacity, filter;
+    &:nth-child(4n + 1) {
+      --ph: #2e2a26;
+    }
+    &:nth-child(7n + 3) {
+      --ph: color-mix(in oklch, var(--background-alt) 80%, #8a6f52);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .mess-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 41%;
+    text-align: center;
+    h2 {
+      font-size: 4.6cqw;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 1.55cqw;
+      line-height: 1.35;
+      margin-top: 0.4cqw;
+    }
+    @media only screen and (max-width: 768px) {
+      left: 47.65%;
+      right: auto;
+      top: 50%;
+      translate: -50% -50%;
+      width: 68vw;
+      h2 {
+        font-size: clamp(2.1rem, 8.5vw, 3rem);
+      }
+      p {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        margin-top: 0.35rem;
+      }
+    }
+  }
+}
+
+/* 04 · DIYRemote */
+.chapter-diy {
+  .diy-wrap {
+    position: absolute;
+    inset: 0;
+    --os: 0.9;
+    --ob: 8px;
+  }
+  .diy-path {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    .diy-line {
+      fill: none;
+      stroke: color-mix(in oklch, var(--foreground) 35%, transparent);
+      stroke-width: 2.2;
+      stroke-dasharray: 9 11;
+    }
+    .diy-mask {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 14;
+    }
+    .diy-tip {
+      --in: 0;
+      opacity: var(--in);
+      fill: var(--foreground);
+      .ring {
+        opacity: 0.12;
+      }
+    }
+  }
+  .card {
+    position: absolute;
+    left: calc(var(--l) * 1%);
+    top: calc(var(--t) * 1%);
+    width: calc(var(--w) * 1%);
+    padding: 0.35cqw;
+    border-radius: 1.5cqw;
+    background: var(--card);
+    border: 2px solid var(--frame);
+    display: flex;
+    flex-direction: column;
+    --iy: 1rem;
+    --is: 0.96;
+    --ib: 8px;
+    .ph {
+      height: var(--ph-h, 20cqh);
+      border-radius: 1.2cqw;
+      background: var(--placeholder);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    figcaption {
+      margin: auto 0;
+      font-size: 0.86cqw;
+      line-height: 1.38;
+      text-align: center;
+      padding: 0.65cqw 0.45cqw 0.55cqw;
+      opacity: 0.85;
+    }
+    &.top-card {
+      height: 28.8%;
+    }
+    &.low {
+      --ph-h: 17.5cqh;
+    }
+    &.note {
+      padding: 0;
+      figcaption {
+        padding: 1.1cqw 0.6cqw;
+      }
+    }
+    &.phone {
+      height: calc(var(--h) * 1%);
+      .ph {
+        height: 100%;
+      }
+    }
+  }
+  .ph span {
+    font-family: "DM Mono", monospace;
+    font-size: max(0.7rem, 0.75cqw);
+    opacity: 0.45;
+  }
+  .diy-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 42.2%;
+    text-align: center;
+    --iy: 1.4rem;
+    --ib: 10px;
+    .eyebrow {
+      width: 18.5cqw;
+      margin: 0 auto -0.2cqw;
+      text-align: left;
+      font-size: 0.72cqw;
+      opacity: 0.75;
+    }
+    h2 {
+      font-size: 4.3cqw;
+      line-height: 1.08;
+    }
+    p {
+      font-size: 1.48cqw;
+      line-height: 1.32;
+      margin-top: 0.65cqw;
+    }
+  }
+  .card-app{
+    background: transparent !important;
+    border: none;
+    transform: translate(-4rem, 4rem) scale(1.4);
+  }
+  @media only screen and (max-width: 768px) {
+    .canvas.contain {
+      width: 100vw;
+      height: auto;
+      min-height: 100svh;
+      top: 0;
+      translate: -50% var(--diy-pan, 0px);
+      container-type: normal;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+      padding: 20svh 6.7vw 18svh;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 2px;
+        height: var(--diy-line-px, 0px);
+        opacity: var(--diy-line-o, 0);
+        translate: -50% 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          color-mix(in oklch, var(--foreground) 35%, transparent) 0 9px,
+          transparent 9px 20px
+        );
+        z-index: 0;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: var(--diy-line-px, 0px);
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--foreground);
+        box-shadow: 0 0 0 10px color-mix(in oklch, var(--foreground) 12%, transparent);
+        translate: -50% -50%;
+        opacity: var(--diy-tip-o, 0);
+        pointer-events: none;
+        z-index: 0;
+      }
+    }
+    .diy-path {
+      display: none;
+    }
+    .card {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: min(84vw, 340px);
+      height: auto !important;
+      padding: 0.45rem;
+      border-radius: 1.2rem;
+      z-index: 1;
+      .ph {
+        height: 135px;
+        border-radius: 0.9rem;
+      }
+      figcaption {
+        font-size: 0.9rem;
+        line-height: 1.45;
+        padding: 0.75rem 0.5rem 0.45rem;
+        br {
+          display: none;
+        }
+      }
+      &.note {
+        width: min(76vw, 290px);
+        figcaption {
+          padding: 0.9rem 1rem;
+        }
+      }
+      &.phone {
+        width: min(48vw, 190px);
+        .ph {
+          height: 310px;
+        }
+      }
+    }
+    .ph span {
+      font-size: 0.75rem;
+    }
+    .diy-title {
+      position: relative;
+      top: auto;
+      z-index: 1;
+      background: var(--background);
+      padding: 0.8rem 1.4rem;
+      border-radius: 1rem;
+      .eyebrow {
+        width: auto;
+        text-align: center;
+        font-size: 0.75rem;
+        margin-bottom: 0;
+      }
+      h2 {
+        font-size: clamp(2.2rem, 9vw, 3rem);
+      }
+      p {
+        font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+        margin-top: 0.35rem;
+      }
+    }
+    .card-app{
+      transform: translate(-0.8rem, 4rem) scale(0.9);
+    }
+  }
+}
+
+/* 05 · Tuition Info */
+.chapter-tuition {
+  display: grid;
+  place-items: center;
+  .tuition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  .frame {
+    position: relative;
+    overflow: hidden;
+    width: min(44vw, calc((100svh - 21rem) * 1.62));
+    aspect-ratio: 1.62;
+    border-radius: 2.2rem;
+    border: 0.4rem solid var(--frame);
+    background: var(--placeholder);
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.6rem;
+    @media only screen and (max-width: 768px) {
+      aspect-ratio: 9 / 16;
+      width: min(80vw, calc((100svh - 13.5rem) * 0.5625));
+      border-radius: 1.5rem;
+      margin-bottom: 2.2rem;
+    }
+  }
+  .tuition-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    &:not([src]),
+    &[src=""] {
+      display: none;
+    }
+  }
+  .tuition-ph {
+    font-family: "DM Mono", monospace;
+    font-size: 0.75rem;
+    opacity: 0.45;
+    padding: 0 1rem;
+  }
+  .tuition-pause {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    margin: 0;
+    padding: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background-color: var(--link-hover);
+    color: var(--foreground);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+    &:active {
+      background-color: var(--background-alt);
+    }
+    .icon-play {
+      display: none;
+    }
+  }
+  &.is-paused .tuition-pause {
+    .icon-pause {
+      display: none;
+    }
+    .icon-play {
+      display: block;
+    }
+  }
+  h2 {
+    font-size: clamp(2.4rem, 3.3vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+  }
+  p {
+    font-size: clamp(1.15rem, 1.5vw, 1.75rem);
+    line-height: 1.42;
+  }
+  .year {
+    --o: 0.85;
+    margin-bottom: 1.2rem;
+  }
+  @media only screen and (max-width: 768px) {
+    .tuition {
+      padding: 0 1rem;
+    }
+    h2 {
+      font-size: clamp(1.85rem, 7vw, 2.3rem);
+    }
+    p {
+      font-size: clamp(0.84rem, 3.55vw, 1.05rem);
+    }
+    .year {
+      margin-bottom: 0.85rem;
+    }
+  }
+}
+
+/* 06 · HCI */
+.chapter-hci {
+  .hci {
+    position: absolute;
+    left: 6.7vw;
+    top: 13svh;
+    max-width: 60vw;
+    h2 {
+      font-size: clamp(2.2rem, 6.6svh, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 5svh;
+    }
+    p {
+      font-size: clamp(1.1rem, 3.1svh, 1.9rem);
+      line-height: 1.45;
+      margin-bottom: 1.4em;
+    }
+    span {
+      display: block;
+    }
+    @media only screen and (max-width: 768px) {
+      left: 6.7vw;
+      right: 6.7vw;
+      max-width: none;
+      top: 11svh;
+      h2 {
+        font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+        margin-bottom: 3svh;
+      }
+      p {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        margin-bottom: 1.15em;
+      }
+    }
+  }
+  .thank-you {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 7svh;
+    margin: 0;
+    gap: 1.4rem;
+    .avatar {
+      width: min(140px, 15svh);
+      height: min(140px, 15svh);
+      padding: 0.2rem;
+      border: 2pt solid var(--border-profile);
+      border-radius: 50%;
+      background-color: transparent;
+      &:focus{
+       box-shadow: none;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      bottom: 5svh;
+      gap: 0.9rem;
+      .avatar {
+        width: min(104px, 13svh);
+        height: min(104px, 13svh);
+      }
+    }
+  }
+}

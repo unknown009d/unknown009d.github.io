@@ -1,0 +1,1629 @@
+<!-- 
+================= WARNING! =================
+============ DISTURBING VISUALS ============
+
+Everything below is AI generated
+Ya I'm just a lazy ass making my life easier
+
+================= WARNING! =================
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>toWebP | Druba</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="assets/main.css" />
+  <link rel="stylesheet" href="assets/darkmode.css" />
+  <link rel="stylesheet" href="assets/icons/css/dicon.css" />
+  <script>
+    // Prevent dev servers (e.g. VS Code Live Server) from reloading the page
+    // when downloaded files are saved into the project workspace folder
+    (() => {
+      const NativeWS = window.WebSocket;
+      if (!NativeWS) return;
+      window.WebSocket = function (...args) {
+        const ws = new NativeWS(...args);
+        const origAdd = ws.addEventListener.bind(ws);
+        ws.addEventListener = function (type, listener, opts) {
+          if (type === "message" && typeof listener === "function") {
+            return origAdd(
+              type,
+              (e) => {
+                if (window.__towebpHasItems && e?.data === "reload") return;
+                return listener.call(ws, e);
+              },
+              opts
+            );
+          }
+          return origAdd(type, listener, opts);
+        };
+        let userOnMsg = null;
+        Object.defineProperty(ws, "onmessage", {
+          configurable: true,
+          get: () => userOnMsg,
+          set: (fn) => {
+            userOnMsg = fn;
+            origAdd("message", (e) => {
+              if (window.__towebpHasItems && e?.data === "reload") return;
+              if (typeof userOnMsg === "function") userOnMsg.call(ws, e);
+            });
+          },
+        });
+        return ws;
+      };
+      window.WebSocket.prototype = NativeWS.prototype;
+      Object.assign(window.WebSocket, NativeWS);
+    })();
+  </script>
+  <script src="assets/main.js"></script>
+
+  <style>
+    body.towebp-page {
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .webp-shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: 1.5rem auto 4rem;
+      padding: 0 4rem;
+      flex: 1;
+
+      @media only screen and (max-width: 612px) {
+        padding: 0 2rem;
+        margin-top: 1.25rem;
+      }
+    }
+
+    .webp-hero {
+      margin-bottom: 1.75rem;
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.12;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 0.96rem;
+        line-height: 1.5;
+        opacity: 0.75;
+      }
+    }
+
+    /* Dropzone */
+    .dropzone {
+      box-sizing: border-box;
+      position: relative;
+      background-color: var(--background-alt);
+      border: 2px dashed var(--border-line);
+      border-radius: 1.6rem;
+      padding: 3rem 2rem;
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      transition:
+        height 380ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 300ms ease,
+        transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 380ms cubic-bezier(0.22, 1, 0.36, 1),
+        margin 380ms cubic-bezier(0.22, 1, 0.36, 1),
+        border-width 300ms ease,
+        border-color 200ms ease,
+        background-color 200ms ease;
+      user-select: none;
+
+      @media only screen and (max-width: 612px) {
+        padding: 2rem 1.25rem;
+        border-radius: 1.25rem;
+      }
+
+      &.is-hidden {
+        opacity: 0;
+        height: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        border-width: 0 !important;
+        transform: translateY(-6px) scale(0.985);
+        pointer-events: none;
+      }
+
+      &:hover,
+      &.is-dragover {
+        border-color: var(--foreground);
+      }
+
+      &.is-dragover {
+        transform: scale(0.995);
+      }
+
+      input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .drop-icon {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 1rem;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        display: inline-grid;
+        place-items: center;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: clamp(1.3rem, 4.5vw, 1.6rem);
+        line-height: 1.25;
+        margin-bottom: 0.4rem;
+      }
+
+      .drop-sub {
+        font-size: 0.88rem;
+        line-height: 1.45;
+        opacity: 0.7;
+        margin-bottom: 0.5rem;
+      }
+
+      .drop-hint {
+        font-family: "DM Mono", monospace;
+        font-size: 0.74rem;
+        line-height: 1.4;
+        opacity: 0.5;
+
+        @media (hover: none) and (pointer: coarse) {
+          display: none;
+        }
+      }
+    }
+
+    /* Controls bar */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      padding: 1.1rem 1.4rem;
+      background-color: var(--background-alt);
+      border-radius: 1.2rem;
+      border: 1px solid var(--border-line);
+
+      @media only screen and (max-width: 612px) {
+        padding: 1rem;
+        gap: 1rem;
+      }
+    }
+
+    .control-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+
+      @media only screen and (max-width: 612px) {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 1rem;
+      }
+    }
+
+    .control-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+
+      label {
+        font-size: 0.88rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .mono-val {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        min-width: 3.2ch;
+        padding: 0.2rem 0.55rem;
+        border-radius: 6pt;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 612px) {
+        width: 100%;
+
+        &.width-control {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 130px;
+      height: 6px;
+      border-radius: 99px;
+      background: var(--border-line);
+      cursor: pointer;
+
+      @media only screen and (max-width: 612px) {
+        flex: 1;
+        width: auto;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--foreground);
+        border: 2px solid var(--background);
+        cursor: pointer;
+      }
+    }
+
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+
+      button.pill {
+        margin: 0;
+        padding: 0.32rem 0.65rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        border-radius: 99px;
+        background-color: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+
+        &.active {
+          background-color: var(--foreground);
+          color: var(--background);
+          border-color: var(--foreground);
+        }
+      }
+    }
+
+    .custom-width {
+      width: 5.8rem;
+      padding: 0.3rem 0.55rem;
+      font-family: "DM Mono", monospace;
+      font-size: 0.76rem;
+      border-radius: 99px;
+      border: 1px solid var(--border-line);
+      background-color: var(--background);
+      color: var(--foreground);
+    }
+
+    .bulk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      margin-top: 1.1rem;
+
+      @media only screen and (max-width: 612px) {
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .btnwicon {
+        box-sizing: border-box;
+        white-space: nowrap;
+        margin: 0;
+        font-size: 0.85rem;
+        padding: 0.55rem 1.15rem;
+
+        .iconb {
+          right: 0.85rem;
+          transform: translateY(-6px);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+          padding-right: 2.35rem;
+
+          .iconb {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
+
+      .btn-ghost {
+        box-sizing: border-box;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0.55rem 1rem;
+        font-size: 0.85rem;
+        background: transparent;
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+        border-radius: 20pt;
+
+        &:hover {
+          border-color: var(--foreground);
+        }
+      }
+    }
+
+    /* Summary banner */
+    .queue-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.75rem 0 1rem;
+
+      &.is-visible {
+        display: flex;
+      }
+
+      .queue-stats {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        opacity: 0.8;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .saved-badge {
+        font-family: "DM Mono", monospace;
+        font-size: 0.78rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 99px;
+        background-color: var(--foreground);
+        color: var(--background);
+      }
+    }
+
+    /* Cards grid */
+    .webp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 1.25rem;
+    }
+
+    .webp-card {
+      background-color: var(--background-alt);
+      border: 1px solid var(--border-line);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .thumb-wrap {
+        position: relative;
+        height: 190px;
+        background-color: var(--background);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border-line);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          padding: 0.5rem;
+          filter: none;
+        }
+      }
+
+      .remove-btn {
+        position: absolute;
+        top: 0.65rem;
+        right: 0.65rem;
+        margin: 0;
+        padding: 0;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: var(--background-alt);
+        color: var(--foreground);
+        border: 1px solid var(--border-line);
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+        line-height: 1;
+
+        &:hover {
+          background-color: var(--foreground);
+          color: var(--background);
+        }
+      }
+
+      .ratio-pill {
+        position: absolute;
+        bottom: 0.65rem;
+        right: 0.65rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.74rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 99px;
+        background-color: var(--foreground);
+        color: var(--background);
+      }
+
+      .card-body {
+        padding: 1rem 1.1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+      }
+
+      .name-row {
+        display: flex;
+        align-items: center;
+        background-color: var(--background);
+        border: 1px solid var(--border-line);
+        border-radius: 0.65rem;
+        padding: 0.4rem 0.65rem;
+
+        &:focus-within {
+          border-color: var(--foreground);
+        }
+
+        input {
+          all: unset;
+          flex: 1;
+          font-size: 0.9rem;
+          font-weight: 600;
+          min-width: 0;
+        }
+
+        span {
+          font-family: "DM Mono", monospace;
+          font-size: 0.78rem;
+          opacity: 0.55;
+          user-select: none;
+        }
+      }
+
+      .meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: "DM Mono", monospace;
+        font-size: 0.76rem;
+        opacity: 0.75;
+        gap: 0.5rem;
+      }
+
+      .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: auto;
+
+        .btnwicon {
+          box-sizing: border-box;
+          white-space: nowrap;
+          margin: 0;
+          width: 100%;
+          text-align: center;
+          padding: 0.55rem 1.1rem;
+          font-size: 0.86rem;
+          border-radius: 0.75rem;
+
+          .iconb {
+            right: 0.9rem;
+            transform: translateY(-6px);
+          }
+
+          &:hover,
+          &:focus,
+          &:active {
+            padding-right: 2.2rem;
+
+            .iconb {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        }
+      }
+    }
+
+      .lie {
+        font-size: 0.6rem;
+      }
+
+      /* Progress bar where text matches track background and is revealed by the fill */
+      .convert-bar-wrap {
+        display: none;
+        margin-top: 1.1rem;
+        margin-bottom: 1.25rem;
+        &.is-visible {
+          display: block;
+        }
+      }
+
+      .convert-progress-bar {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+        min-height: 2.9rem;
+        border-radius: 50rem;
+        background-color: var(--background-alt);
+        border: 1px solid var(--border-line);
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        user-select: none;
+        pointer-events: none;
+        .bar-fill {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: var(--prog, 0%);
+          background-color: var(--foreground);
+          z-index: 1;
+          will-change: width;
+        }
+        .bar-secret {
+          position: relative;
+          z-index: 2;
+          font-family: "DM Mono", monospace;
+          font-size: clamp(0.74rem, 2.4vw, 0.85rem);
+          font-weight: 500;
+          color: var(--background-alt);
+          padding: 0 1rem;
+          text-align: center;
+          white-space: nowrap;
+        }
+      }
+
+      .webp-card.is-loading {
+        opacity: 0.55;
+        pointer-events: none;
+        .thumb-img {
+          opacity: 0;
+        }
+        .thumb-wrap::after {
+          content: "Converting...";
+          position: absolute;
+          font-family: "DM Mono", monospace;
+          font-size: 0.78rem;
+          opacity: 0.6;
+        }
+      }
+
+    @media only screen and (max-width: 250px) {
+      body {
+        display: none !important;
+      }
+
+      html {
+        &::after {
+          content: "Seriously?";
+          display: grid;
+          place-items: center;
+          min-height: 90vh;
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body class="towebp-page">
+  <header id="cs-header">
+    <a class="backbutton" href="/" title="Go home">
+      <span class="icon-home"></span>
+    </a>
+  </header>
+
+  <main class="webp-shell">
+    <section class="webp-hero">
+      <h1>How did you end up here?</h1>
+      <p>
+        Drop one image or a whole folder. Everything converts locally in your
+        browser; nothing is uploaded <small class="lie">*Promise🤞</small>
+      </p>
+    </section>
+
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" accept="image/*" multiple aria-label="Choose images to convert" />
+      <div class="drop-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" x2="12" y1="3" y2="15" />
+        </svg>
+      </div>
+      <h2>Drop images here or click to browse</h2>
+      <p class="drop-sub">Supports PNG, JPG, WebP, AVIF, GIF, SVG — single or bulk</p>
+      <p class="drop-hint">Tip: You can also press Ctrl + V anywhere to paste from clipboard</p>
+    </div>
+
+      <section class="controls-bar" aria-label="Conversion settings">
+        <div class="control-group">
+          <div class="control-item width-control">
+            <label>Format</label>
+            <div class="preset-pills" id="mode-switch">
+              <button type="button" class="pill active" data-mode="webp">WebP</button>
+              <button type="button" class="pill" data-mode="ico">ICO</button>
+              <button type="button" class="pill" data-mode="pwa">PWA Preset</button>
+            </div>
+          </div>
+
+          <div class="control-item" id="webp-quality-group">
+            <label for="quality-range">Quality</label>
+            <input type="range" id="quality-range" min="10" max="100" step="5" value="75" />
+            <span class="mono-val" id="quality-val">75%</span>
+          </div>
+
+          <div class="control-item width-control" id="webp-width-group">
+            <label>Max Width</label>
+            <div class="preset-pills" id="width-presets">
+              <button type="button" class="pill active" data-w="0">Original</button>
+              <button type="button" class="pill" data-w="1920">1920px</button>
+              <button type="button" class="pill" data-w="1200">1200px</button>
+              <button type="button" class="pill" data-w="800">800px</button>
+              <input type="number" id="custom-width" class="custom-width" placeholder="Custom px" min="16" max="8000" />
+            </div>
+          </div>
+
+          <div class="control-item width-control" id="ico-sizes-group" style="display: none">
+            <label>ICO Sizes</label>
+            <div class="preset-pills" id="ico-sizes">
+              <button type="button" class="pill active" data-size="16">16px</button>
+              <button type="button" class="pill active" data-size="32">32px</button>
+              <button type="button" class="pill active" data-size="48">48px</button>
+              <button type="button" class="pill" data-size="64">64px</button>
+              <button type="button" class="pill" data-size="128">128px</button>
+              <button type="button" class="pill" data-size="256">256px</button>
+            </div>
+          </div>
+
+          <div class="control-item width-control" id="pwa-sizes-group" style="display: none">
+            <label>PWA Pack</label>
+            <div class="preset-pills" id="pwa-sizes">
+              <button type="button" class="pill active" data-pwa="ico">favicon.ico (16·32·48)</button>
+              <button type="button" class="pill active" data-pwa="180">180px Apple</button>
+              <button type="button" class="pill active" data-pwa="192">192px</button>
+              <button type="button" class="pill active" data-pwa="512">512px</button>
+            </div>
+            <div class="preset-pills" id="pwa-ext-switch">
+              <button type="button" class="pill active" data-ext="png">PNG</button>
+              <button type="button" class="pill" data-ext="webp">WebP</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="convert-bar-wrap" id="convert-bar-wrap" title="Trust me bro!">
+        <div class="convert-progress-bar" id="convert-bar" role="progressbar" aria-label="Conversion progress">
+          <span class="bar-fill" id="bar-fill"></span>
+          <span class="bar-secret">pinky promise your data isn't getting uploaded</span>
+        </div>
+      </div>
+
+      <section class="controls-bar bulk-actions" id="bulk-actions" style="display: none" aria-label="Batch actions">
+        <button type="button" class="btn-ghost" id="clear-btn">Clear All</button>
+        <button type="button" class="btnwicon btn-outline" id="download-each-btn">
+          Download Each <span class="icon-arrowbelow iconb"></span>
+        </button>
+        <button type="button" class="btnwicon" id="download-zip-btn">
+          Download ZIP <span class="icon-arrowbelow iconb"></span>
+        </button>
+      </section>
+
+    <div class="queue-header" id="queue-header">
+      <div class="queue-stats">
+        <span id="stats-count">0 images</span>
+        <span>•</span>
+        <span id="stats-size">0 KB → 0 KB</span>
+        <span class="saved-badge" id="stats-saved">0% saved</span>
+      </div>
+    </div>
+
+    <section class="webp-grid" id="webp-grid"></section>
+  </main>
+
+  <script>
+    (() => {
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("file-input");
+      const modeSwitch = document.getElementById("mode-switch");
+      const webpQualityGroup = document.getElementById("webp-quality-group");
+      const webpWidthGroup = document.getElementById("webp-width-group");
+      const icoSizesGroup = document.getElementById("ico-sizes-group");
+      const icoSizesEl = document.getElementById("ico-sizes");
+      const pwaSizesGroup = document.getElementById("pwa-sizes-group");
+      const pwaSizesEl = document.getElementById("pwa-sizes");
+      const pwaExtSwitch = document.getElementById("pwa-ext-switch");
+      const qualityRange = document.getElementById("quality-range");
+      const qualityVal = document.getElementById("quality-val");
+      const widthPresets = document.getElementById("width-presets");
+      const customWidthInput = document.getElementById("custom-width");
+      const bulkActions = document.getElementById("bulk-actions");
+      const queueHeader = document.getElementById("queue-header");
+      const statsCount = document.getElementById("stats-count");
+      const statsSize = document.getElementById("stats-size");
+      const statsSaved = document.getElementById("stats-saved");
+      const grid = document.getElementById("webp-grid");
+      const clearBtn = document.getElementById("clear-btn");
+      const downloadEachBtn = document.getElementById("download-each-btn");
+      const downloadZipBtn = document.getElementById("download-zip-btn");
+      const convertBarWrap = document.getElementById("convert-bar-wrap");
+      const convertBar = document.getElementById("convert-bar");
+      const barSecret = convertBar.querySelector(".bar-secret");
+
+      const QUALITY_STORAGE_KEY = "towebp_quality";
+      try {
+        const savedQuality = Number(localStorage.getItem(QUALITY_STORAGE_KEY));
+        if (savedQuality >= 10 && savedQuality <= 100) {
+          qualityRange.value = String(savedQuality);
+          qualityVal.textContent = `${savedQuality}%`;
+        }
+      } catch {}
+
+      let items = [];
+      let mode = "webp"; // "webp" | "ico" | "pwa"
+      let maxWidth = 0;
+      let pwaExt = "png";
+      let nextId = 1;
+      let uploadCount = 0;
+      let progRaf = null;
+
+      const clearProgTimers = () => {
+        if (progRaf) {
+          cancelAnimationFrame(progRaf);
+          progRaf = null;
+        }
+      };
+
+      const setDropzoneHidden = (hidden) => {
+        if (hidden) {
+          if (dropzone.classList.contains("is-hidden")) return;
+          dropzone.style.height = `${dropzone.offsetHeight}px`;
+          void dropzone.offsetHeight;
+          requestAnimationFrame(() => {
+            dropzone.classList.add("is-hidden");
+          });
+        } else {
+          if (!dropzone.classList.contains("is-hidden")) return;
+          dropzone.classList.remove("is-hidden");
+          dropzone.style.height = "";
+        }
+      };
+
+      const nextPaint = () =>
+        new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+      const runProgressBar = (useRealProgress, getRealState) =>
+        new Promise((resolve) => {
+          clearProgTimers();
+          convertBarWrap.classList.add("is-visible");
+          convertBar.style.setProperty("--prog", "0%");
+
+          if (useRealProgress) {
+            let displayed = 0;
+            const tickReal = () => {
+              const { pct: target, done } = getRealState();
+              const diff = target - displayed;
+              displayed += Math.max(0.35, diff * 0.22);
+              if (displayed > target) displayed = target;
+              convertBar.style.setProperty("--prog", `${displayed.toFixed(2)}%`);
+
+              if (!done || displayed < 99.6) {
+                progRaf = requestAnimationFrame(tickReal);
+              } else {
+                convertBar.style.setProperty("--prog", "100%");
+                progRaf = null;
+                resolve();
+              }
+            };
+            progRaf = requestAnimationFrame(tickReal);
+            return;
+          }
+
+          const rand = (min, max) =>
+            Math.floor(min + Math.random() * (max - min + 1));
+
+          // Build smooth segments: glide to a random target, pause briefly, repeat to 100%
+          const segments = [];
+          let cur = 0;
+          let tCursor = 0;
+
+          while (cur < 100) {
+            const next =
+              cur === 0
+                ? rand(12, 28)
+                : Math.min(100, cur + rand(16, 38));
+            const moveDur = rand(360, 520);
+            const holdDur = next < 100 ? rand(80, 180) : 0;
+            segments.push({
+              from: cur,
+              to: next,
+              start: tCursor,
+              moveEnd: tCursor + moveDur,
+              end: tCursor + moveDur + holdDur,
+            });
+            cur = next;
+            tCursor += moveDur + holdDur;
+          }
+
+          const totalDuration = tCursor;
+          const t0 = performance.now();
+
+          const tick = (now) => {
+            const elapsed = now - t0;
+            const { done } = getRealState();
+            const seg =
+              segments.find((s) => elapsed <= s.end) || segments.at(-1);
+            let pct = seg.to;
+            if (elapsed < seg.moveEnd) {
+              const p = Math.max(
+                0,
+                Math.min(1, (elapsed - seg.start) / (seg.moveEnd - seg.start))
+              );
+              // Smooth cosine ease-in-out so each glide starts and stops gently
+              const eased = 0.5 - 0.5 * Math.cos(Math.PI * p);
+              pct = seg.from + (seg.to - seg.from) * eased;
+            }
+            if (!done && pct > 94) pct = 94;
+            convertBar.style.setProperty("--prog", `${pct.toFixed(2)}%`);
+
+            if (elapsed < totalDuration || !done) {
+              progRaf = requestAnimationFrame(tick);
+            } else {
+              convertBar.style.setProperty("--prog", "100%");
+              progRaf = null;
+              resolve();
+            }
+          };
+
+          progRaf = requestAnimationFrame(tick);
+        });
+
+      const formatBytes = (bytes) => {
+        if (bytes < 1024) return `${bytes} B`;
+        const kb = bytes / 1024;
+        if (kb < 1024) return `${kb.toFixed(1)} KB`;
+        return `${(kb / 1024).toFixed(2)} MB`;
+      };
+
+      const stripExt = (name) => name.replace(/\.[^.]+$/, "") || "image";
+
+      const getSelectedIcoSizes = () => {
+        const selected = [...icoSizesEl.querySelectorAll(".pill.active")]
+          .map((b) => Number(b.dataset.size))
+          .filter(Boolean);
+        return selected.length ? selected : [32];
+      };
+
+      const getSelectedPwaTargets = () => {
+        const selected = [...pwaSizesEl.querySelectorAll(".pill.active")].map(
+          (b) => b.dataset.pwa
+        );
+        return selected.length ? selected : ["ico", "180", "192", "512"];
+      };
+
+      const loadImage = (file, onProgress) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onprogress = (e) => {
+            if (e.lengthComputable && onProgress) {
+              onProgress((e.loaded / e.total) * 0.55);
+            }
+          };
+          reader.onerror = (err) => reject(err);
+          reader.onload = () => {
+            if (onProgress) onProgress(0.6);
+            const blob = new Blob([reader.result], { type: file.type });
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+            img.onload = async () => {
+              try {
+                if (img.decode) await img.decode();
+              } catch {}
+              URL.revokeObjectURL(url);
+              if (onProgress) onProgress(1);
+              resolve(img);
+            };
+            img.onerror = (err) => {
+              URL.revokeObjectURL(url);
+              reject(err);
+            };
+            img.src = url;
+          };
+          reader.readAsArrayBuffer(file);
+        });
+
+      const renderWebP = async (img, quality, targetMaxW, onStage) => {
+        let w = img.naturalWidth || img.width;
+        let h = img.naturalHeight || img.height;
+        if (targetMaxW > 0 && w > targetMaxW) {
+          h = Math.round((h * targetMaxW) / w);
+          w = targetMaxW;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        await nextPaint();
+        ctx.drawImage(img, 0, 0, w, h);
+        if (onStage) onStage(0.5);
+        await nextPaint();
+        return new Promise((resolve, reject) => {
+          canvas.toBlob(
+            (blob) => {
+              if (onStage) onStage(1);
+              if (blob) resolve({ blob, width: w, height: h });
+              else reject(new Error("WebP encoding failed"));
+            },
+            "image/webp",
+            quality
+          );
+        });
+      };
+
+      // Renders a square icon (centered contain-fit so non-square logos aren't stretched)
+      const renderSquareIcon = (img, size, mime = "image/png", quality = 0.92) =>
+        new Promise((resolve, reject) => {
+          const canvas = document.createElement("canvas");
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext("2d");
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          const sw = img.naturalWidth || img.width;
+          const sh = img.naturalHeight || img.height;
+          const scale = Math.min(size / sw, size / sh);
+          const dw = Math.round(sw * scale);
+          const dh = Math.round(sh * scale);
+          const dx = Math.round((size - dw) / 2);
+          const dy = Math.round((size - dh) / 2);
+          ctx.drawImage(img, dx, dy, dw, dh);
+          canvas.toBlob(
+            (blob) => {
+              if (blob) resolve(blob);
+              else reject(new Error("Square icon encoding failed"));
+            },
+            mime,
+            quality
+          );
+        });
+
+      // Packs one or more square PNG blobs into a standard Windows .ico binary
+      const buildIco = async (sizes, img) => {
+        const pngEntries = [];
+        for (const size of sizes) {
+          const pngBlob = await renderSquareIcon(img, size, "image/png");
+          const bytes = new Uint8Array(await pngBlob.arrayBuffer());
+          pngEntries.push({ size, bytes, pngBlob });
+        }
+
+        const count = pngEntries.length;
+        const headerSize = 6 + count * 16;
+        const header = new DataView(new ArrayBuffer(headerSize));
+        header.setUint16(0, 0, true); // Reserved
+        header.setUint16(2, 1, true); // Type: 1 = ICO
+        header.setUint16(4, count, true); // Image count
+
+        let offset = headerSize;
+        pngEntries.forEach(({ size, bytes }, i) => {
+          const pos = 6 + i * 16;
+          header.setUint8(pos, size >= 256 ? 0 : size); // Width (0 = 256)
+          header.setUint8(pos + 1, size >= 256 ? 0 : size); // Height (0 = 256)
+          header.setUint8(pos + 2, 0); // Palette colors
+          header.setUint8(pos + 3, 0); // Reserved
+          header.setUint16(pos + 4, 1, true); // Color planes
+          header.setUint16(pos + 6, 32, true); // Bits per pixel
+          header.setUint32(pos + 8, bytes.byteLength, true); // PNG byte length
+          header.setUint32(pos + 12, offset, true); // Offset from file start
+          offset += bytes.byteLength;
+        });
+
+        const icoBlob = new Blob(
+          [header.buffer, ...pngEntries.map((e) => e.bytes)],
+          { type: "image/x-icon" }
+        );
+        const previewBlob = pngEntries.at(-1).pngBlob;
+        return { icoBlob, previewBlob };
+      };
+
+      // Minimal store-mode ZIP builder so bulk & PWA downloads work in a single click
+      const crcTable = (() => {
+        const table = new Uint32Array(256);
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+          for (let k = 0; k < 8; k++) {
+            c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+          }
+          table[n] = c >>> 0;
+        }
+        return table;
+      })();
+
+      const crc32 = (bytes) => {
+        let c = 0xffffffff;
+        for (let i = 0; i < bytes.length; i++) {
+          c = crcTable[(c ^ bytes[i]) & 0xff] ^ (c >>> 8);
+        }
+        return (c ^ 0xffffffff) >>> 0;
+      };
+
+      const buildZip = async (entries) => {
+        const encoder = new TextEncoder();
+        const localParts = [];
+        const centralParts = [];
+        let offset = 0;
+
+        for (const { name, blob } of entries) {
+          const nameBytes = encoder.encode(name);
+          const data = new Uint8Array(await blob.arrayBuffer());
+          const crc = crc32(data);
+          const size = data.byteLength;
+
+          const local = new DataView(new ArrayBuffer(30 + nameBytes.length));
+          local.setUint32(0, 0x04034b50, true);
+          local.setUint16(4, 20, true);
+          local.setUint16(6, 0x0800, true);
+          local.setUint16(8, 0, true);
+          local.setUint16(10, 0, true);
+          local.setUint16(12, 0, true);
+          local.setUint32(14, crc, true);
+          local.setUint32(18, size, true);
+          local.setUint32(22, size, true);
+          local.setUint16(26, nameBytes.length, true);
+          local.setUint16(28, 0, true);
+          new Uint8Array(local.buffer, 30).set(nameBytes);
+
+          const central = new DataView(new ArrayBuffer(46 + nameBytes.length));
+          central.setUint32(0, 0x02014b50, true);
+          central.setUint16(4, 20, true);
+          central.setUint16(6, 20, true);
+          central.setUint16(8, 0x0800, true);
+          central.setUint16(10, 0, true);
+          central.setUint16(12, 0, true);
+          central.setUint16(14, 0, true);
+          central.setUint32(16, crc, true);
+          central.setUint32(20, size, true);
+          central.setUint32(24, size, true);
+          central.setUint16(28, nameBytes.length, true);
+          central.setUint16(30, 0, true);
+          central.setUint16(32, 0, true);
+          central.setUint16(34, 0, true);
+          central.setUint16(36, 0, true);
+          central.setUint32(38, 0, true);
+          central.setUint32(42, offset, true);
+          new Uint8Array(central.buffer, 46).set(nameBytes);
+
+          localParts.push(local.buffer, data);
+          centralParts.push(central.buffer);
+          offset += local.buffer.byteLength + size;
+        }
+
+        const centralSize = centralParts.reduce((s, b) => s + b.byteLength, 0);
+        const eocd = new DataView(new ArrayBuffer(22));
+        eocd.setUint32(0, 0x06054b50, true);
+        eocd.setUint16(8, entries.length, true);
+        eocd.setUint16(10, entries.length, true);
+        eocd.setUint32(12, centralSize, true);
+        eocd.setUint32(16, offset, true);
+
+        return new Blob([...localParts, ...centralParts, eocd.buffer], {
+          type: "application/zip",
+        });
+      };
+
+      const buildPwaPack = async (img, baseName) => {
+        const targets = getSelectedPwaTargets();
+        const mime = pwaExt === "webp" ? "image/webp" : "image/png";
+        const quality = Number(qualityRange.value) / 100;
+        const files = [];
+        let previewBlob = null;
+
+        if (targets.includes("ico")) {
+          const { icoBlob, previewBlob: p } = await buildIco([16, 32, 48], img);
+          files.push({ name: "favicon.ico", blob: icoBlob });
+          previewBlob = p;
+        }
+        if (targets.includes("180")) {
+          const b = await renderSquareIcon(img, 180, mime, quality);
+          files.push({ name: `apple-touch-icon.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+        if (targets.includes("192")) {
+          const b = await renderSquareIcon(img, 192, mime, quality);
+          files.push({ name: `icon-192.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+        if (targets.includes("512")) {
+          const b = await renderSquareIcon(img, 512, mime, quality);
+          files.push({ name: `icon-512.${pwaExt}`, blob: b });
+          previewBlob = b;
+        }
+
+        const manifestIcons = [];
+        if (targets.includes("192")) {
+          manifestIcons.push({
+            src: `/icon-192.${pwaExt}`,
+            sizes: "192x192",
+            type: mime,
+          });
+        }
+        if (targets.includes("512")) {
+          manifestIcons.push({
+            src: `/icon-512.${pwaExt}`,
+            sizes: "512x512",
+            type: mime,
+          });
+        }
+        const manifest = {
+          name: baseName,
+          short_name: baseName,
+          icons: manifestIcons,
+          theme_color: "#ffffff",
+          background_color: "#ffffff",
+          display: "standalone",
+        };
+        files.push({
+          name: "site.webmanifest",
+          blob: new Blob([JSON.stringify(manifest, null, 2)], {
+            type: "application/manifest+json",
+          }),
+        });
+
+        const zipBlob = await buildZip(files);
+        return { zipBlob, previewBlob, files, fileCount: files.length };
+      };
+
+      const updateSummary = () => {
+        const hasItems = items.length > 0;
+        window.__towebpHasItems = hasItems;
+        setDropzoneHidden(hasItems);
+        bulkActions.style.display = hasItems ? "flex" : "none";
+        queueHeader.classList.toggle("is-visible", hasItems);
+        if (!hasItems) return;
+
+        const totalOrig = items.reduce((s, it) => s + it.file.size, 0);
+        const totalOut = items.reduce((s, it) => s + (it.blob ? it.blob.size : 0), 0);
+
+        statsCount.textContent = `${items.length} ${items.length === 1 ? "image" : "images"}`;
+        statsSize.textContent = `${formatBytes(totalOrig)} → ${formatBytes(totalOut)}`;
+
+        if (mode === "webp") {
+          const pct = totalOrig > 0 ? Math.round((1 - totalOut / totalOrig) * 100) : 0;
+          statsSaved.textContent =
+            pct >= 0 ? `-${pct}% saved` : `+${Math.abs(pct)}% larger`;
+        } else if (mode === "ico") {
+          const sizes = getSelectedIcoSizes();
+          statsSaved.textContent = `ICO (${sizes.join("·")}px)`;
+        } else {
+          statsSaved.textContent = `PWA Pack (${pwaExt.toUpperCase()})`;
+        }
+      };
+
+      const updateCardView = (item) => {
+        if (!item.el || !item.blob) return;
+        item.el.querySelector(".thumb-img").src = item.previewUrl;
+        item.el.querySelector(".ext-label").textContent = `.${item.ext}`;
+        item.el.querySelector(".ratio-pill").textContent = item.badgeText;
+        item.el.querySelector(".dims-text").textContent = item.dimsText;
+        item.el.querySelector(".size-text").textContent =
+          `${formatBytes(item.file.size)} → ${formatBytes(item.blob.size)}`;
+      };
+
+      const processItem = async (item, onItemProgress) => {
+        if (!item.img) {
+          item.img = await loadImage(item.file, (p) => {
+            if (onItemProgress) onItemProgress(p * 0.55);
+          });
+        } else if (onItemProgress) {
+          onItemProgress(0.55);
+        }
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+        if (item.downloadUrl && item.downloadUrl !== item.previewUrl) {
+          URL.revokeObjectURL(item.downloadUrl);
+        }
+
+        if (mode === "webp") {
+          const quality = Number(qualityRange.value) / 100;
+          const { blob, width, height } = await renderWebP(
+            item.img,
+            quality,
+            maxWidth,
+            (s) => {
+              if (onItemProgress) onItemProgress(0.55 + s * 0.45);
+            }
+          );
+          const pct = Math.round((1 - blob.size / item.file.size) * 100);
+          item.blob = blob;
+          item.ext = "webp";
+          item.pwaFiles = null;
+          item.badgeText = pct >= 0 ? `-${pct}%` : `+${Math.abs(pct)}%`;
+          item.dimsText = `${width} × ${height}`;
+          item.previewUrl = URL.createObjectURL(blob);
+          item.downloadUrl = item.previewUrl;
+        } else if (mode === "ico") {
+          const sizes = getSelectedIcoSizes();
+          const { icoBlob, previewBlob } = await buildIco(sizes, item.img);
+          if (onItemProgress) onItemProgress(1);
+          item.blob = icoBlob;
+          item.ext = "ico";
+          item.pwaFiles = null;
+          item.badgeText = `${sizes.length} ${sizes.length === 1 ? "size" : "sizes"}`;
+          item.dimsText = `${sizes.join("·")}px`;
+          item.previewUrl = URL.createObjectURL(previewBlob);
+          item.downloadUrl = URL.createObjectURL(icoBlob);
+        } else {
+          const baseName = (item.outputName || "app").trim();
+          const { zipBlob, previewBlob, files, fileCount } = await buildPwaPack(
+            item.img,
+            baseName
+          );
+          if (onItemProgress) onItemProgress(1);
+          item.blob = zipBlob;
+          item.ext = "zip";
+          item.pwaFiles = files;
+          item.badgeText = `${fileCount} files`;
+          item.dimsText = `PWA · ${pwaExt.toUpperCase()}`;
+          item.previewUrl = previewBlob ? URL.createObjectURL(previewBlob) : "";
+          item.downloadUrl = URL.createObjectURL(zipBlob);
+        }
+        updateCardView(item);
+      };
+
+      const triggerDownload = (url, filename) => {
+        const a = document.createElement("a");
+        a.href = url;
+        a.setAttribute("download", filename);
+        a.rel = "noopener";
+        a.style.display = "none";
+        a.addEventListener("click", (e) => e.stopPropagation());
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => a.remove(), 100);
+      };
+
+      const downloadSingle = (item) => {
+        if (!item.blob || !item.downloadUrl) return;
+        const base = (item.outputName || "image").trim();
+        const filename =
+          mode === "pwa" ? `${base}-pwa-pack.zip` : `${base}.${item.ext}`;
+        triggerDownload(item.downloadUrl, filename);
+      };
+
+      const revokeItemUrls = (item) => {
+        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
+        if (item.downloadUrl && item.downloadUrl !== item.previewUrl) {
+          URL.revokeObjectURL(item.downloadUrl);
+        }
+      };
+
+      const createCard = (item) => {
+        const card = document.createElement("article");
+        card.className = "webp-card is-loading";
+        card.innerHTML = `
+            <div class="thumb-wrap">
+              <img class="thumb-img" alt="" />
+              <button type="button" class="remove-btn" title="Remove image" aria-label="Remove image">×</button>
+              <span class="ratio-pill">...</span>
+            </div>
+            <div class="card-body">
+              <div class="name-row">
+                <input type="text" class="name-input" value="" aria-label="Output filename" />
+                <span class="ext-label">.webp</span>
+              </div>
+              <div class="meta-row">
+                <span class="dims-text">...</span>
+                <span class="size-text">${formatBytes(item.file.size)}</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btnwicon dl-btn">
+                  Download <span class="icon-arrowbelow iconb"></span>
+                </button>
+              </div>
+            </div>
+          `;
+
+        const nameInput = card.querySelector(".name-input");
+        nameInput.value = item.outputName;
+        nameInput.addEventListener("input", () => {
+          item.outputName = nameInput.value;
+        });
+
+        card.querySelector(".dl-btn").addEventListener("click", () => {
+          downloadSingle(item);
+        });
+
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+          revokeItemUrls(item);
+          items = items.filter((x) => x.id !== item.id);
+          card.remove();
+          if (!items.length) convertBarWrap.classList.remove("is-visible");
+          updateSummary();
+        });
+
+        item.el = card;
+        grid.appendChild(card);
+      };
+
+      const addFiles = async (fileList) => {
+        const valid = [...fileList].filter((f) => f.type.startsWith("image/"));
+        if (!valid.length) return;
+
+        window.__towebpHasItems = true;
+        setDropzoneHidden(true);
+
+        uploadCount += 1;
+        barSecret.textContent =
+          uploadCount === 1
+            ? "pinky promise your data isn't getting uploaded"
+            : uploadCount === 2
+              ? "Mujhpe itna trust? Kahin data leak kar dun toh?"
+              : uploadCount === 3
+                ? "Thik ase bhai use korte thak ar disturb kortam na"
+                : "";
+
+        const added = valid.map((file) => {
+          const item = {
+            id: nextId++,
+            file,
+            outputName: stripExt(file.name),
+            img: null,
+            blob: null,
+            ext: "webp",
+            badgeText: "...",
+            dimsText: "...",
+            previewUrl: null,
+            downloadUrl: null,
+            pwaFiles: null,
+            el: null,
+          };
+          items.push(item);
+          createCard(item);
+          return item;
+        });
+
+        const totalBytes = valid.reduce((s, f) => s + f.size, 0);
+        const useRealProgress = totalBytes >= 2 * 1024 * 1024;
+        let realPct = 4;
+        let realDone = false;
+
+        const barPromise = runProgressBar(useRealProgress, () => ({
+          pct: realPct,
+          done: realDone,
+        }));
+
+        // Let the browser paint the progress bar and dropzone collapse before heavy work starts
+        await nextPaint();
+
+        for (let i = 0; i < added.length; i++) {
+          const item = added[i];
+          try {
+            await processItem(item, (itemProg) => {
+              realPct = Math.min(
+                99,
+                Math.max(realPct, ((i + itemProg) / added.length) * 100)
+              );
+            });
+          } catch (err) {
+            console.error("Failed to convert", item.file.name, err);
+          }
+          realPct = ((i + 1) / added.length) * 100;
+        }
+        realDone = true;
+        await barPromise;
+        if (uploadCount >= 4) {
+          convertBarWrap.classList.remove("is-visible");
+        }
+        added.forEach((item) => item.el?.classList.remove("is-loading"));
+        updateSummary();
+      };
+
+      const reprocessAll = async () => {
+        if (!items.length) return;
+        for (const item of items) {
+          try {
+            await processItem(item);
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        updateSummary();
+      };
+
+      const syncModeUI = () => {
+        webpQualityGroup.style.display =
+          mode === "webp" || (mode === "pwa" && pwaExt === "webp")
+            ? "flex"
+            : "none";
+        webpWidthGroup.style.display = mode === "webp" ? "flex" : "none";
+        icoSizesGroup.style.display = mode === "ico" ? "flex" : "none";
+        pwaSizesGroup.style.display = mode === "pwa" ? "flex" : "none";
+      };
+
+      // Events
+      modeSwitch.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-mode]");
+        if (!btn) return;
+        modeSwitch
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        mode = btn.dataset.mode;
+        syncModeUI();
+        reprocessAll();
+      });
+
+      icoSizesEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-size]");
+        if (!btn) return;
+        const activeCount = icoSizesEl.querySelectorAll(".pill.active").length;
+        if (btn.classList.contains("active") && activeCount <= 1) return;
+        btn.classList.toggle("active");
+        reprocessAll();
+      });
+
+      pwaSizesEl.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-pwa]");
+        if (!btn) return;
+        const activeCount = pwaSizesEl.querySelectorAll(".pill.active").length;
+        if (btn.classList.contains("active") && activeCount <= 1) return;
+        btn.classList.toggle("active");
+        reprocessAll();
+      });
+
+      pwaExtSwitch.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-ext]");
+        if (!btn) return;
+        pwaExtSwitch
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        pwaExt = btn.dataset.ext;
+        syncModeUI();
+        reprocessAll();
+      });
+
+      fileInput.addEventListener("change", (e) => {
+        addFiles(e.target.files);
+        fileInput.value = "";
+      });
+
+      ["dragenter", "dragover"].forEach((evt) =>
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.add("is-dragover");
+        })
+      );
+      ["dragleave", "drop"].forEach((evt) =>
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove("is-dragover");
+        })
+      );
+      dropzone.addEventListener("drop", (e) => {
+        if (e.dataTransfer?.files?.length) {
+          addFiles(e.dataTransfer.files);
+        }
+      });
+
+      window.addEventListener("paste", (e) => {
+        const files = [...(e.clipboardData?.files || [])];
+        if (files.length) addFiles(files);
+      });
+
+      qualityRange.addEventListener("input", () => {
+        qualityVal.textContent = `${qualityRange.value}%`;
+        try {
+          localStorage.setItem(QUALITY_STORAGE_KEY, qualityRange.value);
+        } catch {}
+      });
+      qualityRange.addEventListener("change", reprocessAll);
+
+      widthPresets.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-w]");
+        if (!btn) return;
+        widthPresets
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        customWidthInput.value = "";
+        maxWidth = Number(btn.dataset.w) || 0;
+        reprocessAll();
+      });
+
+      customWidthInput.addEventListener("change", () => {
+        const v = Number(customWidthInput.value);
+        widthPresets
+          .querySelectorAll(".pill")
+          .forEach((b) => b.classList.remove("active"));
+        maxWidth = v > 0 ? v : 0;
+        if (!maxWidth) {
+          widthPresets.querySelector('[data-w="0"]').classList.add("active");
+        }
+        reprocessAll();
+      });
+
+      clearBtn.addEventListener("click", () => {
+        clearProgTimers();
+        items.forEach(revokeItemUrls);
+        items = [];
+        grid.innerHTML = "";
+        convertBarWrap.classList.remove("is-visible");
+        updateSummary();
+      });
+
+      downloadEachBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        items.forEach((it, idx) => {
+          setTimeout(() => downloadSingle(it), idx * 240);
+        });
+      });
+
+      downloadZipBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const ready = items.filter((it) => it.blob);
+        if (!ready.length) return;
+        const used = new Map();
+        const entries = [];
+        ready.forEach((it) => {
+          const base = (it.outputName || "image").trim();
+          const count = used.get(base) || 0;
+          used.set(base, count + 1);
+          const prefix = count === 0 ? base : `${base}-${count}`;
+          if (mode === "pwa" && it.pwaFiles) {
+            const folder = ready.length > 1 ? `${prefix}/` : "";
+            it.pwaFiles.forEach((f) => {
+              entries.push({ name: `${folder}${f.name}`, blob: f.blob });
+            });
+          } else {
+            entries.push({ name: `${prefix}.${it.ext}`, blob: it.blob });
+          }
+        });
+        const zipBlob = await buildZip(entries);
+        const url = URL.createObjectURL(zipBlob);
+        triggerDownload(url, `${mode}-export-${ready.length}.zip`);
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      });
+    })();
+  </script>
+</body>
+
+</html>
